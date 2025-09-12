@@ -1,5 +1,5 @@
 # Services
-CakeServices is the low-level API that serves as a bridge between Cake IO and Unreal's low-level filesystem API. The service interfaces are not aware of Cake IO objects and operate entirely on lower level primitive types. Cake IO's objects and higher level APIs were all built on top of Cake IO's services interfaces. While users are free to leverage the CakeServices interfaces to accomplish their goals, be aware that these APIs are less forgiving and offer less convenience than the higher levels of Cake IO.
+CakeServices is the low-level API that serves as a bridge between CakeFS and Unreal's low-level filesystem API. The service interfaces are not aware of CakeFS objects and operate entirely on lower level primitive types. CakeFS's objects and higher level APIs were all built on top of CakeFS's services interfaces. While users are free to leverage the CakeServices interfaces to accomplish their goals, be aware that these APIs are less forgiving and offer less convenience than the higher levels of CakeFS.
 
 All of the source code in the CakeServices is fully documented, and one of the best ways to learn how to use CakeServices is to study the implementation of the associated CakeIO object. For instance, if you want to learn how to use the file services, studying the FCakeFile source code is the best place to start.
 

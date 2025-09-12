@@ -1,5 +1,5 @@
 ## Introduction
-Cake IO offers FileExtension objects provide a type-safe way to extract, examine, classify, and manipulate file extensions. 
+CakeFS offers FileExtension objects provide a type-safe way to extract, examine, classify, and manipulate file extensions. 
 
 === "C++"
     {{ cpp_impl_source('file extension', 'FCakeFileExt', 'CakeFileExt') }}
@@ -8,12 +8,12 @@ Cake IO offers FileExtension objects provide a type-safe way to extract, examine
     {{ bp_impl_source('file extension', 'UCakeFileExt', 'CakeFileExt_BP') }}
 
 ## File Extension Classification
-Before we look at the File Extension object interface, it is important to understand how Cake IO classifies file extensions. Cake IO defines two distinct types of file extension: **single** file extensions and **multi** file extensions.
+Before we look at the File Extension object interface, it is important to understand how CakeFS classifies file extensions. CakeFS defines two distinct types of file extension: **single** file extensions and **multi** file extensions.
 > **Single File Extension**: A file extension that contains only one file extension component: e.g., `.txt` or `.bin`
 
 > **Multi File Extension**: A file extension that contains more than one file extension component: e.g., `.cdr.txt` or `.bin.dat.zip`
 
-Cake IO represents file extension types via the enum ECakeFileExtType. File extensions that are empty will have the value `None`, file extensions with one component will be assigned the value `Single`, and file extensions with more than one component will have the value `Multi`.
+CakeFS represents file extension types via the enum ECakeFileExtType. File extensions that are empty will have the value `None`, file extensions with one component will be assigned the value `Single`, and file extensions with more than one component will have the value `Multi`.
 
 
 === "C++"

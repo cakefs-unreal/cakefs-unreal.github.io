@@ -1,5 +1,5 @@
 ## Overview
-Cake IO provides CakeDir objects that offer a comprehensive and ergonomic interface for directory traversal and other common directory IO operations. Just like CakeFile objects, CakeDir objects store their paths using CakePath objects. In addition to their path, however, CakeDir objects also store a collection of [CakeFileExt](/core-api/file-extensions/) objects, called the **file extension filter**, which can be used to selectively visit the files contained in a directory.
+CakeFS provides CakeDir objects that offer a comprehensive and ergonomic interface for directory traversal and other common directory IO operations. Just like CakeFile objects, CakeDir objects store their paths using CakePath objects. In addition to their path, however, CakeDir objects also store a collection of [CakeFileExt](/core-api/file-extensions/) objects, called the **file extension filter**, which can be used to selectively visit the files contained in a directory.
 
 ### Source Code Information
 === "C++"
@@ -66,7 +66,7 @@ We can get a copy of an existing CakeDir via `Clone`:
     ```
 
     !!! tip
-        In general, Clone functions in Cake IO behave identically to copy constructors. However, FCakeDir's `Clone` function is an exception since it provides more control than its copy constructor counterpart.
+        In general, Clone functions in CakeFS behave identically to copy constructors. However, FCakeDir's `Clone` function is an exception since it provides more control than its copy constructor counterpart.
 
 === "Blueprint"
     {{ bp_img_dir('Clone') }}
@@ -543,7 +543,7 @@ The {{ policy_link('OverwriteItems') }} parameter allows us to control whether t
 Directory traversal is a vital part of working with file systems, and Cake Directory objects offer a comprehensive set of traversal interfaces. At its core, a traversal operation involves invoking a user-supplied callback function on each directory element (file or subdirectory) that is being visited by the traversal function.
 
 ### Traversal Overview
-Before we examine the traversal interfaces, it is important to understand some terminology and guiding principles behind Cake IO's traversal design. A traversal has three main traits that define its behavior: 
+Before we examine the traversal interfaces, it is important to understand some terminology and guiding principles behind CakeFS's traversal design. A traversal has three main traits that define its behavior: 
 
 1. **Style**: Determines the behavior of the traversal operation.
 1. **Target**: Determines what kind of element (directories, files, or both) will be visited by a traversal operation.
@@ -558,7 +558,7 @@ Traversal depth is controlled via the {{ policy_link('OpDepth') }} parameter. Fu
 There are three targets a caller can select for a traversal operation to visit at the specified depth: items will visit all files and directories, files will visit only files, and subdirectories will only visit subdirectories. The callback signature for traversals will change based on the target selected. For each target element visited, an items traversal will produce a [CakePath](paths.md) object and a boolean indicating if it is a directory, a files traversal will produce a [CakeFile](files.md) object, and a subdirectory traversal will produce a CakeDir object.
 
 #### Traversal Styles
-There are three styles of traversal that are offered by Cake IO, listed from simplest to the most advanced: unguarded, guarded, and search traversals.
+There are three styles of traversal that are offered by CakeFS, listed from simplest to the most advanced: unguarded, guarded, and search traversals.
 
 An unguarded traversal will visit every target element at the specified depth. The caller has no ability to terminate the traversal early. In essence, this is traversal with no error handling. 
 

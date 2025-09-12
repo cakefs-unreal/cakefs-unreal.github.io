@@ -1,2 +1,2 @@
 !!! note
-    The following section involves file extension types. If you are unfamiliar with how Cake IO classifies file extensions, please see [this section](/core-api/file-extensions/#file-extension-classification).
+    The following section involves file extension types. If you are unfamiliar with how CakeFS classifies file extensions, please see [this section](/core-api/file-extensions/#file-extension-classification).

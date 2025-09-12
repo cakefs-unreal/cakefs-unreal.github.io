@@ -1,8 +1,8 @@
 ## Introduction
-One of the primary design goals of Cake IO is to provide enhanced error reporting from IO operations. Cake IO accomplishes this by using {{ link_outcomes('outcome types') }} which are defined for various types of IO operations. The following sections will showcase common usage patterns and idioms for error handling in Cake IO.
+One of the primary design goals of CakeFS is to provide enhanced error reporting from IO operations. CakeFS accomplishes this by using {{ link_outcomes('outcome types') }} which are defined for various types of IO operations. The following sections will showcase common usage patterns and idioms for error handling in CakeFS.
 
 ### Opt-In Error Handling
-Exhaustive error handling is often complex and tedious, and there are many contexts in which exhaustive error handling is not actually necessary. Because Cake IO is intended for use in a variety of circumstances, from in-house editor tools to end-user interfaces, error handling has been designed so that callers are allowed to opt-in to the level of complexity that best suits their current context. There are three main levels of error complexity, ranging from simplest to most complex: **minimal**, **targeted**, and **exhaustive** error handling.
+Exhaustive error handling is often complex and tedious, and there are many contexts in which exhaustive error handling is not actually necessary. Because CakeFS is intended for use in a variety of circumstances, from in-house editor tools to end-user interfaces, error handling has been designed so that callers are allowed to opt-in to the level of complexity that best suits their current context. There are three main levels of error complexity, ranging from simplest to most complex: **minimal**, **targeted**, and **exhaustive** error handling.
 
 #### Minimal Error Handling
 Minimal error handling views a particular IO operation outcome as a simple binary success or failure. This mirrors the original experience when using Unreal's built-in IO operations. In this strategy, we merely branch on a success flag and have two paths: one for the success state, and one for the error state.
@@ -16,178 +16,162 @@ As long as you know the complete list of outcomes a particular IO operation can 
 --8<-- "ad-error-map.md"
 
 ## File/Directory IO Error Handling Idioms
-For our examples, we are going to use a [CakeFile](files.md) object. However, all of the idioms presented will work with [CakeDir](directories.md) objects. Only the possible outcome values will be different, since directory IO operations are distinct from file IO operations in Cake IO.
+!!! note
+	If you need a refresher regarding the differences between `Ok` and `NoOp`, please see {{ link_outcomes('this section', 'ok-and-no-op') }}.
+
+For our examples, we are going to use a [CakeFile](files.md) object. However, all of the idioms presented will work with [CakeDir](directories.md) objects. Only the possible outcome values will be different, since directory IO operations are distinct from file IO operations in CakeFS.
+
+File/Directory IO operations will return either an {{ link_results('FCakeResultFileIO', 'fcakeresultfileio') }} or an {{ link_results('FCakeResultDirIO', 'fcakeresultdirio') }} result type, respectively. If you are unfamiliar with result types, please glance over those sections and refer to them as necessary when viewing the following idioms.
+
+The most simple way to deal with these results is to check if the operation succeeded by using the `IsOk` function on the result object. This style is highly ergonomic when we don't need to worry about specific details of failure and just want to know if the IO operation has succeeded. If we want to get a human friendly error string describing the error encountered, we can use the associated `ToString` operation for our result type.
 
 === "C++"
-    File/Directory IO operations will return either an {{ link_results('FCakeResultFileIO', 'fcakeresultfileio') }} or an {{ link_results('FCakeResultDirIO', 'fcakeresultdirio') }} result type, respectively. If you are unfamiliar with result types, please glance over those sections and refer to them as necessary when viewing the following idioms.
-
-    The following examples will assume we have previously declared the following {{ link_cakefile() }} object:
 
     ```c++
-	FCakeFile FileReadme{ FCakePath{ TEXTVIEW("X:/Game/readme.md")} };
-    ```
+	FCakeFile FileReadme{ TEXTVIEW("X:/Game/readme.md") };
 
-    The simplest error handling method is to simply use a result type as an implicit boolean via `operator bool`:
-
-    ```c++
-	if (!FileReadme.CreateTextFile(TEXTVIEW("## Cake Battle Arena"))
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed creating the readme file."));
-	}
-    ```
-    This style is highly ergonomic when we don't need to worry about specific details of failure and just want to know whether an IO operation has succeeded.
-
-    When we do want to examine the error more closely, we can save it to a variable:
-
-    ```c++
 	FCakeResultFileIO ResultAppend{
-		FileReadme.AppendTextFile(TEXTVIEW("Welcome to Cake Battle Arena."))
+		FileReadme.AppendTextFile(TEXTVIEW("--- Cake Arena Readme ---"))
 	};
 
 	if (ResultAppend.IsOk())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Successfully appended text to the readme file!"))
+		UE_LOG(LogTemp, Warning, TEXT("Append text successful!"))
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("Failed appending text to file: [%s]"), *ResultAppend.ToString())
+		UE_LOG(LogTemp, Error, TEXT("Append text failed: [%s]"), *ResultAppend.ToString())
 	}
     ```
 
-    A few things to note here. First of all, the call to `IsOk` is equivalent to using `operator bool` on the result type. So we could also have used:
+	In C++ we can also use the result types' operator bool which is equivalent to calling `IsOk`. We could achieve the same effect as the example above using this form:
 
     ```c++
-	if (ResultAppend)
+	FCakeFile FileReadme{ TEXTVIEW("X:/Game/readme.md") };
+
+	if (FileReadme.AppendTextFile(TEXTVIEW("--- Cake Arena Readme ---")))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Successfully appended text to the readme file!"))
+		UE_LOG(LogTemp, Warning, TEXT("Append text successful!"))
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Append text failed."))
 	}
     ```
-    Second, since we have stored the result type, we can use its `ToString` function to get better error reporting context, even though we aren't doing any specific error handling in our code. Storing the result can be valuable even when we aren't planning on directly examining the outcome value.
 
-    Finally, since we're using `IsOk`, which is equivalent to `operator bool`, we can use scoped variable declaration for a more compact style:
+	We've achieved slightly more compact code, but we've lost the context that the result type can provide. Sometimes this might be fine, especially for exploratory / prototype code; however, don't forget that you can also use if-initialization forms to achieve a similar compactness without sacrificing the result type:
 
     ```c++
+	FCakeFile FileReadme{ TEXTVIEW("X:/Game/readme.md") };
+
 	if (FCakeResultFileIO ResultAppend =
-		FileReadme.AppendTextFile(TEXTVIEW("Welcome to Cake Battle Arena.")))
+		FileReadme.AppendTextFile(TEXTVIEW("--- Cake Arena Readme ---")))
 	{
-
-		UE_LOG(LogTemp, Warning, TEXT("Successfully appended text to the readme file!"))
-	}
-	else 
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed appending text to file: [%s]"), *ResultAppend.ToString())
-	}
-    ```
-
-    However, we need to keep in mind that this approach will only work if we plan to use `IsOk`. Let's consider our current IO operation: `AppendTextFile`. This function can return a `NoOp` in the situation where the string-like object we send to be appended is empty. In our particular scenario, this can't occur, and so we have no interest in checking for it. However, let's assume for a minute that we're accepting the append text data from an outside source. In this situation, we might be interested in checking for `NoOp`. 
-
-	```c++
-	FCakeResultFileIO ResultAppend{
-		FileReadme.AppendTextFile(ExternalSourceTextData)
-	};
-
-	if (ResultAppend.IsOkStrict())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Successfully appended text to the readme file!"))
+		UE_LOG(LogTemp, Warning, TEXT("Append text successful!"))
 	}
 	else
 	{
-		switch (ResultAppend.Outcome)
-		{
-		case ECakeOutcomeFileIO::NoOp:
-			UE_LOG(LogTemp, Error, TEXT("The append text payload was empty! Please be sure to submit some text."))
-			break;
-		default:
-			UE_LOG(LogTemp, Error, TEXT("Failed appending text to file: [%s]"), *ResultAppend.ToString())
-			break;
-		}
-	}
-	``` 
-	!!! note
-		If you need a refresher regarding the differences between `Ok` and `NoOp`, please see {{ link_outcomes('this section', 'ok-and-no-op') }}.
-
-	Now we're leveraging the power of distinguishing between `Ok` and `NoOp`, as well as using targeted error handling. We recognize when the text that was submitted was empty, and so we can provide a specialized error message to better help the caller. However, if some other IO operation failed, we'll just use the same generic string report strategy as before. 
-
-    !!! tip
-        This is an example of how the {{ link_errormap() }} can help us achieve better error handling, even when we don't care about exhaustive error handling. 
-
-    Finally, let's see what exhaustive error handling might look like:
-
-    ```c++
-	FCakeResultFileIO ResultAppend{
-		FileReadme.AppendTextFile(ExternalSourceTextData)
-	};
-
-	if (ResultAppend.IsOkStrict())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Successfully appended text to the readme file!"))
-	}
-	else
-	{
-		switch (ResultAppend.Outcome)
-		{
-		case ECakeOutcomeFileIO::NoOp:
-			UE_LOG(LogTemp, Error, 
-				TEXT("The append text payload was empty! Please be sure to submit some text."))
-			break;
-		case ECakeOutcomeFileIO::DoesNotExist:
-			UE_LOG(LogTemp, Error, 
-				TEXT("The file we're attempting to append to doesn't exist, should we make it?"))
-			break;
-		case ECakeOutcomeFileIO::FailedOpenWrite:
-			UE_LOG(LogTemp, Error, 
-				TEXT("We couldn't open a write handle to this file, should we retry?"))
-			break;
-		case ECakeOutcomeFileIO::FailedWrite:
-			UE_LOG(LogTemp, Error, 
-				TEXT("We opened a valid write handle but the write operation failed, should we retry?"))
-			break;
-		default:
-			UE_LOG(LogTemp, Error, 
-				TEXT("Unexpected append error occurred: "), *ResultAppend.ToString())
-			break;
-		}
+		UE_LOG(LogTemp, Error, TEXT("Append text failed: [%s]"), *ResultAppend.ToString())
 	}
     ```
 
-    Exhaustive error handling will usually require referencing the appropriate [error map](../core-api/error-maps/#appendfile-text-binary) unless you have a great memory or choose to delve into the implementation source code.
-    For the sake of example we are just logging out the error, but we can easily imagine putting more robust error handling logic in each switch case.
 
 === "Blueprint"
-	Any IO operation will always return at least two variables related to the IO operation: a boolean to indicate whether the operation succeeded or failed as a whole, and an outcome value that identifies the exact outcome that the operation generated. For CakeFile IO operations, the outcome value we get back is of type {{ link_outcomes('ECakeOutcomeFileIO', 'ecakeoutcomefileio') }}. For CakeDir IO operations, the outcome value we get back is of type {{ link_outcomes('ECakeOutcomeDirIO', 'ecakeoutcomedirio') }}.
+	{{ bp_img_error_handling('Append Is Ok') }}
 
-	It is important to understand that the bool will return true if the outcome is either `Ok` OR `NoOp`. If you are unfamiliar with the differences, please see {{ link_outcomes('this section', 'ok-and-no-op') }}. 
+It's important to note that `IsOk` returns true if the result is either `Ok` or `NoOp`. We can view this as a guarantee that whether any actual IO operation occurred, the filesystem is in the desired state that we want. However, there might be times when we want to know if an IO operation actually did occur. For instance, AppendText can generate a NoOp if we send it an empty string to append to the file. For these situations, we can use `IsOkStrict`, which only returns true if the operation result is `Ok`. When this is true, we can be sure that some meaningful work was actually done. 
 
-    The following examples will assume we have previously declared the following [CakeFile](files.md) object:
+=== "C++"
 
-	{{ bp_img_error_handling('Example Readme File') }}
+	```c++
+	FCakeFile FileReadme{ TEXTVIEW("X:/Game/readme.md") };
 
-	Let's start with an example of minimal error handling. In this approach, we branch on the bool value that indicates whether or not the operation succeeded / failed: 
+	FCakeResultFileIO ResultAppend{
+		FileReadme.AppendTextFile(ExternalTextData)
+	};
 
-	{{ bp_img_error_handling('Minimal Error Handling IO') }}
+	if (ResultAppend.IsOkStrict())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Appended text successfully!"))
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No text appended: [%s]", *ResultAppend.ToString()));
+	}
+	``` 
+=== "Blueprint"
+	{{ bp_img_error_handling('Append Is Ok Strict') }}
 
-	This style is ergonomic and ideal for situations where we don't actually care about the specific details regarding failure, but still want to know whether the operation succeeded or failed.
+We can better understand the context of the Append Text operation if we switch to targeted error handling. In this verison, we'll explicitly handle the Ok and NoOp states, and we'll forward any other errors into a generic error reporting message. The benefit to this approach is that we can clearly identify the cases where the AppendText operation is being sent empty input strings.
 
-	Using the outcome value returned by an IO operation will give us greater context and the ability to implement more refined error handling. Even when using the simple branch technique described above, we can use a [CakeMixLibrary](/core-api/cake-mix/#error-handling) utility function to get a human-readable string of the outcome when it fails, giving any readers a better understanding of the actual point of failure:
+=== "C++"
+	```c++
+	FCakeFile FileReadme{ TEXTVIEW("X:/Game/readme.md") };
 
-	{{ bp_img_error_handling('Minimal Error Handling IO To String') }}
+	FCakeResultFileIO ResultAppend{
+		FileReadme.AppendTextFile(ExternalTextData)
+	};
 
-	The bool `Op Ok` is true if the outcome is `Ok` or `NoOp`, false otherwise. In some situations, we might want to distinguish between those `Ok` and `NoOp`. for instance, since we are using the AppendTextFile interface, a `NoOp` can be generated whenever it is submitted an empty string to append to a file. Since there is nothing to append, the IO operation will be skipped entirely. Since this is not technically an error from the API's standpoint, it is up to the caller to decide what to do. 
-	
-	Let's imagine that we are accepting input from an outside source, like a GUI. At this point, we can't be certain that the string being sent to AppendTextFile is non-empty, and it would be good to know when it is empty. Since now we are interested in distinguishing between `Ok` and `NoOp`, but we still don't care about handling all potential outcome values, we will be using the targeted error handling approach. 
+	switch (ResultAppend.Outcome)
+	{
+		case ECakeOutcomeFileIO::Ok:
+			UE_LOG(LogTemp, Warning, TEXT("Appended text successfully!"));
+		break;
 
-	To do this, we'll still branch on the bool value, knowing that it will be true if the result is `Ok` or `NoOp`, and false otherwise. When it's false, we'll still just print the generic error message to the user. When it's true, however, we'll switch on the outcome and provide two new paths: one for `Ok` and one for `NoOp`.
+		case ECakeOutcomeFileIO::NoOp:
+			UE_LOG(LogTemp, Warning, TEXT("Empty string submitted, no append necessary."));
+		break;
 
-	Now we can more accurately report the outcome to our users. Below is the same Blueprint script, zoomed into the error handling part specifically:
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("Append text error: [%s]"), *ResultAppend.ToString());
+		break;
+	}
+	``` 
 
-	{{ bp_img_error_handling('Targeted Error Handling IO') }}
+=== "Blueprint"
+	{{ bp_img_error_handling('Append Targeted Error Handling') }}
 
-	Finally, let's take a look at the final strategy: exhaustive error handling. Exhaustive error handling will usually require referencing the appropriate [error map](/core-api/error-maps/#appendfile-text-binary) unless you have a great memory or choose to delve into the implementation source code. This time we'll ignore the bool value entirely and just switch on the outcome value, handling every potential outcome value that AppendTextFile can send us. To keep the example simple, we'll just print a string for each outcome, but we can imagine that each of these print string nodes could instead be replaced with more complex, appropriate error handling:
+In some situations we need to explicitly handle every possible error from a particular function. When using exhaustive error handling, it's important to check the [error map](../core-api/error-maps/#appendfile-text-binary) for the relevant function in order to avoid writing unnecessary code. Since we're using `AppendTextFile`, we only need to handle `DoesNotExist`, `FailedOpenWrite`, and `FailedWrite`:
 
-	{{ bp_img_error_handling('Exhaustive Error Handling IO') }}
+=== "C++"
 
-	As we can see, exhaustive error handling greatly increases the complexity of our code. Strive to choose the minimum complexity required by a given context. 
+	```c++
+	FCakeFile FileReadme{ TEXTVIEW("X:/Game/readme.md") };
 
+	FCakeResultFileIO ResultAppend{
+		FileReadme.AppendTextFile(ExternalTextData)
+	};
+
+	switch (ResultAppend.Outcome)
+	{
+		case ECakeOutcomeFileIO::Ok:
+			UE_LOG(LogTemp, Warning, TEXT("Appended text successfully!"));
+		break;
+
+		case ECakeOutcomeFileIO::NoOp:
+			UE_LOG(LogTemp, Warning, TEXT("Empty string submitted, no append necessary."));
+		break;
+
+		case ECakeOutcomeFileIO::DoesNotExist:
+			UE_LOG(LogTemp, Warning, TEXT("Append failed -- the file does not exist."));
+		break;
+
+		case ECakeOutcomeFileIO::FailedOpenWrite:
+			UE_LOG(LogTemp, Warning, TEXT("Append failed -- could not open file for writing."));
+		break;
+
+		case ECakeOutcomeFileIO::FailedWrite:
+			UE_LOG(LogTemp, Warning, TEXT("Append failed -- could write to file."));
+		break;
+
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("This is a bug in CakeFS, please report it!"));
+		break;
+	}
+	```
+
+=== "Blueprint"
+	{{ bp_img_error_handling('Append Exhaustive Error Handling') }}
 
 And that concludes our tour through error handling with file and directory IO operations. Remember, the level of complexity for error handling depends entirely upon your use case. 
 
@@ -346,7 +330,7 @@ For our search, our goal is to collect three text files from a given directory.
 
 	{{ bp_img_error_handling('Search Callback Definition') }}
 
-	First, let's look at a minimal error handling example. The bool returned by a search traversal is only true if the search was successful. Since we're trying to gather three text files, we can be certain that a true value for this outcome means we did indeed gather three text files from the target directory.
+	First, let's look at a minimal error handling example. We can use the `WasSuccessful` function on the search result to see if our search was successful. Since we're trying to gather three text files, we can be certain that a true value for this outcome means we did indeed gather three text files from the target directory.
 
 	{{ bp_img_error_handling('Minimal Error Handling Search') }}
 

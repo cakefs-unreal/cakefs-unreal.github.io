@@ -1,2 +1,2 @@
 !!! info 
-    Cake IO Object interfaces will vary slightly between their Native / Blueprint representations. These deviations are minimal, but exist to maximize ergonomics and manage language limitations (e.g., Blueprint cannot use overloaded functions).
+    CakeFS Object interfaces will vary slightly between their Native / Blueprint representations. These deviations are minimal, but exist to maximize ergonomics and manage language limitations (e.g., Blueprint cannot use overloaded functions).

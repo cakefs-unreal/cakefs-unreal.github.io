@@ -25,6 +25,6 @@ This signal is used in the CakeMix [GatherCustom](/core-api/cake-mix/#gathering-
 {{ read_csv(open_csv_by_typename('ECakeSignalGather')) }}
 
 ### ECakeSignalBatchOp
-This signal is used in the CakeAsyncIO exclusive [Batch Operation](/core-api/async-io/#batch-operations) functions.
+This signal is used in the CakeFS Async exclusive [Batch Operation](/core-api/async-io/#batch-operations) functions.
 
 {{ read_csv(open_csv_by_typename('ECakeSignalBatchOp')) }}

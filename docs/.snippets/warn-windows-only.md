@@ -1,2 +1,2 @@
 !!! warning
-    Cake IO currently only provides official support for the Windows platform. Expanding the supported platforms is a high priority. For more details, please see [this section](../future-dev/future-development#supported-platforms).
+    CakeFS currently only provides official support for the Windows platform. Expanding the supported platforms is a high priority. For more details, please see [this section](../future-dev/future-development#supported-platforms).

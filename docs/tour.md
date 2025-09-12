@@ -1,15 +1,15 @@
 # Tour
-Cake IO's goal is to make working with the filesystem from within Unreal Engine simple and easy. In this tour, we'll take a look at the core features designed to accomplish that goal.
+CakeFS's goal is to make working with the filesystem from within Unreal Engine simple and easy. In this tour, we'll take a look at the core features designed to accomplish that goal.
 
 --8<-- "warn-windows-only.md"
 
 ## Dedicated Filesystem Types
-Cake IO provides dedicated types to represent the common filesystem concepts: paths, file extensions, files, and directories. Together these types work to provide us with a cohesive, simple way to accomplish our filesystem goals. 
+CakeFS provides dedicated types to represent the common filesystem concepts: paths, file extensions, files, and directories. Together these types work to provide us with a cohesive, simple way to accomplish our filesystem goals. 
 
 ### Paths
 Paths grant us the ability to easily store, compare, and manipulate filesystem paths. 
 
-With Cake IO's path objects, a standard path representation is automatically maintained, and we can focus entirely on using the path rather than how it is represented. We can build paths using Windows or Unix-like path strings:
+With CakeFS's path objects, a standard path representation is automatically maintained, and we can focus entirely on using the path rather than how it is represented. We can build paths using Windows or Unix-like path strings:
 
 === "C++"
 	```c++ 
@@ -63,7 +63,7 @@ Just like the path objects, one of the core jobs of the file extension object is
 
 	{{ bp_img_tour('Ext Equality') }}
 
-Cake IO makes a distinction between single file extensions like ".txt" and multi file extensions like ".txt.md". We can easily find out type a file extension is by having the object classify itself: 
+CakeFS makes a distinction between single file extensions like ".txt" and multi file extensions like ".txt.md". We can easily find out type a file extension is by having the object classify itself: 
 
 === "C++"
 	```c++ 
@@ -282,7 +282,7 @@ For more information on directory objects, please see the [official API document
 ## Enhanced Error Handling
 
 ### Custom Error Types
-Cake IO introduces custom error types to improve error reporting from filesystem operations, empowering callers with more context in the event an operation fails. Both file and directory IO operations have their own dedicated error type, and directory traversals also have error types to ensure the caller knows the exact outcome of every traversal.
+CakeFS introduces custom error types to improve error reporting from filesystem operations, empowering callers with more context in the event an operation fails. Both file and directory IO operations have their own dedicated error type, and directory traversals also have error types to ensure the caller knows the exact outcome of every traversal.
 
 ### Opt-In Error Handling
 Error handling has been designed to be as flexible as possible, allowing users to opt-in to whatever level of complexity they require. 
@@ -301,7 +301,7 @@ When minimal error handling is required, operations always provide a way where t
 	{{ bp_img_tour('Error Handling Simple') }}
 
 
-However, when more robust error handling is necessary, Cake IO's errors will give you the context required to properly respond to any untoward outcomes.
+However, when more robust error handling is necessary, CakeFS's errors will give you the context required to properly respond to any untoward outcomes.
 
 === "C++"
 
@@ -327,7 +327,7 @@ However, when more robust error handling is necessary, Cake IO's errors will giv
 For more information on error handling, please see the [official API documentation](core-api/error-handling.md).
 
 ## Cake Mix Library
-Cake Mix is the official utility library for Cake IO. Cake Mix gives you access to both simple utilities like human-readable strings for error codes as well as advanced filesystem operations, like gathering all the files from a directory into an array.
+Cake Mix is the official utility library for CakeFS. Cake Mix gives you access to both simple utilities like human-readable strings for error codes as well as advanced filesystem operations, like gathering all the files from a directory into an array.
 
 === "C++"
 
@@ -347,12 +347,12 @@ Cake Mix is the official utility library for Cake IO. Cake Mix gives you access 
 === "Blueprint"
 	{{ bp_img_tour('CakeMix Gather') }}
 
-Cake Mix will continue to expand and evolve throughout Cake IO's lifetime.
+Cake Mix will continue to expand and evolve throughout CakeFS's lifetime.
 
 For more information on Cake Mix, please see the [official API documentation](core-api/cake-mix.md).
 
 ## Cake Async IO
-Cake IO offers async support for many of the filesystem operations in both C++ and Blueprint. Cake Async IO lets you use many of Cake IO's interfaces in an asynchronous context.
+CakeFS offers async support for many of the filesystem operations in both C++ and Blueprint. Cake Async IO lets you use many of CakeFS's interfaces in an asynchronous context.
 
 === "C++"
 
@@ -371,7 +371,7 @@ Cake IO offers async support for many of the filesystem operations in both C++ a
 
 	TArray<uint8> PlayerLoc{ 0x14, 0x00, 0x4C, 0x4D, 0xFF };
 
-	auto Task = CakeAsyncIO::File::WriteBinaryFile(
+	auto Task = CakeFS Async::File::WriteBinaryFile(
 		DataFile,
 		PlayerLoc,
 		FCakeAsyncDoneFileIO::CreateLambda(OnAsyncWriteComplete)
@@ -382,6 +382,6 @@ Cake IO offers async support for many of the filesystem operations in both C++ a
 === "Blueprint"
 	{{ bp_img_tour('Async WriteBinary') }}
 
-As with Cake Mix, the async libraries will continue to evolve throughout Cake IO's lifetime.
+As with Cake Mix, the async libraries will continue to evolve throughout CakeFS's lifetime.
 
 For more information on Cake Async IO, please see the [official API documentation](core-api/async-io.md).

@@ -196,7 +196,7 @@ def define_env(env):
     @env.macro
     def cpp_impl_source(obj_id, type_name, relative_src_path):
         return f"""
-    The native {obj_id} object in Cake IO is **{type_name}**, which is defined in `CakeIO/{relative_src_path}.h`.
+    The native {obj_id} object in CakeFS is **{type_name}**, which is defined in `CakeIO/{relative_src_path}.h`.
 
 {cpp_assumed_include(relative_src_path)}
 """
@@ -204,7 +204,7 @@ def define_env(env):
     @env.macro
     def bp_impl_source(obj_id, type_name, relative_src_path):
         return f"""
-    The Blueprint {obj_id} object in Cake IO is **{type_name}**, which is defined in `CakeIO/Blueprint/{relative_src_path}.h`.
+    The Blueprint {obj_id} object in CakeFS is **{type_name}**, which is defined in `CakeIO/Blueprint/{relative_src_path}.h`.
 """
     
     @env.macro
@@ -254,15 +254,15 @@ def define_env(env):
         return inline_link(label, link_under_coreapi('cake-mix', subsec))
 
     @env.macro
-    def link_cakeasyncio(label='CakeAsyncIO', subsec: str|None = None):
+    def link_cake_async(label='CakeFS Async', subsec: str|None = None):
         return inline_link(label, link_under_coreapi('async-io', subsec))
 
     @env.macro
-    def link_cakeservices(label='Cake IO Services', subsec: str|None = None):
+    def link_cakeservices(label='CakeFS Services', subsec: str|None = None):
         return inline_link(label, link_under_coreapi('services', subsec))
 
     @env.macro
     def bp_currently_unsupported(feature_label: str):
         return f'''
-    {feature_label} is not currently supported for Blueprint due to limitations inherent with UObjects and multi-threaded contexts. As Unreal Engine evolves Cake IO will be looking for opportunities to add this functionality to the Blueprint API.
+    {feature_label} is not currently supported for Blueprint due to limitations inherent with UObjects and multi-threaded contexts. As Unreal Engine evolves CakeFS will be looking for opportunities to add this functionality to the Blueprint API.
 '''

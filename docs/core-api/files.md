@@ -1,6 +1,6 @@
 
 ## Overview
-Cake IO provides CakeFile objects to allow file manipulation in a type-safe and ergonomic manner.
+CakeFS provides CakeFile objects to allow file manipulation in a type-safe and ergonomic manner.
 
 ### Source Code Information
 === "C++"
@@ -33,7 +33,7 @@ The following covers some of the core interfaces required to utilize and manipul
 	{{ bp_img_file('Build Cake File Empty') }}
 
 	!!! tip
-		Cake IO offers automatic string to [CakePath](paths.md) conversions. You can pass a string to any function that expects a CakePath argument and it will automatically create a CakePath object from the string for you: 
+		CakeFS offers automatic string to [CakePath](paths.md) conversions. You can pass a string to any function that expects a CakePath argument and it will automatically create a CakePath object from the string for you: 
 
 		{{ bp_img_file('Auto Str Conv') }}
 
@@ -240,7 +240,7 @@ To check if a CakeFile exists on the filesystem, we can use `Exists`:
 	{{ bp_img_file('Exists') }}
 
 ### Creating Files
-Cake IO makes a distinction between writing to a file that does not exist (file creation) and writing to a file that already exists (file writing). The following file creation interfaces are meant to be used when a file does not exist. __These functions will fail if the file already exists on the filesystem.__ If the file already exists, use one of the [Write](#writing-data-to-files) functions instead.
+CakeFS makes a distinction between writing to a file that does not exist (file creation) and writing to a file that already exists (file writing). The following file creation interfaces are meant to be used when a file does not exist. __These functions will fail if the file already exists on the filesystem.__ If the file already exists, use one of the [Write](#writing-data-to-files) functions instead.
 
 To create a text or binary file, we use `CreateTextFile` or `CreateBinaryFile` respectively.
 === "C++"
@@ -693,10 +693,10 @@ This function takes an `ECakeFilePermissions` enum argument, which allows to spe
 ## Advanced Usage
 
 ### Advanced File Name Extraction
-Cake File objects allow callers to clone its associated file name into three different forms. It is important to understand how Cake IO classifies file names before we examine the clone interfaces.
+Cake File objects allow callers to clone its associated file name into three different forms. It is important to understand how CakeFS classifies file names before we examine the clone interfaces.
 
 #### File Name Types
-**Cake IO** classifies file names into three different categories. 
+**CakeFS** classifies file names into three different categories. 
 
 Using the file name `info.cdr.txt` as an example, we can view the file name according to three different categories:
 

@@ -3,11 +3,11 @@
 ## TCakeOrder
 {{ src_loc_single('TCakeOrder', 'CakeOrders') }}
 
-Cake IO uses the template struct TCakeOrder for IO operations that need to return additional data in addition to the IO operation result. It holds just two member fields: a result type of the operation and the data produced by the operation. The type of data produced will vary based on the operation.
+CakeFS uses the template struct TCakeOrder for IO operations that need to return additional data in addition to the IO operation result. It holds just two member fields: a result type of the operation and the data produced by the operation. The type of data produced will vary based on the operation.
 
 ```c++
 template<CakeConcepts::CCakeOpResult ResultType, CakeConcepts::CNotPtrOrRef OrderType>
-struct Cake IO_API TCakeOrder
+struct CakeFS_API TCakeOrder
 {
 	ResultType Result{ ResultType::BuildNoOp() };
 	OrderType Order{};

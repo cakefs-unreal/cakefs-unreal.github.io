@@ -1,18 +1,18 @@
-# Advanced Cake IO
-Welcome to the advanced section of Cake IO! All of the sections in this area will assume that users are comfortable and familiar with fundamental principles established in the [Core API](/core-api) section.
+# Advanced CakeFS
+Welcome to the advanced section of CakeFS! All of the sections in this area will assume that users are comfortable and familiar with fundamental principles established in the [Core API](/core-api) section.
 
 ## Tour of Advanced Features
 This section will give a brief tour of the advanced sections covered in this documentation. 
 
 ## Utility Libraries 
-There are two higher level library implementations that are built on Cake IO's core objects: CakeMix and CakeAsyncIO. These libraries will continue to expand and be refined as the Cake IO API matures.
+There are two higher level library implementations that are built on CakeFS's core objects: CakeMix and Async CakeFS. 
 
 ### CakeMix 
-{{ link_cakemix() }} is a utility library that offers a variety of high level operations on CakeDir, CakeFile, and CakePath objects. There are two implementations, one for C++ and one for Blueprint. This library is meant to serve as a starting point for users who are seeking a prebuilt solution to some common, complex IO operations. It also serves as an experimental grounds where Cake IO can test out designs and interfaces that might some day be promoted to the CoreAPI. 
+{{ link_cakemix() }} is a utility library that offers a variety of high level operations on CakeDir, CakeFile, and CakePath objects. This library is meant to serve as a starting point for users who are seeking a prebuilt solution to some common, complex IO operations. It also serves as an experimental grounds where CakeFS can test out designs and interfaces that might some day be promoted to the Core API. 
 
-### CakeAsyncIO 
-{{ link_cakeasyncio() }} is a library that offers asynchronous interfaces to Core and CakeMix IO operations. There are two implementations, one for C++ and one for Blueprint. There are numerous more limitations on async operations in Blueprint, and so the coverage between the two implementations varies. Regardless, these are meant to be serve as a helpful resource for users to be able to accomplish asynchronous IO in a relatively simple manner. 
+### Async CakeFS
+{{ link_cake_async() }} is a library that offers asynchronous versions of CakeFS and CakeMix operations.  
 
-## Cake IO Services
-The {{ link_cakeservices() }} are the lowest level of Cake IO. They are the interfaces that wrap the underlying Unreal IO operations, and they are what the Core Cake IO API is built upon. C++ users of Cake IO can also take advantage of this API when they desire to build their own IO solutions if the Core API is insufficient for their needs. Be warned, though, the service APIs are much lower level and error-prone than using the Core API!
+## CakeFS Services
+The {{ link_cakeservices() }} are the lowest level of CakeFS. They are the interfaces that wrap the underlying Unreal IO operations, and they are what the core CakeFS objects are built upon. C++ users of CakeFS can also take advantage of this API when they desire to build their own solutions if the core objects are insufficient for their needs. Be warned, though, the service APIs are much lower level and error-prone than using the Core API!
 

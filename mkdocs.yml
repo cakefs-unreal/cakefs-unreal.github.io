@@ -1,4 +1,4 @@
-site_name: Cake IO 
+site_name: CakeFS 
 site_url: https://cakeio-unreal.github.io
 theme:
   name: material
@@ -87,9 +87,9 @@ nav:
       - Overview: core-api/advanced-usage.md
       - Utility Libraries:
         - CakeMix: core-api/cake-mix.md
-        - CakeAsyncIO: core-api/async-io.md
-      - Cake IO Services:
-        - Cake IO Services Overview: core-api/services.md
+        - CakeAsyncFS: core-api/cake-async-fs.md
+      - CakeFS Services:
+        - CakeFS Services Overview: core-api/services.md
   - Examples: 
     - Overview: examples/examples.md
     - Basic:

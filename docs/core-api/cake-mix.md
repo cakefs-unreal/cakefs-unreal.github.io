@@ -1,5 +1,5 @@
 ## Cake Mix Library
-CakeMixLibrary provides a suite of advanced functionality built on top of the Cake IO's core APIs and objects. Its primary purpose is to provide an ergonomic interface for some common complex operations, such as collecting elements from a directory and storing them in a container. 
+CakeMixLibrary provides a suite of advanced functionality built on top of the CakeFS's core APIs and objects. Its primary purpose is to provide an ergonomic interface for some common complex operations, such as collecting elements from a directory and storing them in a container. 
 
 --8<-- "warning-lib-advanced.md"
 
@@ -7,13 +7,13 @@ CakeMixLibrary provides a suite of advanced functionality built on top of the Ca
 	CakeMixLibrary is located in the following header:
 
 	```c++
-	#include "Cake IO/CakeMixLibrary.h"
+	#include "CakeFS/CakeMixLibrary.h"
 	```
 === "Blueprint"
-	The Blueprint implementation of CakeMixLibrary is UCakeMixBlueprintLibrary, located in the following header:
+	The Blueprint implementation of CakeMixLibrary is UCakeMixBlueprintStatics, located in the following header:
 
 	```c++
-	#include "Cake IO/Blueprint/CakeMixBlueprintLibrary.h"
+	#include "CakeFS/Blueprint/CakeMixBlueprintStatics.h"
 	``` 
 
 ## Directory Work Functions
@@ -49,7 +49,7 @@ Gather error handling is very simple -- assuming the directory work operation su
     The `Gather` functions return the CakeMix exclusive order type [TCakeMixBatch](#tcakemixbatch). 
 
 === "Blueprint"
-	Regardless as to which Gather function we use, the return types will follow a similar form. We get a bool that indicates whether or not the gather operation successfully completed, an {{ link_outcomes('ECakeOutcomeDirWork', 'ecakeoutcomedirwork') }} that indicates outcome of the gather operation, and an array that contains all gathered elements.
+	Regardless as to which Gather function we use, the return types will follow a similar form. We get a an {{ link_outcomes('ECakeOutcomeDirWork', 'ecakeoutcomedirwork') }} that indicates outcome of the gather operation, and an array that contains all gathered elements.
 
     {{ bp_img_cakemix('Gather Return Type Example') }}
 
@@ -72,7 +72,10 @@ To gather all files in a directory at a specific depth, we use `GatherFiles`:
 
     if (ShallowFiles)
     {
-        UE_LOG(LogTemp, Warning, TEXT("Gathered [%d] files!"), ShallowFiles.Batch.Num());
+        UE_LOG(LogTemp, Warning, 
+			TEXT("Gathered [%d] files!"), 
+			ShallowFiles.Batch.Num()
+		);
     }
     ```
 === "Blueprint"
@@ -94,7 +97,10 @@ We can use `GatherFilesWithFilter` to utilize our source directory's extension f
 
     if (SoundFiles)
     {
-        UE_LOG(LogTemp, Warning, TEXT("Gathered [%d] sound effect files!"), SoundFiles.Batch.Num());
+        UE_LOG(LogTemp, Warning, 
+			TEXT("Gathered [%d] sound effect files!"), 
+			SoundFiles.Batch.Num()
+		);
     }
     ```
 
@@ -116,11 +122,17 @@ To gather all subdirectories in a directory at a specified depth, we use `Gather
 
     if (ShallowSubdirs)
     {
-        UE_LOG(LogTemp, Warning, TEXT("Gathered [%d] subdirectories!"), ShallowSubdirs.Batch.Num());
+        UE_LOG(LogTemp, Warning, 
+			TEXT("Gathered [%d] subdirectories!"), 
+			ShallowSubdirs.Batch.Num()
+		);
     }
     else 
     {
-        UE_LOG(LogTemp, Error, TEXT("Failed gathering subdirectories: [%s]"), *ShallowSubdirs.Result.ToString());
+        UE_LOG(LogTemp, Error, 
+			TEXT("Failed gathering subdirectories: [%s]"), 
+			*ShallowSubdirs.Result.ToString()
+		);
     }
     ```
 
@@ -198,7 +210,7 @@ If the File IO Read operation fails, we return `Abort`, which signifies a critic
 === "Blueprint"
 	{{ bp_img_cakemix('Gather Custom Callback Example Simple') }}
 
-The form `if (cond) { Select } else { Reject }` is quite common when writing GatherCustom predicates, and so Cake IO offers some convenience utilities to make writing that a bit more concise:
+The form `if (cond) { Select } else { Reject }` is quite common when writing GatherCustom predicates, and so CakeFS offers some convenience utilities to make writing that a bit more concise:
 
 === "C++"
 	The CakeSignalGather namespace has utility functions to help spare us the boilerplate. We can use `SelectIf` as the equivalent for `if (cond) { Select }  else { Reject }`:
@@ -217,9 +229,9 @@ The form `if (cond) { Select } else { Reject }` is quite common when writing Gat
         The CakeSignalGather namespace also contains the complement to `SelectIf`, which is the utility function `RejectIf`. This function is equivalent to the form `if (cond) { Reject } else { Select }`.
 
 === "Blueprint"
-	CakeMixBlueprintLibrary provides an automatic conversion from a `bool` to an `ECakeSignalGather`. The signal will be `Select` when the `bool` is true, otherwise the signal will be `Reject`.
+	CakeMix provides a conversion utility from a `bool` to an `ECakeSignalGather`. The signal will be `Select` when the `bool` is true, otherwise the signal will be `Reject`. We can drag the return node from Contains to our Gather Signal return output node and then type "Select If" to bring up the conversion utility. This can help simplify and compact our callback's code.
 
-	{{ bp_img_cakemix('Gather Custom Callback Example Simple Auto Signal') }}
+	{{ bp_img_cakemix('Gather Custom Callback Example Simple Select If') }}
 
 This new callback is logically equivalent to the previous one. Use whichever style you prefer. 
 
@@ -256,6 +268,7 @@ We'll keep track of how many files we've gathered via an integer, and then we'll
 	{{ bp_img_cakemix('Gather Custom Callback Advanced Select') }}
 
 	This callback is getting a little large for screenshots. Here is the portion of the callback with the new logic zoomed:
+
 	{{ bp_img_cakemix('Gather Custom Callback Advanced Select Zoom') }}
 
 We used the `SelectThenStop` signal because of how we setup our number termination logic. We could also change the logic so that once the number is greater than two we want to stop, but this time we wouldn't want to gather the current file because we already have gathered enough files. `RejectThenStop` will cause our gather operation to immediately stop, and the current file we have been passed will not be added to the gather batch.
@@ -344,50 +357,94 @@ The Count functions do not return an `Aborted` directory work outcome. Assuming 
 === "C++"
     All the count functions return an [FCakeMixCount](#fcakemixcount) object which just wraps an [FCakeResultDirWork](../core-api/special-types/results.md#fcakeresultdirwork) result and an `int32` representing the number of elements counted. That's all there is to this function, nothing more, nothing less.
 
+	In this example we'll use Count Files, but the basic usage is the same for all variants.
+
     ```c++ 
-	FCakeDir ProjectDir{ FCakePath{TEXTVIEW("X:/cake-arena")}, TEXTVIEW("txt") };
-
-	FCakeMixCount Items {
-		CakeMixLibrary::Dir::CountItems(ProjectDir, ECakePolicyOpDepth::Deep)
-	};
-
-	if (Items)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("There are [%d] total items in [%s]."),
-			Items.Count, *ProjectDir.CloneDirName());
-	}
+	FCakeDir ProjectDir{ TEXTVIEW("X:/cake-arena") };
 
 	FCakeMixCount Files{
 		CakeMixLibrary::Dir::CountFiles(ProjectDir, ECakePolicyOpDepth::Deep)
 	};
 
-	FCakeMixCount TextFiles{
-		CakeMixLibrary::Dir::CountFilesWithFilter(ProjectDir, ECakePolicyOpDepth::Deep)
-	};
-
-	FCakeMixCount Subdirs{
-		CakeMixLibrary::Dir::CountSubdirs(ProjectDir, ECakePolicyOpDepth::Deep)
-	};
-
+	if (Files)
+	{
+		UE_LOG(LogTemp, Warning, 
+			TEXT("There are [%d] total file(s) in [%s]."),
+			Files.Count, 
+			*ProjectDir.CloneDirName()
+		);
+	}
     ```
 === "Blueprint"
-    The Count functions return us three values: a bool that indicates if the count operation successfully ran, an ECakeOutcomeDirWork that indicates the outcome of the count operation, and an integer that represents the number of target elements found in the source directory at the specified depth.
+    The Count functions give us back a DirWork result type and an integer that represents the number of target elements found in the source directory at the specified depth.
 
-	That's all there is to these functions. We can count items (both files and directories), files, or subdirectories:
-
-    {{ bp_img_cakemix('Count Items') }}
+	In this example we'll use Count Files, but the basic usage pattern is the same for all variants.
 
     {{ bp_img_cakemix('Count Files') }}
 
-    {{ bp_img_cakemix('Count Files With Filter') }}
-
-    {{ bp_img_cakemix('Count Subdirs') }}
-
 ## File Functions
-As of now, CakeMixLibrary does not have any dedicated functions specifically for files. This section is reserved in case that changes in the future.
+### BuildFileName
+BuildFileName is a convenience function that allows us to quickly concatenate a file extension to a bare file name. In the following example, we use BuildFileName to generate the file name `my-file.bin.dat`.
+
+=== "C++"
+
+	```c++
+	FCakeFileExt FileExt{ TEXTVIEW("bin.dat") };
+
+	FString NewFileName{
+		CakeMixLibrary::File::BuildFileName(TEXTVIEW("my-file"), FileExt)
+	};
+	```
+
+=== "Blueprint"
+    {{ bp_img_cakemix('Build File Name') }}
 
 ## Path Functions
-As of now, CakeMixLibrary does not have any dedicated functions specifically for paths. This section is reserved in case that changes in the future.
+### PathStringIsValid
+The `PathStringIsValid` family of functions indicate if a given string represents a file or directory that currently exists on the filesystem. These functions are intended to be used in contexts where a path string needs to be frequently evaulated and the caller would like to avoid the cost of CakePath normalization. A classic example is an input field where a user is submitting a path -- we can check the string that the text field is holding via `PathStringIsValid` before we need to convert it into any other object form. 
+
+=== "C++"
+
+	```c++
+	FString PathString{ "X:/cake-arena/enemy-data.db" };
+
+	if (CakeMixLibrary::Path::PathStringIsValidFile(PathString))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("It's a file!"));
+	}
+
+	if (CakeMixLibrary::Path::PathStringIsValidDir(PathString))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("It's a directory!"));
+	}
+	```
+
+
+=== "Blueprint"
+    {{ bp_img_cakemix('Path String Is Valid') }}
+
+### PathIsValid
+The `PathIsValid` family of functions indicate if a given CakePath object holds a path that represents a file or directory that currently exists on the filesystem. These functions can be used to cheaply identify whether a path points to a file or directory without having to convert the CakePath into a CakeFile or CakeDir.
+
+=== "C++"
+
+	```c++
+	FCakePath Path{ TEXTVIEW("X:/cake-arena/enemy-data.db") };
+
+	if (CakeMixLibrary::Path::PathIsValidFile(Path))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("It's a file!"));
+	}
+
+	if (CakeMixLibrary::Path::PathIsValidDir(Path))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("It's a directory!"));
+	}
+	```
+
+
+=== "Blueprint"
+    {{ bp_img_cakemix('Path Is Valid') }}
 
 ## Error Handling
 
@@ -399,61 +456,58 @@ CakeMixLibrary offers various `ToString` functions which generate human-readable
 
     ```c++ 
 		/** @return A human-readable string that describes the file IO outcome value. */
-		Cake IO_API [[nodiscard]] FString ToStringOutcomeFileIO(ECakeOutcomeFileIO Outcome); 
+		CakeFS_API [[nodiscard]] FString ToStringOutcomeFileIO(ECakeOutcomeFileIO Outcome); 
 
 		/** @return A human-readable string that describes the directory IO outcome value. */
-		Cake IO_API [[nodiscard]] FString ToStringOutcomeDirIO(ECakeOutcomeDirIO Outcome);
+		CakeFS_API [[nodiscard]] FString ToStringOutcomeDirIO(ECakeOutcomeDirIO Outcome);
 
 		/** @return A human-readable string that describes the directory traversal outcome value. */
-		Cake IO_API [[nodiscard]] FString ToStringOutcomeTraversal(ECakeOutcomeTraversal Outcome);
+		CakeFS_API [[nodiscard]] FString ToStringOutcomeTraversal(ECakeOutcomeTraversal Outcome);
 
 		/** @return A human-readable string that describes the directory search outcome value. */
-		Cake IO_API [[nodiscard]] FString ToStringOutcomeSearch(ECakeOutcomeSearch Outcome);
+		CakeFS_API [[nodiscard]] FString ToStringOutcomeSearch(ECakeOutcomeSearch Outcome);
 
 		/** @return A human-readable string that describes the directory work outcome value. */
-		Cake IO_API [[nodiscard]] FString ToStringOutcomeDirWork(ECakeOutcomeDirWork Outcome);
+		CakeFS_API [[nodiscard]] FString ToStringOutcomeDirWork(ECakeOutcomeDirWork Outcome);
 
 		/** @return A human-readable string that describes the batch operation outcome value. */
-		Cake IO_API [[nodiscard]] FString ToStringOutcomeBatchOp(ECakeOutcomeBatchOp Outcome);
+		CakeFS_API [[nodiscard]] FString ToStringOutcomeBatchOp(ECakeOutcomeBatchOp Outcome);
 
 
 
 		/** @return A human-readable string that describes the file IO result value. */
-		Cake IO_API [[nodiscard]] FString ToStringResultFileIO(FCakeResultFileIO Result);
+		CakeFS_API [[nodiscard]] FString ToStringResultFileIO(FCakeResultFileIO Result);
 
 		/** @return A human-readable string that describes the directory IO result value. */
-		Cake IO_API [[nodiscard]] FString ToStringResultDirIO(FCakeResultDirIO Result);
+		CakeFS_API [[nodiscard]] FString ToStringResultDirIO(FCakeResultDirIO Result);
 
 		/** @return A human-readable string that describes the directory traversal result value. */
-		Cake IO_API [[nodiscard]] FString ToStringResultTraversal(FCakeResultTraversal Result);
+		CakeFS_API [[nodiscard]] FString ToStringResultTraversal(FCakeResultTraversal Result);
 
 		/** @return A human-readable string that describes the directory search result value. */
-		Cake IO_API [[nodiscard]] FString ToStringResultSearch(FCakeResultSearch Result);
+		CakeFS_API [[nodiscard]] FString ToStringResultSearch(FCakeResultSearch Result);
 
 		/** @return A human-readable string that describes the directory work result value. */
-		Cake IO_API [[nodiscard]] FString ToStringResultDirWork(FCakeResultDirWork Result);
+		CakeFS_API [[nodiscard]] FString ToStringResultDirWork(FCakeResultDirWork Result);
 
 		/** @return A human-readable string that describes the batch operation result value. */
-		Cake IO_API [[nodiscard]] FString ToStringResultBatchOp(FCakeResultBatchOp Result);
+		CakeFS_API [[nodiscard]] FString ToStringResultBatchOp(FCakeResultBatchOp Result);
 
     ```
 
 === "Blueprint"
-    CakeMix ensures that we can always easily turn an outcome value into a human readable string. When you are working with an outcome value, you can either call the appropriate ToString function manually:
-
+    CakeMix ensures that we can always easily turn an outcome value into a human readable string. Finding the appropriate ToString function is simple, just drag off the outcome value, ensure Context Sensitive is checked, type in 'ToString', and you should easily find the function you need.
 
     {{ bp_img_cakemix('To String Outcome') }}
 
-	Or you can use the auto-conversion node by just connecting the outcome value to a string node:
+## Blueprint Exclusive Functions
+### Sorting arrays of Paths, Files, and Directories
+Unreal Engine doesn't expose the sort operations for arrays in Blueprint; in light of this, CakeMix provides the functions SortPaths, SortFiles, and SortDirs to enable callers to sort their collections by basic string ordering logic to ensure some kind of ordering consistency.
 
-    {{ bp_img_cakemix('To String Outcome Auto') }}
-
-	Finding the appropriate ToString function is simple, just drag off the outcome value, ensure Context Sensitive is checked, type in 'ToString', and you should easily find the function you need:
-
-    {{ bp_img_cakemix('To String Search') }}
+{{ bp_img_cakemix('Sort Arrays') }}
 
 ## CakeMix Exclusive C++ Types
-CakeMix introduces a few types exclusive to the C++ API. They are defined in `Cake IO/CakeMixTypes.h`.
+CakeMix introduces a few types exclusive to the C++ API. They are defined in `CakeFS/CakeMixTypes.h`.
 
 --8<-- "note-native-only.md"
 

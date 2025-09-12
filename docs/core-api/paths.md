@@ -240,7 +240,7 @@ In this section we will cover the fundamental CakePath operations. Once you are 
     In the example above, the target CakePath object's path will be `x/game/data/assets/models`.
 
 ### Path Equality
-Path equality in Cake IO is simple: two CakePath objects are equal if they refer to the same location on the filesystem.
+Path equality in CakeFS is simple: two CakePath objects are equal if they refer to the same location on the filesystem.
 === "C++"
     FCakePath uses `operator==` and `operator!=` for equality comparisons.
 

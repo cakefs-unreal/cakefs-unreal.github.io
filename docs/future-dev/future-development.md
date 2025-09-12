@@ -1,15 +1,15 @@
 # Future Development
-Cake IO will continue to be refined and expanded throughout its lifetime. This section will detail some of the future designs planned for Cake IO. 
+CakeFS will continue to be refined and expanded throughout its lifetime. This section will detail some of the future designs planned for CakeFS. 
 
 ## Supported Platforms
-Cake IO is launching with just one officially supported platform (Windows) in order to focus on initial stability and correctness. While internally Cake IO utilizes Unreal Engine's cross-platform IO API, we want to be absolutely sure that everything works correctly on each target platform before we give an official endorsement.
+CakeFS is launching with just one officially supported platform (Windows) in order to focus on initial stability and correctness. While internally CakeFS utilizes Unreal Engine's cross-platform IO API, we want to be absolutely sure that everything works correctly on each target platform before we give an official endorsement.
 
-Expanding the supported platforms is one of the highest priorities for future improvements of Cake IO. Cake IO is being used in production by MakinaCube and we will be increasing the number of supported platforms as fast as possible. If there is a particular platform you want support for, please send us an email at makinacube@gmail.com, with the phrase "Cake IO Supported Platforms" somewhere in the subject line. Customer feedback can help us better prioritize which platforms to add next. 
+Expanding the supported platforms is one of the highest priorities for future improvements of CakeFS. CakeFS is being used in production by MakinaCube and we will be increasing the number of supported platforms as fast as possible. If there is a particular platform you want support for, please send us an email at makinacube@gmail.com, with the phrase "CakeFS Supported Platforms" somewhere in the subject line. Customer feedback can help us better prioritize which platforms to add next. 
 
 ## Cake Mix Library
-Cake Mix library will continue to have utility functions added to it as the library matures. We plan to use feedback from our internal usage of Cake IO as well as customer suggestions / requests to help guide the expansions of Cake Mix. 
+Cake Mix library will continue to have utility functions added to it as the library matures. We plan to use feedback from our internal usage of CakeFS as well as customer suggestions / requests to help guide the expansions of Cake Mix. 
 
-One of the major design goals of Cake IO is to keep the core object interfaces as lean as possible without comprimising their power. Cake Mix can help serve as an experimental ground where we add candidate functions that could potentially be added to the core object interface should it prove to be exceptionally useful. This approach will allow us to get production feedback from new functions before having to increase the surface area of a core object's API.
+One of the major design goals of CakeFS is to keep the core object interfaces as lean as possible without comprimising their power. Cake Mix can help serve as an experimental ground where we add candidate functions that could potentially be added to the core object interface should it prove to be exceptionally useful. This approach will allow us to get production feedback from new functions before having to increase the surface area of a core object's API.
 
 ## Cake Async IO
 The goals of Cake Async IO differ between the C++ and Blueprint APIs. 

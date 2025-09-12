@@ -374,7 +374,7 @@ struct FCakeResultDirWork
 This result type is used in the async exclusive [Batch Operation](/core-api/async-io/#batch-operations) functions. It wraps an [ECakeOutcomeBatchOp](outcomes.md#ecakeoutcomebatchop) value and provides a few utility functions. 
 
 ```c++
-struct Cake IO_API FCakeResultBatchOp
+struct CakeFS_API FCakeResultBatchOp
 {
 	ECakeOutcomeBatchOp Outcome{ ECakeOutcomeBatchOp::NoOp };
 	int32 TotalProcessed{ 0 };
