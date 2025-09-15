@@ -82,7 +82,6 @@ nav:
       - Results: core-api/special-types/results.md
       - Cake Orders: core-api/special-types/cake-orders.md
       - Settings: core-api/special-types/settings.md
-      - Cake Ext Filter: core-api/special-types/cakeextfilter.md
     - Advanced Usage: 
       - Overview: core-api/advanced-usage.md
       - Utility Libraries:

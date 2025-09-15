@@ -187,18 +187,18 @@ def define_env(env):
     @env.macro
     def cpp_assumed_include(rel_path):
         return f"""
-    All C++ examples in this section assume the following include statement:
-
-    ```c++
-    {cpp_incl(rel_path)}
-    ```
+```c++
+{cpp_incl(rel_path)}
+```
 """
     @env.macro
-    def cpp_impl_source(obj_id, type_name, relative_src_path):
+    def cpp_impl_source(type_name, relative_src_path):
         return f"""
-    The native {obj_id} object in CakeFS is **{type_name}**, which is defined in `CakeIO/{relative_src_path}.h`.
+{type_name} is defined in `CakeIO/{relative_src_path}.h`.
 
 {cpp_assumed_include(relative_src_path)}
+
+All of the following C++ examples will assume this has already been included.
 """
 
     @env.macro

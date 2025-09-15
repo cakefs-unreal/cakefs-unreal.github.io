@@ -2,50 +2,54 @@
 CakeFS provides CakeDir objects that offer a comprehensive and ergonomic interface for directory traversal and other common directory IO operations. Just like CakeFile objects, CakeDir objects store their paths using CakePath objects. In addition to their path, however, CakeDir objects also store a collection of [CakeFileExt](/core-api/file-extensions/) objects, called the **file extension filter**, which can be used to selectively visit the files contained in a directory.
 
 ### Source Code Information
-=== "C++"
-    {{ cpp_impl_source('directory', 'FCakeDir', 'CakeDir') }}
-
-=== "Blueprint"
-    {{ bp_impl_source('directory', 'UCakeDir', 'CakeDir_BP') }}
+{{ cpp_impl_source('FCakeDir', 'CakeDir') }}
 
 ## Basic Usage
 
-### Building CakeDir Objects
+### Constructing CakeDir Objects
+The simplest way to construct an FCakeDir is to submit a string or an FCakePath that represents the directory path we want to use.
+
 === "C++"
-    We can build an FCakeDir via its constructor by submitting an FCakePath argument that represents the directory location.
 	```c++ 
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
-        // Path: "x/game"
-        // File Extension Filter: []
-	```
-    We can pass a string-like object as the second argument to an FCakeDirconstructor if we want to also set the starting elements in its [file extension filter](#file-extension-filter):
+	FCakeDir DirectoryViaString{ TEXTVIEW("X:/game") };
 
-	```c++ 
-    FCakeDir DirectoryGame{ 
-        FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("txt|bin")};
-        // Path: "x/game"
-        // File Extension Filter: [.txt, .bin]
+	FCakeDir DirectoryViaPath{ 
+		FCakePath{ TEXTVIEW("X:/game") }
+	};
 	```
+
 === "Blueprint"
-    We can build a CakeDir object via `BuildCakeDir`:
+	{{ bp_img_dir('Make Cake Dir') }}
 
-	{{ bp_img_dir('Build Cake Dir') }}
+If we know we are going to use this directory for [filtered traversals](#filtered-traversals), we can set its initial file extension filter by providing a [file extension filter](#file-extension-filter). In the following examples, our directory will hold the path `X:/game` and its file extension filter will holds two extensions: `.txt` and `.bin`.
 
-    The second argument is a string that represents the extensions we want in its file extension filter: 
+=== "C++"
+	```c++ 
+	FCakeExtFilterQuery Query{ TEXT("txt | bin") };
 
-    {{ bp_img_dir('Build Cake Dir Ext Filter') }}
-    
-    !!! info 
-        Please see the [file extension filter](#file-extension-filter) section for details on the extension filter and the syntax used here to specify extensions
+	FCakeDir DirectoryViaString{ TEXTVIEW("X:/game"), Query };
 
-    To build a CakeDir with an empty path and extension filter, we use `BuildCakeDirEmpty`:
+	FCakeDir DirectoryViaPath{ 
+		FCakePath{ TEXTVIEW("X:/game") }, Query
+	};
+	```
 
-    {{ bp_img_dir('Build Cake Dir Empty') }}
+	If you are not using a cached query and don't want to pay the cost of creating one for just one directory, you can use the special constructor overload which takes an FCakePath and an FStringView for the query instead:
+
+	```c++
+	FCakeDir DirectoryViaPath{ 
+		FCakePath{ TEXTVIEW("X:/game") }, TEXTVIEW("txt | bin")
+	};
+	```
+
+=== "Blueprint"
+	{{ bp_img_dir('Make Cake Dir With Filter') }}
 
 We can get a copy of an existing CakeDir via `Clone`:
 === "C++"
-    ```cpp
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
+
+    ```c++ hl_lines="5"
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
         // Path: "x/game"
         // File Extension Filter: [.bin, .dat]
 
@@ -55,7 +59,7 @@ We can get a copy of an existing CakeDir via `Clone`:
     ```
 
     ```c++ hl_lines="5"
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
         // Path: "x/game"
         // File Extension Filter: [.bin, .dat]
 
@@ -74,61 +78,90 @@ We can get a copy of an existing CakeDir via `Clone`:
 By default, this function will also ensure that the cloned CakeDir has an identical file extension filter. We can control this directly via the {{ policy_link('ExtFilterClone') }} parameter. This parameter is optional in C++.
 
 ### Accessing the Directory Path
+We can access a CakeDir's associated CakePath via `GetPath`.
 === "C++"
-    We can access an FCakeDir's associated FCakePath via `operator*` or `GetPath`:
-	```c++ hl_lines="6-7"
+
+
+	```c++ hl_lines="7-8"
+
     auto PrintPath = [](const FCakePath& Path) { 
         UE_LOG(LogTemp, Warning, TEXT("Path: [%s]"), **Path);
     };
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
 
-    PrintPath(*DirectoryGame);
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
+
     PrintPath(DirectoryGame.GetPath());
+    PrintPath(*DirectoryGame);
+
 	```
-    When we just want to use the directory path as a string, we can use the convenience function `GetPathString`:
+	!!! note
+		`operator*` is overloaded to be equivalent to calling `GetPath`.
+
+=== "Blueprint"
+	{{ bp_img_dir('Get Path') }}
+
+When we just want to use the directory path as a string, we can use the convenience function `GetPathString`:
+=== "C++"
 	```c++ hl_lines="7"
     auto PrintPathStr = [](const FString& Path) { 
         UE_LOG(LogTemp, Warning, TEXT("Path: [%s]"), *Path);
     };
 
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
 
     PrintPathStr(DirectoryGame.GetPathString());
 	```
 
 === "Blueprint"
-    To read the directory path as a string, we use `GetPathString`:
-
 	{{ bp_img_dir('Get Path String') }}
 
-    To get a copy of the CakePath object that holds the directory path, we use `ClonePath`:
-
-	{{ bp_img_dir('Clone Path') }}
-
-
 ### Modifying the Directory Path
+To change the path of an existing CakeDir object, we use `SetPath`. There are two versions of `SetPath` we can use: one that accepts a string and one that accepts a CakePath object.
 === "C++"
-    We can change the path an FCakeDir is using via `SetPath` or `StealPath`. `SetPath` operates on `const FCakePath&`, and `StealPath` operates on `FCakePath&&`.  
 
-    ```c++ hl_lines="4-5"
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
+    ```c++ hl_lines="4"
+	// FString Overload
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
+
+    DirectoryGame.SetPath(TEXTVIEW("y/archive/data"));
+	```
+
+    ```c++ hl_lines="5"
+	// FCakePath Overload
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
     FCakePath NewPath{ TEXTVIEW("y/archive/data") };
 
     DirectoryGame.SetPath(NewPath);
+    ```
+
+    !!! tip
+        We can use `StealPath` in C++ that accepts an `FCakePath&&` parameter when the situation can allow for it.
+
+    ```c++ hl_lines="4-5"
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
+
     DirectoryGame.StealPath( FCakePath{TEXTVIEW("x/other/archive")} );
     ```
-    !!! tip
-        Favor `StealPath` unless you are copying from a source `FCakePath` that needs to be used elsewhere.
 
-    We can check if an FCakeDir's directory path is empty via `PathIsEmpty`:
+=== "Blueprint"
+	{{ bp_img_dir('Set Path String') }}
+
+	{{ bp_img_dir('Set Path CakePath') }}
+
+We can check if an FCakeDir's directory path is empty via `PathIsEmpty`:
+=== "C++"
 
     ```c++ hl_lines="3"
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
 
     const bool bPathIsEmpty{ DirectoryGame.PathIsEmpty() }; // => false
     ```
 
-    We can reset the directory path to be empty via `ResetPath`:
+=== "Blueprint"
+	{{ bp_img_dir('Path Is Empty') }}
+
+We can reset the directory path to be empty via `ResetPath`:
+=== "C++"
 
     ```c++ hl_lines="1"
     DirectoryGame.ResetPath();
@@ -138,16 +171,6 @@ By default, this function will also ensure that the cloned CakeDir has an identi
     --8<-- "ad-newreservedsize.md"
 
 === "Blueprint"
-    To change the path of an existing CakeDir object, we use `SetPath`:
-
-	{{ bp_img_dir('Set Path') }}
-
-    To see if the path a CakeDir object holds is empty, we use `PathIsEmpty`:
-
-	{{ bp_img_dir('Path Is Empty') }}
-
-    To clear the path a CakeDir object holds, we use `ResetPath`:
-
 	{{ bp_img_dir('Reset Path') }}
 
     --8<-- "note-bp-newreservedsize.md"
@@ -157,7 +180,7 @@ We can get the directory name as a string via `CloneDirName`:
 
 === "C++"
 	```c++ hl_lines="3"
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
 
     FString DirName{ DirectoryGame.CloneDirName() }; // => "game"
 	```
@@ -168,9 +191,9 @@ We can get the directory name as a string via `CloneDirName`:
 
 ### Directory Equality
 Directory equality mirrors path equality: two CakeDir objects are equal if they refer to the same directory location on the filesystem. The extension filters are not taken into consideration for equality since this would lead to unintuitive, misleading results.
-=== "C++"
-    We use `operator==` and `operator!=` for FCakeDirequality, and can compare them against other FCakeDiror FCakePath objects.
 
+We use the equality operators `==` and `!=` to compare FCakeDir objects.
+=== "C++"
 	```c++ hl_lines="8 9 11 12"
     FCakePath PathData{ TEXTVIEW("X:/game/data") };
 
@@ -185,40 +208,136 @@ Directory equality mirrors path equality: two CakeDir objects are equal if they 
     bAreEqual = DirData != PathData; // => false
     bAreEqual = DirData != DirArc; // => true
 	```
+
+	!!! note
+		The FCakeDir / FCakePath overload is also provided for convenience.
+
 === "Blueprint"
-    We can check if two CakeDir objects are equal via `IsEqualTo`:
-
 	{{ bp_img_dir('Is Equal To') }}
-
-    We can check if two CakeDir objects are not equal via `IsNotEqualTo`:
 
 	{{ bp_img_dir('Is Not Equal To') }}
 
 ### File Extension Filter
-All CakeDir objects have their own file extension filter, which contains a collection of unique file extensions stored as [CakeFileExt](file-extensions.md) objects. This filter is used on specialized variations of file traversal and allows callers to decide which files in a directory are visited based upon their file extensions.
+Each CakeDir object stores a list of unique file extensions that are used for [filtered traversals](#filtered-traversals). We will look at how we can interact with the file extension filter soon, but first we need to take a brief detour and become familiar with file extension query syntax. 
+
+#### File Extension Query Syntax
+CakeDir filters use a specific syntax to represent groups of file extensions as a string. The syntax is very simple: each file extension element is separated via the `|` (pipe) character. 
+As an example, if we wanted to use the extensions `.txt`, `.bin.dat`, and `.jpg` in the same command, we could use the string "txt|bin.dat|jpg" for the extension command. Any leading or trailing whitespace is removed from each element, so we can also use the string "txt | bin.dat | jpg" to enhance the readability.
+
+!!! note
+    It does not matter if we include the leading extension dot for an extension. 
+
+We use a special type to contain these file extensions queries: `FCakeExtFilterQuery`. Making a query is simple: we just need to construct it with our desired query string:
 
 === "C++"
-    We can get access to either a const or mutable reference to the file extension filter via `GetExtFilter` and `GetExtFilterMut`, respectively:
 
-    ```c++
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
-
-	const FCakeExtFilter& FilterConst  { DirectoryGame.GetExtFilter()    };
-	      FCakeExtFilter& FilterMutable{ DirectoryGame.GetExtFilterMut() };
-    ```
-
+	```c++
+	FCakeExtFilterQuery ImageFiles{ .Query = TEXT("jpg | jpeg | png") };
+	```
 
 === "Blueprint"
-    Blueprint users cannot directly access the filter extension filter and instead control it via specific **UCakeDir** member functions. 
+	{{ bp_img_dir('Query Image Files') }}
 
-For details on how to use the extension filter, please see the [FCakeExtFilter documentation](/core-api/special-types/cakeextfilter/).
+In the example above, the filter query will contain the following extensions: `.jpg`, `.jpeg`, and `.png`.
+
+!!! tip
+    Adding surrounding whitespace to `|` extension separator can help boost legibility, especially in Blueprints. Any leading/trailing whitespace is always removed from each entry, so use whatever format is most legible for you and your team.
+
+!!! info
+    The extension filter is extremely lenient when parsing file extension queries. It doesn't matter if we include the leader dot in an extension (".txt" and "txt" are equivalent, as are ".cdr.txt" and "cdr.txt"), It can also handle redundant `|` or `.` symbols and empty entries without incident (it will merely skip them). For example, `|.|..cdr.|txt|bin||` will correctly parse the command into the following extension list `[.cdr, .txt, .bin]`. Therefore, you do not have to do exhaustive syntax checking when accepting filter query strings from outside sources (like from a GUI).
+
+#### File Extension Filter Initialization
+When we construct a CakeDir object, by default the file extension filter is completely empty. If we know at construction time what kind of files the CakeDir object is going to be working with, we can directly set the filter by providing an FCakeExtFilterQuery argument, as shown in the [construction](#constructing-cakedir-objects) section.
+
+#### Modifying the File Extension Filter
+We can submit file extensions queries to add, remove, or directly set the contents of the File Extension Filter. All of these functions return an integer indicating the number of changes that were made to the file extension filter. 
+
+`ExtFilterSetExtensions` will remove any preexisting file extensions from the filter and set its contents to the file extensions in the query argument. The number returned indicates the total number of extensions in the filter after it has been modified.
+
+=== "C++"
+
+	```c++ hl_lines="5"
+	FCakeDir DataDir{ TEXTVIEW("Z:/Vault/Data") };
+
+	//FCakeExtFilterQuery overload
+	FCakeExtFilterQuery NewExts{ .Query = TEXT("bin | dat") };
+	DataDir.ExtFilterSetExtensions(NewExts); // => 2 (bin, dat)
+	```
+
+	--8<-- "overloads-ext-filter.md"
+
+	```c++ hl_lines="4"
+	FCakeDir DataDir{ TEXTVIEW("Z:/Vault/Data") };
+
+	//FStringView overload
+	DataDir.ExtFilterSetExtensions( TEXTVIEW("bin | dat") ); // => 2 (bin, dat)
+	```
+
+=== "Blueprint"
+	{{ bp_img_dir('filter-set-extensions') }}
+
+In the example above, the function will return `2` and the file extension filter will contain two file extensions: `[ ".bin", ".dat" ]`.
+
+`ExtFilterAddExtensions` will add any new file extensions found in the submitted query. It will return the number of new extensions added. Remember, the file extension filter only stores unique entries, so sometimes this number returned will be different from the number of file extensions found in the query.
+
+=== "C++"
+
+	```c++ hl_lines="5"
+	FCakeExtFilterQuery InitialExts{ .Query = TEXT("bin | dat") };
+	FCakeDir DataDir{ TEXTVIEW("Z:/Vault/Data"), InitialExts };
+
+	//FCakeExtFilterQuery overload
+	FCakeExtFilterQuery AdditionalExts{ .Query = TEXT("sav | json") };
+	DataDir.ExtFilterAddExtensions(AdditionalExts); // => 2 (bin, dat, sav, json)
+	```
+	--8<-- "overloads-ext-filter.md"
+
+	```c++ hl_lines="4"
+	FCakeExtFilterQuery InitialExts{ .Query = TEXT("bin | dat") };
+	FCakeDir DataDir{ TEXTVIEW("Z:/Vault/Data"), InitialExts };
+
+	//FStringView overload
+	DataDir.ExtFilterAddExtensions( TEXTVIEW("sav | json") ); // => 2 (bin, dat, sav, json)
+	```
+
+=== "Blueprint"
+	{{ bp_img_dir('filter-add-extensions') }}
+
+In the example above, the function will return `2` and the file extension filter will contain four file extensions: `[ ".bin", ".dat", ".sav", and ".json" ]`.
+
+`ExtFilterRemoveExtensions` will remove any queried file extensions from the filter set. It will return the number of extensions removed. 
+
+=== "C++"
+
+	```c++ hl_lines="5"
+	FCakeExtFilterQuery InitialExts{ .Query = TEXT("bin | dat") };
+	FCakeDir DataDir{ TEXTVIEW("Z:/Vault/Data"), InitialExts };
+
+	//FCakeExtFilterQuery overload
+	FCakeExtFilterQuery ExtsToRemove{ .Query = TEXT("bin | json") };
+	DataDir.ExtFilterAddExtensions(ExtsToRemove); // => 1 (dat)
+	```
+	--8<-- "overloads-ext-filter.md"
+
+	```c++ hl_lines="4"
+	FCakeExtFilterQuery InitialExts{ .Query = TEXT("bin | dat") };
+	FCakeDir DataDir{ TEXTVIEW("Z:/Vault/Data"), InitialExts };
+
+	//FStringView overload
+	DataDir.ExtFilterAddExtensions( TEXTVIEW("bin | json") ); // => 1 (dat)
+	```
+=== "Blueprint"
+	{{ bp_img_dir('filter-remove-extensions') }}
+
+In the example above, the function will return `1` and the file extension filter will contain one file extension: `[ ".dat" ]`.
 
 ### Clearing All Data
-To clear the path and the file extension filter on a CakeDir object, we use `Reset`:
+To clear the path and the file extension filter on a CakeDir object, we use `Reset`. 
+
 === "C++"
 
     ```c++ hl_lines="5"
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin|dat") };
+    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("bin | dat") };
         // Path: "x/game"
         // File Extension Filter: [.bin, .dat]
 
@@ -226,14 +345,13 @@ To clear the path and the file extension filter on a CakeDir object, we use `Res
         // Path: ""
         // File Extension Filter: []
     ```
-    --8<-- "ad-newreservedsize.md"
-
 === "Blueprint"
 	{{ bp_img_dir('Reset') }}
 
-    --8<-- "note-bp-newreservedsize.md"
+!!! note
+	There are two optional integer parameters which allow us to reserve sizes for the path string and the file extension filter; in most scenarios you can leave this at zero. However, if you happen to know the size of the path or how many file extensions you will be storing after the reset, reserving the size can increase performance.
 
-## IO Operations
+## Filesystem Operations
 --8<-- "disclaimer-error-handling.md"
 
 --8<-- "ad-policies.md"
