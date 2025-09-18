@@ -360,8 +360,8 @@ To clear the path and the file extension filter on a CakeDir object, we use `Res
 To check if a CakeDir object's referenced directory exists on the filesystem, we use `Exists`:
 === "C++"
 
-    ```c++
-	FCakeDir DirectoryGame { FCakePath{TEXTVIEW("X:/game")} };
+    ```c++ hl_lines="3"
+	FCakeDir DirectoryGame { TEXTVIEW("X:/game") };
 
 	if (DirectoryGame.Exists())
 	{
@@ -381,16 +381,14 @@ To check if a CakeDir object's referenced directory exists on the filesystem, we
 ### Creating Directories
 To create the directory a CakeDir object references, we use `CreateDir`:
 === "C++"
-    ```c++
-        FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
 
-        if (!DirectoryGame.Exists())
-        {
-            if (!DirectoryGame.CreateDir())
-            {
-                UE_LOG(LogTemp, Error, TEXT("Failed creating game directory."));
-            }
-        }
+    ```c++ hl_lines="3"
+        FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
+
+		if (!DirectoryGame.CreateDir())
+		{
+			UE_LOG(LogTemp, Error, TEXT("Failed creating game directory."));
+		}
     ```
 
 === "Blueprint"
@@ -404,8 +402,9 @@ We can use the {{ policy_link('MissingParents') }} parameter to control whether 
 ### Deleting Directories
 We can delete a CakeDir's referenced directory and all of its contents via `DeleteDir`:
 === "C++"
+
     ```c++ hl_lines="3"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
 	if (!DirectoryGame.DeleteDir())
 	{
@@ -415,19 +414,22 @@ We can delete a CakeDir's referenced directory and all of its contents via `Dele
 === "Blueprint"
 	{{ bp_img_dir('Delete Dir') }}
 
+!!! tip
+	`DeleteDir` returns a NoOp if the directory does not exist, so we can safely use `DeleteDir` without checking for directory existence just check the result's `IsOk` to ensure that the directory does not exist.
+
 ### Copying Directories
-To copy the directory a CakeDir represents to another location on the filesystem, use `CopyDir`, which takes a CakePath argument that represents the destination directory for the copied directory:
+To copy a CakeDir's directory to another location on the filesystem, use `CopyDir`, which takes a CakePath argument specifying where the source directory should be copied:
 === "C++"
 
     ```c++ hl_lines="5"
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
-    FCakePath PathDestDir{ TEXT("Z:/archive/") };
+	FCakePath PathDestDir{ TEXT("Z:/archive/") };
 
-    if (!DirectoryGame.CopyDir(PathDestDir))
-    {
-        UE_LOG(LogTemp, Error, TEXT("Failed copying game directory to archives!"))
-    }
+	if (!DirectoryGame.CopyDir(PathDestDir))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed copying game directory to archives!"));
+	}
     ```
 
 	--8<-- "ad-settings-copyitem.md"
@@ -440,7 +442,7 @@ We can give the copied directory a new name easily via `CopyDirWithNewName`. In 
 === "C++"
 
     ```c++ hl_lines="5"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
 	FCakePath PathDestDir{ TEXT("Z:/archive/") };
 
@@ -458,19 +460,19 @@ Assuming the copy succeeds, the copied directory's path would be `Z:/archive/gam
 
 
 ### Moving Directories
-To move the directory a CakeDir represents to another location on the filesystem, use `MoveDir`, which takes a CakePath argument that represents the destination directory for the moved directory:
+To move a CakeDir's directory to another location on the filesystem, use `MoveDir`, which takes a CakePath argument specifying where the source directory should be moved:
 
 === "C++"
 
     ```c++ hl_lines="5"
-    FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
-    FCakePath PathDestDir{ TEXT("Z:/archive/") };
+	FCakePath PathDestDir{ TEXT("Z:/archive/") };
 
-    if (!DirectoryGame.MoveDir(PathDestDir))
-    {
-        UE_LOG(LogTemp, Error, TEXT("Failed moving game directory to archives!"))
-    }
+	if (!DirectoryGame.MoveDir(PathDestDir))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed moving game directory to archives!"));
+	}
     ```
 
 	--8<-- "ad-settings-copyitem.md"
@@ -479,6 +481,25 @@ To move the directory a CakeDir represents to another location on the filesystem
 	{{ bp_img_dir('Move Dir') }}
 
 We can give the moved directory a new name easily via `MoveDirWithNewName`. In addition to a destination path, we also need to provide a new name that the moved directory should have: 
+
+=== "C++"
+
+    ```c++ hl_lines="5"
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
+
+	FCakePath PathDestDir{ TEXT("Z:/archive/") };
+
+	if (!DirectoryGame.MoveDirWithNewName(PathDestDir, TEXTVIEW("game_archive")))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed moving game directory to archives!"));
+	}
+    ```
+	--8<-- "ad-settings-copyitem.md"
+
+=== "Blueprint"
+	{{ bp_img_dir('Move Dir With New Name') }}
+
+Assuming the move succeeds, the moved directory's path would be `Z:/archive/game_archive`.
 
 ### Understanding Copy / Move Overwrite behavior
 When moving or copying directories to a new location on the filesystem, it's important to understand what happens when the destination directory already exists and contains files and subdirectories. First of all, it is important to understand that the copy or move operations offered by CakeDir objects will __merge__ into preexisting directories. This means that any files or subdirectories in the destination directory that do not share names with files in the copied directory will be left entirely untouched. During a copy operation, subdirectories are only created if they do not already exist; otherwise, they are left alone. The {{ policy_link('OverwriteItems') }} policy parameter involved in a directory copy or move will resolve any remaining clashes between files -- if a file shares the same relative path in both the destination and the source directory, then it will be overwritten with the source directory's file if overwriting is allowed, or the file will be skipped otherwise.   
@@ -587,36 +608,21 @@ As we can see, the two versions of the `Models` directory have merged. Any overw
 !!! tip 
 	If you want a copy to replace its destination directory rather than merge with it, you will first need to ensure that the destination directory is deleted prior to the copy or move.
 
-=== "C++"
-
-    ```c++ hl_lines="5"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
-
-	FCakePath PathDestDir{ TEXT("Z:/archive/") };
-
-	if (!DirectoryGame.MoveDirWithNewName(PathDestDir, TEXTVIEW("game_archive")))
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed moving game directory to archives!"))
-	}
-    ```
-	--8<-- "ad-settings-copyitem.md"
-
-=== "Blueprint"
-	{{ bp_img_dir('Move Dir With New Name') }}
-
-Assuming the move succeeds, the moved directory's path would be `Z:/archive/game_archive`.
 
 ### Changing Directory Name 
 To change the name of a directory on the filesystem, use `ChangeDirName`:
 
 === "C++"
-    ```c++ hl_lines="4"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
-	FString NewName{ TEXT("game_main") };
+    ```c++ hl_lines="3"
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
-	if (!DirectoryGame.ChangeDirName(NewName))
+	if (!DirectoryGame.ChangeDirName(TEXTVIEW("game_main")))
 	{
-		UE_LOG(LogTemp, Error, TEXT("Failed renaming [%s] to [%s]."), *DirectoryGame.CloneDirName(), *NewName)
+		UE_LOG(LogTemp, Error, 
+			TEXT("Failed renaming [%s] to [%s]."), 
+			*DirectoryGame.CloneDirName(), 
+			*NewName
+		);
 	}
     ```
 === "Blueprint"
@@ -628,13 +634,17 @@ The {{ policy_link('OverwriteItems') }} parameter allows us to control whether t
 
 
 ### Retrieving Directory OS Stat Information
+We can get the stat data for a CakeDir's referenced directory via `QueryStatData`. It is imperative that callers check to ensure the query operation succeeded before using any of the fields in the stat data -- they will be incorrect / invalid unless the operation succeeded.
 === "C++"
-    We can get the `FFileStatData` for an FCakeDir via `QueryStatData`:
 
-    ```c++ hl_lines="3"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
+    ```c++ hl_lines="4"
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
-	if (TCakeOrderDir<FFileStatData> DirStatOpt = DirectoryGame.QueryStatData())
+	TCakeOrderDir<FFileStatData> DirStatOpt{
+		DirectoryGame.QueryStatData()
+	};
+
+	if (DirStatOpt.IsValid())
 	{
 		FFileStatData& DirStat = *DirStatOpt;
 		bool bIsDir = DirStat.bIsDirectory; // => true
@@ -644,9 +654,7 @@ The {{ policy_link('OverwriteItems') }} parameter allows us to control whether t
     ```
     `QueryStatData` will return a `TCakeOrderDir<FFileStatData>` that holds both the [FCakeResultDirIO](special-types/results.md#fcakeresultdirio) and the `FFileStatData`, which will be valid only if the query operation doesn't fail. For more information about TCakeOrder types and their usage, see [this section](/core-api/special-types/cake-orders/).
 
-
 === "Blueprint"
-    We can get the stat data for a CakeDir's referenced directory via `QueryStatData`:
 
 	{{ bp_img_dir('Query Stat Data') }}
 
@@ -654,8 +662,6 @@ The {{ policy_link('OverwriteItems') }} parameter allows us to control whether t
 
 	{{ bp_img_dir('Cake File Stat Data') }}
 
-    !!! warning
-        It is imperative to ensure the query operation succeeded before using any of the values in the stat data struct. They will not hold accurate information when the query operation fails.
 
 ## Directory Traversal 
 Directory traversal is a vital part of working with file systems, and Cake Directory objects offer a comprehensive set of traversal interfaces. At its core, a traversal operation involves invoking a user-supplied callback function on each directory element (file or subdirectory) that is being visited by the traversal function.
