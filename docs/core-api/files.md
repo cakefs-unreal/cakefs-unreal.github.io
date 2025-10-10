@@ -1,148 +1,150 @@
-
 ## Overview
 CakeFS provides CakeFile objects to allow file manipulation in a type-safe and ergonomic manner.
 
 ### Source Code Information
-=== "C++"
-    {{ cpp_impl_source('file', 'FCakeFile', 'CakeFile') }}
-
-=== "Blueprint"
-    {{ bp_impl_source('file', 'UCakeFile', 'CakeFile_BP') }}
+{{ cpp_impl_source('FCakeFile', 'CakeFile') }}
 
 ## Basic Usage
 The following covers some of the core interfaces required to utilize and manipulate CakeFile objects.
 
 ### Building CakeFile Objects
+We can create CakeFile objects by passing a path string or a CakePath object that holds the desired file path.
 === "C++"
-	The simplest way to create an **FCakeFile** object is via its constructor, which accepts a single **FCakePath** that holds the path the file.
+	```c++ hl_lines="2 5"
+	// FStringView overload
+	FCakeFile EnemiesDbPath{ TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") };
 
-	```c++ hl_lines="1 5"
-	FCakeFile PlayerFile{ FCakePath{ TEXTVIEW("/x/game/data/profiles/player_1.dat") } };
-
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
-
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	// FCakePath overload
+	FCakeFile PlayerFile   { FCakePath{ TEXTVIEW("/x/game/data/profiles/player_1.dat") } };
 	```
 === "Blueprint"
-	We can create a new CakeFile object via `BuildCakeFile`, passing a [CakePath](paths.md) that holds the file path the CakeFile should target:
+	{{ bp_img_file('Make Cake File String') }}
 
-	{{ bp_img_file('Build Cake File') }}
-
-	If we need to make an empty CakeFile object whose path will be determined later, we can use `Build Cake File Empty`:
-
-	{{ bp_img_file('Build Cake File Empty') }}
-
-	!!! tip
-		CakeFS offers automatic string to [CakePath](paths.md) conversions. You can pass a string to any function that expects a CakePath argument and it will automatically create a CakePath object from the string for you: 
-
-		{{ bp_img_file('Auto Str Conv') }}
+	{{ bp_img_file('Make Cake File Path') }}
 
 ### Accessing the File Path
+CakeFile objects store their file paths as CakePath objects. We can gain access to that CakePath object via `GetPath`.
 === "C++"
-	**FCakeFile** stores its full file path internally as an **FCakePath**. We can gain access to that **FCakePath** object via  `operator*` and `GetPath`:
 
-
-	```c++ hl_lines="7-8"
+	```c++ hl_lines="8"
 	auto PrintPath = [](const FCakePath& Path) 
 		{ UE_LOG(LogTemp, Warning, TEXT("Path String: [%s]"), **Path); };
 
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	FCakeFile EnemiesDbFile{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db")
+	 };
 
-	PrintPath(*EnemiesDbFile);
 	PrintPath(EnemiesDbFile.GetPath());
 	```
+	C++ also overloads `operator*` to be equivalent to calling `GetPath`. We could rewrite the code using `operator*` like this:
 
-	If we just need to access the path string itself, we can use the convenience member function `GetPathString`:
+	```c++ hl_lines="8"
+	auto PrintPath = [](const FCakePath& Path) 
+		{ UE_LOG(LogTemp, Warning, TEXT("Path String: [%s]"), **Path); };
 
-	```c++ hl_lines="7"
+	FCakeFile EnemiesDbFile{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db")
+	 };
+
+	PrintPath(*EnemiesDbFile);
+	```
+=== "Blueprint"
+	{{ bp_img_file('Get Path') }}
+
+If we just need to access the path string itself, we can use the convenience member function `GetPathString`:
+
+=== "C++"
+
+	```c++ hl_lines="8"
 	auto PrintPathStr = [](const FString& PathStr) 
 		{ UE_LOG(LogTemp, Warning, TEXT("Path String: [%s]"), *ExtStr); };
 
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	FCakeFile EnemiesDbFile{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db")
+	 };
 
 	PrintPath(EnemiesDbFile.GetPathString());
 	```
-
-	We can check if an **FCakeFile** object's file path is empty via  `PathIsEmpty`:
-
-	```c++ hl_lines="5-6"
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
-	FCakeFile EmptyFile{};
-
-	const bool bDbFileIsEmpty{ EnemiesDbFile.PathIsEmpty() }; // => false
-	const bool bEmptyFile   { EmptyFile.PathIsEmpty()     }; // => true
-	```
 === "Blueprint"
-	When we need to read a CakeFile's path as a string, we can use `GetPathString`:
-
 	{{ bp_img_file('Get Path String') }}
 
-	If we want a copy of a CakeFile's path as a CakePath, we can use `ClonePath`:
-
-	{{ bp_img_file('Clone Path') }}
-
-	To check if a CakeFile's path is empty, we can use `PathIsEmpty`:
-
-	{{ bp_img_file('Path is Empty') }}
-
 ### Modifying the File Path
+We can change the file path a CakeFile object holds via `SetPath`, submitting either a path string or a CakePath object.
 === "C++"
-	We can change the file path an FCakeFile object represents via `SetPath`, which takes an FCakePath to copy its path.
-
 	```c++ hl_lines="6"
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	FCakeFile EnemiesDb{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") 
+	};
 
-	FCakePath NewEnemiesDb{ TEXTVIEW("X:\\Extra\\Enemies\\enemies_new.db") };
+	// FStringView overload
+	EnemiesDb.SetPath( TEXTVIEW("X:/Extra/Enemies/enemies_new.db") );
+	```
+	```c++ hl_lines="10"
+	FCakeFile EnemiesDb{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") 
+	};
 
-	EnemiesDbFile.SetPath(NewEnemiesDb);
+	FCakePath NewDbPath{ 
+		TEXTVIEW("X:/Extra/Enemies/enemies_new.db") 
+	};
+
+	// FCakePath overload
+	EnemiesDb.SetPath(NewDbPath);
 	```
 
-	To use move semantics, we can use `StealPath`:
+	When we want to take advantage of move semantics with a CakePath object we can use `StealPath`:
 
-	```c++ hl_lines="6"
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	```c++ hl_lines="9"
+	FCakeFile EnemiesDb{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") 
+	};
 
-	FCakePath NewEnemiesDb{ TEXTVIEW("X:\\Extra\\Enemies\\enemies_new.db") };
+	FCakePath NewDbPath{ 
+		TEXTVIEW("X:/Extra/Enemies/enemies_new.db") 
+	};
 
-	EnemiesDbFile.StealPath(MoveTemp(NewEnemiesDb));
+	EnemiesDb.StealPath( MoveTemp(NewDbPath) );
 	```
-
 	--8<-- "ad-copymove-ctor.md"
 
-	When we want to clear the file path contents of an FCakePath, we can call `ResetPath`:
+=== "Blueprint"
+	{{ bp_img_file('Set Path String') }}
+	{{ bp_img_file('Set Path CakePath') }}
 
-	```c++ hl_lines="4"
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+To clear any path in an existing CakeFile object, we use `ResetPath`:
+=== "C++"
 
-	EnemiesDbFile.ResetPath();
-	const bool bFileIsEmpty{ EnemiesDbFile.PathIsEmpty() }; // => true
+	```c++ hl_lines="3"
+	FCakeFile EnemiesDb{ TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") };
+
+	EnemiesDb.ResetPath();
 	```
 	We can pass an optional parameter that can will ensure the internal path buffer is at least as large as the size submitted:
 
-	```c++ hl_lines="5"
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") };
-	FCakePath NewEnemiesDb { TEXTVIEW("X:/Extra/Enemies/enemies_new.db")      };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	```c++ hl_lines="4"
+	FCakeFile EnemiesDb{ TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") };
+	FCakePath NewDbPath{ TEXTVIEW("X:/Extra/Enemies/enemies_new.db")      };
 
-	EnemiesDbFile.ResetPath(NewEnemiesDb.QueryPathString().Len());
-	const bool bFileIsEmpty{ EnemiesDbFile.PathIsEmpty() }; // => true
+	EnemiesDb.ResetPath(NewDbPath.GetPathString().Len());
 	```
 === "Blueprint"
-	To change the file path of an existing CakeFile object, we use `SetPath`:
-
-	{{ bp_img_file('Set Path') }}
-
-	To clear any path in an existing CakeFile object, we use `ResetPath`:
-
 	{{ bp_img_file('Reset Path') }}
 
     --8<-- "note-bp-newreservedsize.md"
+
+We can check if a CakeFile object's file path is empty via `PathIsEmpty`:
+=== "C++"
+	```c++ hl_lines="3 7"
+	FCakeFile EnemiesDb{ TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") };
+
+	bool bIsEmpty{ EnemiesDb.PathIsEmpty() }; // => false
+
+	EnemiesDb.ResetPath();
+
+	bIsEmpty = EnemiesDb.PathIsEmpty(); // => true
+	```
+=== "Blueprint"
+	{{ bp_img_file('Path Is Empty') }}
 
 ### Accessing the File Name
 To get the file name of a CakeFile object as a string, we use `CloneFileName`:
@@ -151,10 +153,11 @@ To get the file name of a CakeFile object as a string, we use `CloneFileName`:
 	auto PrintFileName = [](const FString& FileName) 
 		{ UE_LOG(LogTemp, Warning, TEXT("File Name: [%s]"), *FileName); };
 
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	FCakeFile EnemiesDb{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") 
+	};
 
-	FString FileName{ EnemiesDbFile.CloneFileName() };
+	FString FileName{ EnemiesDb.CloneFileName() };
 	PrintFileName(FileName);
 	```
 
@@ -167,39 +170,42 @@ To get the file name of a CakeFile object as a string, we use `CloneFileName`:
 ### Accessing the File Extension
 To get the file extension from a CakeFile's file path we use `CloneFileExt`, which returns a [CakeFileExt](file-extensions.md) object:
 === "C++"
-	```c++ hl_lines="7"
+	```c++ hl_lines="8"
 	auto PrintFileExt = [](const FString& FileExt) 
 		{ UE_LOG(LogTemp, Warning, TEXT("File Ext: [%s]"), *FileExt); };
 
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	FCakeFile EnemiesDb{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") 
+	};
 
-	FCakeFileExt DbExt{ EnemiesDbFile.CloneFileExt() };
+	FCakeFileExt DbExt{ EnemiesDb.CloneFileExt() };
 	PrintFileExt(*DbExt);
 	```
+
 === "Blueprint"
 	{{ bp_img_file('Clone File Ext') }}
 
 To get the file extension as a string, we can use `CloneFileExtString`:
 === "C++"
-	```c++ hl_lines="7"
+	```c++ hl_lines="8"
 	auto PrintFileExt = [](const FString& FileExt) 
 		{ UE_LOG(LogTemp, Warning, TEXT("File Ext: [%s]"), *FileExt); };
 
-	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
-	FCakeFile EnemiesDbFile{ EnemiesDbPath };
+	FCakeFile EnemiesDb{ 
+		TEXTVIEW("C:/Game/Data/Enemies/enemies_full.db") 
+	};
 
-	FString DbExt{ EnemiesDbFile.CloneFileExtString() };
+	FString DbExt{ EnemiesDb.CloneFileExtString() };
 	PrintFileExt(DbExt);
 	```
 === "Blueprint"
 	{{ bp_img_file('Clone File Ext String') }}
 
 ### File Equality
-File equality mirrors Path equality: two File objects are equal if they refer to the same file on the filesystem.
+File equality mirrors Path equality: two File objects are equal if they refer to the same file on the filesystem. We use `operator==` and `operator!=` for equality comparisons.
 
 === "C++"
-	FCakeFile uses `operator==` and `operator!=` for equality comparisons.
+	The equality operators are overloaded so that we can compare a CakeFile object against another CakeFile or a CakePath object.
 
 	```c++ hl_lines="11-12"
 	FCakePath EnemiesDbPath{ TEXTVIEW("C:\\Game\\Data\\Enemies\\enemies_full.db") };
@@ -208,20 +214,15 @@ File equality mirrors Path equality: two File objects are equal if they refer to
 	FCakePath ItemsDbPath{ TEXTVIEW("C:/Game/Data/Items/items_full.db") };
 	FCakeFile ItemsDbFile{ ItemsDbPath };
 
-	const bool bAreEqual  { ItemsDbFile == EnemiesDbFile }; // => false
+	const bool bAreEqual   { ItemsDbFile == EnemiesDbFile }; // => false
 	const bool bAreNotEqual{ ItemsDbFile != EnemiesDbFile }; // => true
 	```
 
 === "Blueprint"
-	To check if two CakeFile objects are equal, we use `IsEqualTo`:
-
 	{{ bp_img_file('Is Equal To') }}
-
-	To check if two CakeFile objects are not equal, we use `IsNotEqualTo`:
-
 	{{ bp_img_file('Is Not Equal To') }}
 
-## IO Operations
+## Filesystem Operations
 --8<-- "disclaimer-error-handling.md"
 
 --8<-- "ad-policies.md"
@@ -229,10 +230,8 @@ File equality mirrors Path equality: two File objects are equal if they refer to
 ### File Existence
 To check if a CakeFile exists on the filesystem, we can use `Exists`:
 === "C++"
-	```c++ hl_lines="5"
-	FCakeFile ItemsDb{ 
-		FCakePath{ TEXTVIEW("x/game/data/items.db") } 
-	};
+	```c++ hl_lines="3"
+	FCakeFile ItemsDb{ TEXTVIEW("x/game/data/items.db") };
 
 	const bool bExists{ ItemsDb.Exists() };
 	```
@@ -301,7 +300,7 @@ If a file already exists, we generally should use the WriteTextFile or WriteBina
 To attempt to delete the file a CakeFile references, we use `DeleteFile`:
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SpellsDb{ FCakePath{TEXTVIEW("abilities/magic/spells.db")} };
+	FCakeFile SpellsDb{ TEXTVIEW("abilities/magic/spells.db") };
 
 	if (!SpellsDb.DeleteFile())
 	{
@@ -312,17 +311,17 @@ To attempt to delete the file a CakeFile references, we use `DeleteFile`:
 === "Blueprint"
 	{{ bp_img_file('Delete File') }}
 
-This function has an {{ policy_link('DeleteFile') }} parameter (optional in C++) that determines if read only files can be deleted.
+This function has an {{ policy_link('DeleteFile') }} parameter that determines if read only files can be deleted.
 
 !!! note
 	In the event that the file does not exist, `DeleteFile` will return a [No Op](special-types/outcomes.md#ok-and-no-op) outcome value.
    
 ### File Read/Write Operations
-Cake Files provide interfaces for handling files as text files or binary files. Text files will use string-like objects for read/write operations, and binary files will use `TArray<uint8>`.
+CakeFiles provide interfaces for handling files as text files or binary files. Text files will use string-like objects for read/write operations, and binary files will use `TArray<uint8>`.
 
 #### Reading File Data
 === "C++"
-	There are two approaches to reading file data from an FCakeFile object. We will explore these approaches through examples of reading a text file. 
+	There are two approaches to reading file data from an FCakeFile object. We will explore these approaches using a text file. 
 
 	The first approach we can use is reading the file data into a pre-existing buffer:
 
@@ -389,16 +388,16 @@ The writing interfaces are designed to be used on preexisting files whose conten
 To overwrite a file's contents, we can use `WriteTextFile` or `WriteBinaryFile`:
 === "C++"
 	```c++ hl_lines="5 10"
-	FCakePath IntDir     { FPaths::ProjectIntermediateDir()             };
-	FCakeFile FileBinary { IntDir / FCakePath{TEXTVIEW("data.bin")}     };
-	FCakeFile FileText   { IntDir / FCakePath{TEXTVIEW("controls.txt")} };
+	FCakePath IntDir     { FPaths::ProjectIntermediateDir()  };
+	FCakeFile FileBinary { IntDir / TEXTVIEW("data.bin")     };
+	FCakeFile FileText   { IntDir / TEXTVIEW("controls.txt") };
 
 	if (!FileText.WriteTextFile(TEXTVIEW("This will fully overwrite any old data in FileText.")))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed overwriting text in FileText. Aborting.")) 
 	}
 
-	if (!FileBinary.WriteBinaryFile( { 0x80, 0x80, 0x80, 0x80 }))
+	if (!FileBinary.WriteBinaryFile( { 0x80, 0x80, 0x80, 0x80 } ))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed overwriting data in FileBinary. Aborting.")) 
 	}
@@ -420,7 +419,7 @@ To append data to a file's contents instead of overwriting it, we can use `Appen
 		UE_LOG(LogTemp, Error, TEXT("Failed appending text to FileText. Aborting.")) 
 	}
 
-	if (!FileBinary.AppendBinaryFile( { 0xEA, 0xD }))
+	if (!FileBinary.AppendBinaryFile( { 0xEA, 0xD } ))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed appending data to FileBinary. Aborting.")) 
 	}
@@ -431,11 +430,12 @@ To append data to a file's contents instead of overwriting it, we can use `Appen
 	{{ bp_img_file('Append Binary File') }}
 
 ### Copying Files
-We can copy a CakeFile's referenced file to another location via `CopyFile`. This takes an CakePath argument that represents the source directory into which the file should be copied. 
+We can copy a CakeFile's referenced file to another location via `CopyFile`. This takes a CakePath argument that represents the source directory into which the file should be copied. 
+
 === "C++"
 	```c++ hl_lines="4"
-	FCakeFile SpellsDb { FCakePath{TEXTVIEW("abilities/magic/spells.db")} };
-	FCakePath ArchiveDir{ FCakePath{TEXTVIEW("/y/archive/spells_backup")}  };
+	FCakeFile SpellsDb  { TEXTVIEW("abilities/magic/spells.db") };
+	FCakePath ArchiveDir{ TEXTVIEW("/y/archive/spells_backup")  };
 
 	if (!SpellsDb.CopyFile(ArchiveDir))
 	{
@@ -447,22 +447,22 @@ We can copy a CakeFile's referenced file to another location via `CopyFile`. Thi
 === "Blueprint"
 	{{ bp_img_file('Copy File') }}
 
-If we want the copied file to have a file name that differs from the source file, we can use `CopyFileAliased`:
+If we want the copied file to have a file name that differs from the source file, we can use `CopyFileWithNewName`:
+
 === "C++"
 	```c++ hl_lines="4"
-	FCakeFile SpellsDb { FCakePath{TEXTVIEW("abilities/magic/spells.db")} };
-	FCakePath ArchiveDir{ FCakePath{TEXTVIEW("/y/archive/spells_backup")}  };
+	FCakeFile SpellsDb  { TEXTVIEW("abilities/magic/spells.db") };
+	FCakePath ArchiveDir{ TEXTVIEW("/y/archive/spells_backup")  };
 
-	if (!SpellsDb.CopyFileAliased(ArchiveDir, TEXTVIEW("spells_archive.db")))
+	if (!SpellsDb.CopyFileWithNewName(ArchiveDir, TEXTVIEW("spells_archive.db")))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Failed copying spells database to archive dir."))
 	}
 	```
-
 	--8<-- "ad-settings-copyitem.md"
 
 === "Blueprint"
-	{{ bp_img_file('Copy File Aliased') }}
+	{{ bp_img_file('Copy File With New Name') }}
 
 In the example above, assuming the copy succeeds, the copied file's path will be `/y/archive/spells_backup/spells_archive.db`.
 
@@ -472,8 +472,8 @@ It is important to understand that a move is actually a compound IO operation --
 We can move a file to another location via `MoveFile`. This takes an CakePath argument that represents the source directory into which the file should be moved. 
 === "C++"
 	```c++ hl_lines="4"
-	FCakeFile SpellsDb { FCakePath{TEXTVIEW("abilities/magic/spells.db")} };
-	FCakePath ArchiveDir{ FCakePath{TEXTVIEW("/y/archive/spells_backup")}  };
+	FCakeFile SpellsDb  { TEXTVIEW("abilities/magic/spells.db") };
+	FCakePath ArchiveDir{ TEXTVIEW("/y/archive/spells_backup")  };
 
 	if (!SpellsDb.MoveFile(ArchiveDir))
 	{
@@ -485,36 +485,36 @@ We can move a file to another location via `MoveFile`. This takes an CakePath ar
 === "Blueprint"
 	{{ bp_img_file('Move File') }}
 
-Just like copy interface, we can also change the name of the moved file via `MoveFileAliased`:
+Just like copy interface, we can also change the name of the moved file via `MoveFileWithNewName`:
 
 === "C++"
-	```c++ hl_lines="4"
-	FCakeFile SpellsDb { FCakePath{TEXTVIEW("abilities/magic/spells.db")} };
-	FCakePath ArchiveDir{ FCakePath{TEXTVIEW("/y/archive/spells_backup")}  };
 
-	if (!SpellsDb.MoveFileAliased(ArchiveDir, TEXTVIEW("spells_archive.db")))
+	```c++ hl_lines="4"
+	FCakeFile SpellsDb  { TEXTVIEW("abilities/magic/spells.db") };
+	FCakePath ArchiveDir{ TEXTVIEW("/y/archive/spells_backup")  };
+
+	if (!SpellsDb.MoveFileWithNewName(ArchiveDir, TEXTVIEW("spells_archive.db")))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Failed moving spells database to archive dir."))
 	}
 	```
-
 	--8<-- "ad-settings-copyitem.md"
 
 === "Blueprint"
-	{{ bp_img_file('Move File Aliased') }}
+	{{ bp_img_file('Move File With New Name') }}
 
 In the example above, assuming the move succeeds, the moved file's path will be `/y/archive/spells_backup/spells_archive.db`.
 
 ### Changing File Names
-Cake File objects have various functions to aid us in changing their associated file's name on the filesystem.
+CakeFile objects have various functions to aid us in changing their associated file's name on the filesystem.
 
 !!! info 
-	In all of the following functions, the second argument (optional in C++) is an [OverwriteItems](special-types/policies.md#overwriteitems) policy which controls whether or not we can overwrite an existing file if one with the desired name already exists in the same directory. 
+	In all of the following functions, the second argument is an [OverwriteItems](special-types/policies.md#overwriteitems) policy which controls whether or not we can overwrite an existing file if one with the desired name already exists in the same directory. 
 
 We can change the entire file's name using `ChangeFileName`:
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SpellsDb { FCakePath{TEXTVIEW("abilities/magic/spells.db")} };
+	FCakeFile SpellsDb { TEXTVIEW("abilities/magic/spells.db") };
 
 	if (!SpellsDb.ChangeFileName( TEXTVIEW("spells_archive.db") ))
 	{
@@ -528,9 +528,9 @@ We can change the entire file's name using `ChangeFileName`:
 We can change just the file extension using `ChangeFileExt`, passing a CakeFileExt object that holds the desired file extension:
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SpellsDb { FCakePath{TEXTVIEW("abilities/magic/spells.db")} };
+	FCakeFile SpellsDb { TEXTVIEW("abilities/magic/spells.db") };
 
-	if (!SpellsDb.ChangeFileExt( FCakeFileExt(TEXTVIEW("bin.db")) ))
+	if (!SpellsDb.ChangeFileExt( FCakeFileExt{TEXTVIEW("bin.db")} ))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Failed changing the full file extension."))
 	}
@@ -544,14 +544,16 @@ In the example above, assuming the change succeeds, the final extension will be 
 Finally, we can change the trailing file extension component using `ChangeFileExtSingle`, passing a CakeFileExt object that holds the desired file extension:
 
 === "C++"
-	```c++ hl_lines="3"
-	FCakeFile MagicDetails { FCakePath{TEXTVIEW("abilities/magic/details.cdr.pdf")} };
 
-	if (!MagicDetails.ChangeFileExtSingle( FCakeFileExt(TEXTVIEW("txt")) ))
+	```c++ hl_lines="3"
+	FCakeFile MagicDetails { TEXTVIEW("abilities/magic/details.cdr.pdf") };
+
+	if (!MagicDetails.ChangeFileExtSingle( FCakeFileExt{TEXTVIEW("txt")} ))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Failed changing the trailing file extension component."))
 	}
 	```
+
 === "Blueprint"
 	{{ bp_img_file('Change File Ext Single') }}
 
@@ -566,21 +568,25 @@ The Query family of functions allows us to gain os information about a particula
 !!! warning
 	It is imperative that you ensure that a particular Query operation has succeeded without error before using any value returned by these functions. The values are only in a valid state when the associated Query function indicates success.
 
-To get all OS stat info for a CakeFile object, we use `QueryStatData`
+To get all OS stat info for a CakeFile object, we use `QueryStatData`:
 === "C++"
 	--8<-- "ad-order-file.md"
 
 	`QueryStatData` returns a TCakeOrderFile whose payload is the Unreal type `FFileStatData`.
 
 	```c++ hl_lines="3"
-	FCakeFile SrcGoblin{ FCakePath{TEXTVIEW("enemies/ai/goblin.cpp")} };
+	FCakeFile SrcGoblin{ TEXTVIEW("enemies/ai/goblin.cpp") };
 
-	if (TCakeOrderFile<FFileStatData> StatData = SrcGoblin.QueryStatData())
+	TCakeOrderFile<FFileStatData> StatData{ SrcGoblin.QueryStatData() };
+	if (StatData.IsValid())
 	{
 		FFileStatData& DataUnwrapped = *StatData;
-		UE_LOG(LogTemp, Warning, TEXT("StatData file size: [%d] bytes."), DataUnwrapped.FileSize);
-		UE_LOG(LogTemp, Warning, TEXT("StatData access time: [%s]"), *DataUnwrapped.AccessTime.ToString());
-		UE_LOG(LogTemp, Warning, TEXT("StatData creation time: [%s]"), *DataUnwrapped.CreationTime.ToString());
+
+		UE_LOG(LogTemp, Warning, 
+			TEXT("StatData file size: [%d] bytes."), 
+			DataUnwrapped.FileSize
+		);
+		//...
 	}
 	```
 
@@ -599,11 +605,15 @@ We can also query individual stats if we don't need all the data that `QueryStat
 We can attempt to retrieve the size of a file via `QueryFileSizeInBytes`:
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SrcGoblin{ FCakePath{TEXTVIEW("enemies/ai/goblin.cpp")} };
+	FCakeFile SrcGoblin{ TEXTVIEW("enemies/ai/goblin.cpp") };
 
-	if (TCakeOrderFile<int64> FileSize = SrcGoblin.QueryFileSizeInBytes())
+	TCakeOrderFile<int64> FileSize { SrcGoblin.QueryFileSizeInBytes() };
+	if (FileSize.IsValid())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("QueryFileSizeInBytes file size: [%d] bytes."), *FileSize);
+		UE_LOG(LogTemp, Warning, 
+			TEXT("QueryFileSizeInBytes file size: [%d] bytes."), 
+			*FileSize
+		);
 	}
 	```
 
@@ -613,12 +623,18 @@ We can attempt to retrieve the size of a file via `QueryFileSizeInBytes`:
 We can attempt to retrieve the last modified timestamp via `QueryTimestampLastModified`, which gives us back an `FDateTime` indicating the time the file was last modified.
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SrcGoblin{ FCakePath{TEXTVIEW("enemies/ai/goblin.cpp")} };
+	FCakeFile SrcGoblin{ TEXTVIEW("enemies/ai/goblin.cpp") };
 
-	if (TCakeOrderFile<FDateTime> ModStamp = SrcGoblin.QueryTimestampLastModified())
+	TCakeOrderFile<FDateTime> ModStamp { SrcGoblin.QueryTimestampLastModified() };
+
+	if (ModStamp.IsValid())
 	{
-		FString DateStr{ ModStamp.Payload.ToString() };
-		UE_LOG(LogTemp, Warning, TEXT("QueryModifiedTimestamp: [%s]"), *DateStr);
+		FString DateStr{ ModStamp.Order.ToString() };
+
+		UE_LOG(LogTemp, Warning, 
+			TEXT("QueryModifiedTimestamp: [%s]"), 
+			*DateStr
+		);
 	}
 	```
 
@@ -628,17 +644,23 @@ We can also try to change the last modified time to a custom value via `ChangeTi
 
 === "C++"
 	```c++ hl_lines="5"
-	FCakeFile SrcGoblin{ FCakePath{TEXTVIEW("enemies/ai/goblin.cpp")} };
+	FCakeFile SrcGoblin{ TEXTVIEW("enemies/ai/goblin.cpp") };
 
 	FDateTime NewMod{ FDateTime::Now() };
 	NewMod -= FTimespan::FromDays(1.0);
+
 	if (SrcGoblin.ChangeTimestampLastModified(NewMod))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("New mod time: [%s]"), *NewMod.ToString())
+		UE_LOG(LogTemp, Warning, 
+			TEXT("New mod time: [%s]"), 
+			*NewMod.ToString()
+		);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Failed modifying the source file's modified timestamp."))
+		UE_LOG(LogTemp, Warning, 
+			TEXT("Failed modifying the source file's modified timestamp.")
+		);
 	}
 	```
 === "Blueprint"
@@ -648,12 +670,16 @@ We can attempt to retrieve the last accessed timestamp via `QueryTimestampLastAc
 
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SrcGoblin{ FCakePath{TEXTVIEW("enemies/ai/goblin.cpp")} };
+	FCakeFile SrcGoblin{ TEXTVIEW("enemies/ai/goblin.cpp") };
 
-	if (TCakeOrderFile<FDateTime> AccessStamp = SrcGoblin.QueryTimestampLastAccessed())
+	TCakeOrderFile<FDateTime> AccessStamp{ SrcGoblin.QueryTimestampLastAccessed() };
+	if (AccessStamp.IsValid())
 	{
-		FString DateStr{ AccessStamp.Payload.ToString() };
-		UE_LOG(LogTemp, Warning, TEXT("Last Accessed: [%s]"), *DateStr);
+		FString DateStr{ AccessStamp.Order.ToString() };
+		UE_LOG(LogTemp, Warning, 
+			TEXT("Last Accessed: [%s]"), 
+			*DateStr
+		);
 	}
 	```
 === "Blueprint"
@@ -662,14 +688,18 @@ We can attempt to retrieve the last accessed timestamp via `QueryTimestampLastAc
 ### Changing File Permissions
 We can change whether a file is marked as read-only via `ChangeFilePermissions`:
 === "C++"
+
 	```c++ hl_lines="3"
-	FCakeFile SrcGoblin{ FCakePath{TEXTVIEW("enemies/ai/goblin.cpp")} };
+	FCakeFile SrcGoblin{ TEXTVIEW("enemies/ai/goblin.cpp") };
 
 	if (!SrcGoblin.ChangeFilePermissions(ECakeFilePermissions::ReadOnly))
 	{
-		UE_LOG(LogTemp, Error, TEXT("Failed setting goblin.cpp to read-only."))
+		UE_LOG(LogTemp, Error, 
+			TEXT("Failed setting goblin.cpp to read-only.")
+		);
 	}
 	```
+
 === "Blueprint"
 	{{ bp_img_file('Change File Permissions') }}
 
@@ -713,10 +743,13 @@ Using the file name `info.cdr.txt` as an example, we can view the file name acco
 When we want to get the full name of the file, we need to use `CloneFileName`:
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SrcOrc{ FCakePath{TEXTVIEW("enemies/orc_warrior.gen.cpp")} };
+	FCakeFile SrcOrc{ TEXTVIEW("enemies/orc_warrior.gen.cpp") };
 
 	FString FullName{ SrcOrc.CloneFileName() };
-	UE_LOG(LogTemp, Warning, TEXT("   CloneFileName: [%s]"), *FullName); // => "orc_warrior.gen.cpp"
+	UE_LOG(LogTemp, Warning, 
+		TEXT("   CloneFileName: [%s]"), 
+		*FullName
+	); // => "orc_warrior.gen.cpp"
 	```
 === "Blueprint"
 	{{ bp_img_file('Clone File Name Adv') }}
@@ -727,10 +760,13 @@ To get the root file name, we need to use `CloneFileNameRoot`:
 
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SrcOrc{ FCakePath{TEXTVIEW("enemies/orc_warrior.gen.cpp")} };
+	FCakeFile SrcOrc{ TEXTVIEW("enemies/orc_warrior.gen.cpp") };
 
 	FString RootName{ SrcOrc.CloneFileNameRoot() };
-	UE_LOG(LogTemp, Warning, TEXT("CloneFileNameRoot: [%s]"), *RootName); // => "orc_warrior.gen"
+	UE_LOG(LogTemp, Warning, 
+		TEXT("CloneFileNameRoot: [%s]"), 
+		*RootName
+	); // => "orc_warrior.gen"
 	```
 === "Blueprint"
 	{{ bp_img_file('Clone File Name Root') }}
@@ -740,10 +776,13 @@ In the example above, the returned file name will be `orc_warrior.gen`.
 Finally, when we want the bare file name, we can use `CloneFileNameBare`:
 === "C++"
 	```c++ hl_lines="3"
-	FCakeFile SrcOrc{ FCakePath{TEXTVIEW("enemies/orc_warrior.gen.cpp")} };
+	FCakeFile SrcOrc{ TEXTVIEW("enemies/orc_warrior.gen.cpp") };
 
 	FString BareName{ SrcOrc.CloneFileNameBare() };
-	UE_LOG(LogTemp, Warning, TEXT("CloneFileNameBare: [%s] "), *BareName); // => "orc_warrior"
+	UE_LOG(LogTemp, Warning, 
+		TEXT("CloneFileNameBare: [%s] "), 
+		*BareName
+	); // => "orc_warrior"
 	```
 === "Blueprint"
 	{{ bp_img_file('Clone File Name Bare') }}
@@ -754,23 +793,24 @@ In the example above, the returned file name will be `orc_warrior`.
 !!! note
 	Only native Cake File objects can get access to low-level file handles.
 
-There may be situations where you direct access to a low-level file handle. To get a unique pointer to an `IFileHandle`, use `OpenFileHandleUnique`. This function takes one parameter, an [FCakeSettingsFileHandle](special-types/settings.md#fcakesettingsfilehandle) settings struct that determines the open / write mode the file handle should use.
-```c++ hl_lines="4"
-	FCakeFile SrcOrc{ FCakePath{TEXTVIEW("enemies/orc_warrior.gen.cpp")} };
+To get direct access to a low-level file handle we use `OpenFileHandle`, which will give us an `FCakeFileHandle` which wraps an `IFileHandle`. The `FCakeFileHandle` will automatically close the file handle when it goes out of scope. This function takes one parameter, an [FCakeSettingsFileHandle](special-types/settings.md#fcakesettingsfilehandle) settings struct that determines the open / write mode the file handle should use.
+```c++ hl_lines="4-6"
+	FCakeFile SrcOrc{ TEXTVIEW("enemies/orc_warrior.gen.cpp") };
 
-	TUniquePtr<IFileHandle> FileHandle{ 
-		SrcOrc.OpenFileHandleUnique({ 
-			.OpenMode = ECakeFileOpenMode::ReadAndWrite, 
+	FCakeFileHandle FileHandle{ 
+		SrcOrc.OpenFileHandle({ 
+			.OpenMode  = ECakeFileOpenMode::ReadAndWrite, 
 			.WriteMode = ECakeFileWriteMode::OverwriteData })
 	};
 
 	if (FileHandle.IsValid())
 	{
+		FileHandle->Seek(5);
 		// ...
 	}
 ```
 
 !!! warning 
-	`OpenFileHandleUnique` will return an invalid pointer when the opening fails, so always check to ensure the pointer is valid before using it!
+	`OpenFileHandle` will return an invalid pointer when the opening fails, so always check to ensure the pointer is valid before using it!
 
 

@@ -177,6 +177,10 @@ def define_env(env):
         return bp_img(label, 'async')
 
     @env.macro
+    def bp_img_results(label):
+        return bp_img(label, 'results')
+
+    @env.macro
     def bp_img_ext_filter(label):
         return bp_img(label, 'ext-filter')
 

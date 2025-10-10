@@ -3,48 +3,44 @@
 ## TCakeOrder
 {{ src_loc_single('TCakeOrder', 'CakeOrders') }}
 
-CakeFS uses the template struct TCakeOrder for IO operations that need to return additional data in addition to the IO operation result. It holds just two member fields: a result type of the operation and the data produced by the operation. The type of data produced will vary based on the operation.
+CakeFS uses the template struct TCakeOrder for IO operations that need to return additional data in addition to the IO operation result. It holds just two member fields: a result type named `Result` and the data produced by the operation named `Order`. 
 
-```c++
-template<CakeConcepts::CCakeOpResult ResultType, CakeConcepts::CNotPtrOrRef OrderType>
-struct CakeFS_API TCakeOrder
-{
-	ResultType Result{ ResultType::BuildNoOp() };
-	OrderType Order{};
+We won't use `TCakeOrder` directly, but instead we will use the alias templates `TCakeOrderFile` and `TCakeOrderDir`, for file and directory operations respectively. These use their associated IO result (e.g., FCakeResultFileIO for TCakeOrderFile), and the `Order` field's type will vary based on the operation being performed.
 
-	FORCEINLINE operator bool() const { return Result.IsOkStrict(); }
+Let's take a look at a simple CakeFile example.
 
-	OrderType& operator*() { return Order; }
+```c++ hl_lines="4"
+FCakeFile TestFile{ TEXTVIEW("X:/game/enemies/goblin.dat") };
+
+TCakeOrderFile<int64> Query{
+	TestFile.QueryFileSizeInBytes()
 };
 
-```
-
-We won't use `TCakeOrder` directly, but instead we will use the alias templates TCakeOrderFile and TCakeOrderDir:
-
-```c++
-template<CakeConcepts::CNotPtrOrRef PayloadType>
-using TCakeOrderFile = TCakeOrder<FCakeResultFileIO, PayloadType>;
-
-template<CakeConcepts::CNotPtrOrRef PayloadType>
-using TCakeOrderDir = TCakeOrder<FCakeResultDirIO, PayloadType>;
-```
-
-As we can see from the above declarations, we use `TCakeOrderFile` for any order that wishes to get data from an `FCakeFile`, and we use `TCakeOrderDir` for any order that wishes to get data from an `FCakeDir`.
-
-As a convenience, `TCakeOrder` has an `operator bool` member function defined that returns the result of calling `IsOkStrict` on its result field. This means that with a single check we can confirm that the IO operation occurred, was successful, and that the `Order` member field is valid and holds the desired data.  
-
-```c++ hl_lines="1"
-if (TCakeOrderFile<int64> Query = TestFile.QueryFileSizeInBytes())
+if ( Query.IsValid() )
 {
-    UE_LOG(LogTemp, Warning, TEXT("File size: [%d] bytes."), Query.Order);
+	UE_LOG(LogTemp, Warning, 
+		TEXT("File size: [%d] bytes."), 
+		Query.Order
+	);
 }
 ```
+Our template parameter needs to be `int64`, which will hold our file size in bytes. While we could directly check the result type held within Query, it's more convenient to use the function `IsValid` which will return true if the operation succeeded.
 
-`operator*` returns a mutable reference to the payload, so we could also write this instead:
+We can access the filesize data using the `Order` member field. Alternatively, we can use `operator*` to achieve the same effect.
 
-```c++ hl_lines="3"
-if (TCakeOrderFile<int64> Query = TestFile.QueryFileSizeInBytes())
+
+```c++ hl_lines="4"
+FCakeFile TestFile{ TEXTVIEW("X:/game/enemies/goblin.dat") };
+
+TCakeOrderFile<int64> Query{
+	TestFile.QueryFileSizeInBytes()
+};
+
+if ( Query.IsValid() )
 {
-    UE_LOG(LogTemp, Warning, TEXT("File size: [%d] bytes."), *Query);
+	UE_LOG(LogTemp, Warning, 
+		TEXT("File size: [%d] bytes."), 
+		*Query
+	);
 }
 ```

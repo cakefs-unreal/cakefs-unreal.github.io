@@ -2,267 +2,242 @@
 CakePath objects provide an ergonomic and standardized way to work with filesystem paths in Unreal Engine. 
 
 ### Source Code Information
-=== "C++"
-    {{ cpp_impl_source('path', 'FCakePath', 'CakePath') }}
-    
-=== "Blueprint"
-    {{ bp_impl_source('path', 'UCakePath', 'CakePath_BP') }}
+{{ cpp_impl_source('FCakePath', 'CakePath') }}
 
 ## Basic Usage
 In this section we will cover the fundamental CakePath operations. Once you are comfortable using CakePaths, consider looking at the advanced usage section for examples of more complex operations.
 
 ### Building CakePath Objects
+Making a CakePath object is simple, we just need to pass a string that represents our desired filesystem path:
+
 === "C++"
-    The most straightforward way to build a new FCakePath is via the constructor, which accepts an FStringView. 
 
     ```c++
-    FCakePath FirstPath{ TEXTVIEW("x/game/data") };
-    ```
-    Remember, CakePath objects will ensure path representation is standardized, so we can also submit Windows-style paths to the constructor.
-
-    ```c++
-    FCakePath FirstPath{ TEXTVIEW("X:\\game\\data") };
-    ```
-
-    It also doesn't matter whether or not we include trailing path separators for directory paths. The following FCakePath objects hold the exact same path:
-
-    ```c++
-    FCakePath PathA{ TEXTVIEW("x/game/data") };
-    FCakePath PathB{ TEXTVIEW("x/game/data/") };
-    ```
-
-    To build a combined path out of multiple string-like objects, we can use the static method `BuildPathCombined`.
-
-    ```c++ hl_lines="3"
-	FString PathComponentOne{ TEXT("x/game") };
-
-	FCakePath CombinedPath{ FCakePath::BuildPathCombined(PathComponentOne, TEXTVIEW("data")) };
+    FCakePath DataDir{ TEXTVIEW("X:\\game\\data") };
     ```
 === "Blueprint"
-    When we want to make a new CakePath object, we can use `BuildCakePath`, supplying a string that represents the path that this CakePath object should hold.
+    {{ bp_img_path('Make Cake Path Back Slash') }}
 
-    {{ bp_img_path('Build Cake Path') }}
+CakePath objects ensure that path separators are standardized, so it doesn't matter if we use UNIX or Windows-style path separators.
 
-    Sometimes we might want to make an empty CakePath object and set its path information later, and for that we can use `BuildCakePathEmpty`, which will give us a CakePath object whose path is empty:
-
-    {{ bp_img_path('Build Cake Path Empty') }}
-
-    We can build a combined path with `BuildCakePathCombined`, which will create a combined path out of the two strings we supply as inputs: 
-
-    {{ bp_img_path('Build Cake Path Combined') }}
-
-    In the example above, the path of the object returned would be `X:/game/data/assets`.
-
-### Copying Paths
 === "C++"
-    To get a copy of an existing FCakePath, we can use either the copy constructor directly or call the function `Clone` on the source path.
 
-    ```c++ hl_lines="3-4"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
+    ```c++
+    FCakePath DataDir{ TEXTVIEW("X:/game/data") };
+    ```
+=== "Blueprint"
+    {{ bp_img_path('Make Cake Path Forward Slash') }}
 
-    FCakePath CopyCtor  { SourcePath         };
+To build a single path by combining multiple path strings, we can use `BuildPathCombined`:
+
+=== "C++"
+
+    ```c++ hl_lines="4"
+    FString GameDir{ TEXT("X:/game") };
+
+    FCakePath DataDir{ 
+        FCakePath::BuildPathCombined( GameDir, TEXTVIEW("data") ) 
+    };
+    ```
+=== "Blueprint"
+    {{ bp_img_path('Build Path Combined') }}
+
+In the example above, the path of the object returned would be `X:/game/data`.
+
+
+To get an independent copy of an existing CakePath, we use `Clone`:
+=== "C++"
+
+    ```c++ hl_lines="3"
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
+
     FCakePath ClonedPath{ SourcePath.Clone() };
     ```
 
-    To copy just the path string, use `ClonePathString`:
-
-    ```c++ hl_lines="3"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
-
-    FString ClonedPathString{ SourcePath.ClonePathString() };
-    ```
-
 === "Blueprint"
-    To duplicate a CakePath object, we use `Clone`:
-
     {{ bp_img_path('Clone') }}
 
-    To duplicate just the path as a string, we use `ClonePathString`:
-
-    {{ bp_img_path('Clone Path String') }}
-
 ### Reading the Path String
+To read a CakePath's path string we use `GetPathString`:
+
 === "C++"
-    To read an FCakePath's path string, we can use `operator*` or `GetPathString`:
 
-    ```c++ hl_lines="4 5"
-    auto PrintPath = [](const FString& Path) { UE_LOG(LogTemp, Warning, TEXT("Path: [%s]"), *Path) };
-    FCakePath SourcePath{ TEXT("x/game/data") };
+    ```c++ hl_lines="7-8"
+    auto PrintPath = [](const FString& Path) { 
+        UE_LOG(LogTemp, Warning, TEXT("Path: [%s]"), *Path) 
+    };
 
-    PrintPath(*SourcePath); // => "x/game/data"
-    PrintPath(SourcePath.GetPathString()); // => "x/game/data"
+    FCakePath SourcePath{ TEXT("/x/game/data") };
+
+    PrintPath(SourcePath.GetPathString()); // => "/x/game/data"
+    PrintPath(*SourcePath); // => "/x/game/data"
+    ```
+
+    !!! note
+        `operator*` achieves the same effect.
+
+=== "Blueprint"
+    {{ bp_img_path('Get Path String') }}
+
+We can get an independent copy of the path string via `ClonePathString`:
+
+=== "C++"
+
+    ```c++ hl_lines="3"
+    FCakePath SourcePath{ TEXT("/x/game/data") };
+
+    FString PathString{ SourcePath.ClonePathString() };
     ```
 
 === "Blueprint"
-    To read the path as a string, we can use `GetPathString`:
-
-    {{ bp_img_path('Get Path String') }}
+    {{ bp_img_path('Clone Path String') }}
 
 ### Modifying Paths
+
+We can change the path of an existing CakePath via `SetPath`, sending either a string or another CakePath object that holds the new path.
+
 === "C++"
-    We can change the path of an existing FCakePath via `SetPath`, which takes a string-like object just like the constructor:
-
-    ```c++ hl_lines="3"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
-
-    SourcePath.SetPath(TEXTVIEW("y:/network/profiling/"));
-    ```
-    We can also set the path of an existing FCakePath to the path another FCakePath holds via `SetPathViaOther`:
 
     ```c++ hl_lines="4"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
-    FCakePath NewPath{ TEXTVIEW("Z:/misc/data") };
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
 
-    SourcePath.SetPathViaOther(NewPath);
+    // FStringView overload
+    SourcePath.SetPath(TEXTVIEW("Y:/network/profiling/"));
+    ```
+    ```c++ hl_lines="5"
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
+	FCakePath MapPath   { TEXTVIEW("/x/game/maps") };
+
+    // FCakePath overload
+    SourcePath.SetPath(MapPath);
     ```
 
-    If we want to use move semantics instead of copy semantics, we can use `StealPath`:
+    If we want to employ move semantics, we can use `StealPath`:
 
-    ```c++ hl_lines="3"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
+    ```c++ hl_lines="4"
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
+	FCakePath MapPath   { TEXTVIEW("/x/game/maps") };
 
-    SourcePath.StealPath( FCakePath{ TEXTVIEW("Y:/netdb/player") } );
+    SourcePath.StealPath( MoveTemp(MapPath) );
     ```
-    --8<-- "ad-copymove-ctor.md"
+
+    !!! note
+        We could have used the move constructor instead of `StealPath`. Use whichever you prefer.
+
+=== "Blueprint"
+    {{ bp_img_path('Set Path String') }}
+    {{ bp_img_path('Set Path Cake Path') }}
 
 
-    To check if an FCakePath's path is empty, we can use the `IsEmpty` member function:
+To check if a CakePath's path is empty, we use `IsEmpty`:
+=== "C++"
 
     ```c++ hl_lines="3"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
 
     const bool bPathIsEmpty{ SourcePath.IsEmpty() }; // => false
     ```
-    To reset an FCakePath's path back to empty, we can use the `Reset` member function:
 
-    ```c++ hl_lines="2"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
+=== "Blueprint"
+    {{ bp_img_path('Is Empty') }}
+
+
+To reset a CakePath's path back to an empty string, we use `Reset`:
+=== "C++"
+
+    ```c++ hl_lines="3"
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
+
     SourcePath.Reset();
     const bool bPathIsEmpty{ SourcePath.IsEmpty() }; // => true
     ```
-    `Reset` takes an optional size parameter that will reserve a buffer size for the internal `FString` that holds the path string:
-
-    ```c++ hl_lines="4"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
-    FCakePath NewPath{ TEXTVIEW("Z:/misc/data") };
-
-    SourcePath.Reset(NewPath.GetPathString.Len());
-    ```
-    --8<-- "note-reset-forwarding.md"
 
 === "Blueprint"
-    To change the path that a preexisting CakePath object holds, we use `SetPath`, submitting a string that represents the new path that the CakePath object should use:
-
-    {{ bp_img_path('Set Path') }}
-
-    !!! note
-        In the example above, the path will be set to `y:/network/profiling/`.
-
-    If we want to set the path using another CakePath object's path, we can use `SetPathViaOther`:
-
-    {{ bp_img_path('Set Path Via Other') }}
-
-    !!! note
-        In the example above, the path will be `Z:/misc/data` after the call to Set Path resolves.
-
-    To check if a path is empty, we can use `IsEmpty`:
-
-    {{ bp_img_path('Is Empty') }}
-
-    To clear any path a CakePath object holds, we use `Reset`:
-
     {{ bp_img_path('Reset') }}
 
-    --8<-- "note-bp-newreservedsize.md"
+!!! note
+    `Reset` takes an optional size parameter that will ensure the path string's buffer is at least as large as the size argument. If you don't need a specific size, just leave this at zero.
 
 
 ### Combining Paths
+To combine a CakePath object's path with another, we use `Combine`. We can use `Combine` with a string or another CakePath object.
+
 === "C++"
-    To make a new FCakePath that combines other FCakePath objects, use `operator/` or `Combine`.
+
+    !!! note
+        `operator/` can be used for an equivalent effect.
 
     ```c++ hl_lines="4 5"
-	FCakePath PathGame    { TEXTVIEW("x/game/")       };
-	FCakePath PathHeroFile{ TEXTVIEW("hero/hero.fbx") };
+    // FStringView overload
+	FCakePath PathGame{ TEXTVIEW("/x/game/") };
 
-	FCakePath PathToHeroFileOperator{ PathGame / PathHeroFile        };
-	FCakePath PathToHeroFileCombined{ PathGame.Combine(PathHeroFile) };
-    ```
-    Either function will produce the same result, but `operator/` can be especially ergonomic if you are combining more than two paths at once: 
-
-    ```c++ hl_lines="5"
-    FCakePath PathDrive   { TEXT("x")    };
-    FCakePath PathGameOnly{ TEXT("game") };
-    FCakePath PathDataOnly{ TEXT("data") };
-
-    FCakePath PathDataCombined = PathDrive / PathGameOnly / PathDataOnly;
-    ```
-    Note that the combination interfaces only accept FCakePath objects as inputs in order to avoid implicit type conversions and surprising results. In other words, you can't mix string-like objects and FCakePath objects in combination chains. However, there are two ways to work around this. The simplest way is to explicitly convert any string-like objects into FCakePath objects within the combination expression:
-
-    ```c++ hl_lines="4"
-    FCakePath PathDrive     { TEXT("x")    };
-    FString   PathGameString{ TEXT("game") };
-
-    FCakePath CombinedMix{ PathDrive / FCakePath(PathGameString) };
-    ```
-    When combining multiple strings, you can use FString's `operator/`, which also supports path concatenation, and then feed the combined FString into the FCakePath constructor, which will guarantee the final result is well-formed:
-
-    ```c++ hl_lines="4"
-    FString PathDriveString { TEXT("x")    };
-    FString PathGameString  { TEXT("game") };
-
-    FCakePath CombinedFromStrings{ PathDriveString / PathGameString };
+	FCakePath FullHeroPath  { PathGame.Combine(TEXTVIEW("hero/hero.fbx")) };
+	FCakePath FullHeroPathOp{ PathGame / TEXTVIEW("hero/hero.fbx")        };
     ```
 
-    To append another path onto a pre-existing FCakePath, we can use `operator/=` or `CombineInline`.
+    ```c++ hl_lines="5 6"
+    // CakePath overload
+	FCakePath PathGame    { TEXTVIEW("/x/game/")       };
+	FCakePath PathHeroFile{ TEXTVIEW("hero/hero.fbx")  };
 
-    ```c++ hl_lines="5 8"
-    FCakePath PathMisc   { TEXTVIEW("y/misc")         };
-    FCakePath PathItemsDb{ TEXTVIEW("items/items.db") };
-
-    FCakePath PathCombineOperator{ PathMisc };
-    PathCombineOperator /= PathItemsDb; // => "y/misc/items/items.db"
-
-    FCakePath PathCombineInline{ PathMisc };
-    PathCombineInline.CombineInline(PathItemsDb); // => "y/misc/items/items.db"
+	FCakePath FullHeroPath  { PathGame.Combine(PathHeroFile) };
+	FCakePath FullHeroPathOp{ PathGame / PathHeroFile        };
     ```
 
 === "Blueprint"
-    To build a CakePath object whose path is the combination of two preexisting CakePath objects, we use `Combine`. 
+    {{ bp_img_path('Combine String') }}
+    {{ bp_img_path('Combine Cake Path') }}
 
-    {{ bp_img_path('Combine') }}
+In the example above, the returned CakePath object's path will be `/x/game/hero/hero.fbx`.
 
-    In the example above, the returned CakePath object's path will be `x/game/data/assets/models`.
+To perform the combination directly on the source CakePath object, we can use `CombineInline`:
+=== "C++"
 
-    To append one CakePath object's path directly onto another CakePath object, we can use `CombineInline`. 
+    ```c++ hl_lines="6 9"
+    // FStringView overload
+    FCakePath PathMisc   { TEXTVIEW("/y/misc")         };
+    FCakePath PathItemsDb{ TEXTVIEW("items/items.db") };
 
-    {{ bp_img_path('Combine Inline') }}
+    FCakePath PathCombineInline{ PathMisc };
+    PathCombineInline.CombineInline( TEXTVIEW("items/items.db") ); // => "/y/misc/items/items.db"
 
-    In the example above, the target CakePath object's path will be `x/game/data/assets/models`.
+    FCakePath PathCombineOperator{ PathMisc };
+    PathCombineOperator /= TEXTVIEW("items/items.db"); // => "/y/misc/items/items.db"
+    ```
+
+    ```c++ hl_lines="6 9"
+    // CakePath overload
+    FCakePath PathMisc   { TEXTVIEW("/y/misc")         };
+    FCakePath PathItemsDb{ TEXTVIEW("items/items.db") };
+
+    FCakePath PathCombineInline{ PathMisc };
+    PathCombineInline.CombineInline(PathItemsDb); // => "/y/misc/items/items.db"
+
+    FCakePath PathCombineOperator{ PathMisc };
+    PathCombineOperator /= PathItemsDb; // => "/y/misc/items/items.db"
+    ```
+
+=== "Blueprint"
+    {{ bp_img_path('Combine Inline String') }}
+    {{ bp_img_path('Combine Inline Cake Path') }}
+
+In the example above, the target CakePath object's path will be `/y/misc/items/items.db`.
 
 ### Path Equality
-Path equality in CakeFS is simple: two CakePath objects are equal if they refer to the same location on the filesystem.
+Path equality in CakeFS is simple: two CakePath objects are equal if they refer to the same location on the filesystem. We use `operator==` and `operator!=` for equality comparisons.
 === "C++"
-    FCakePath uses `operator==` and `operator!=` for equality comparisons.
 
-    ```c++ hl_lines="6 7 9 10"
-    FCakePath PathData{ TEXT("x/game/data") };
-    FCakePath PathDataCopy{ TEXT("x/game/data") };
-    FCakePath PathMisc{ TEXT("y/game/misc") };
+    ```c++ hl_lines="5 6"
+    FCakePath PathData{ TEXTVIEW("/x/game/data") };
+    FCakePath PathMisc{ TEXTVIEW("/y/game/misc") };
 
     bool bPathsAreEqual{ false };
     bPathsAreEqual = PathData == PathMisc;      // => false
-    bPathsAreEqual = PathData == PathDataCopy; // => true
-
     bPathsAreEqual = PathData != PathMisc;      // => true
-    bPathsAreEqual = PathData != PathDataCopy; // => false
     ```
+
 === "Blueprint"
-    To check if two CakePath objects are equal, we use `IsEqualTo`:
-
     {{ bp_img_path('Is Equal To') }}
-
-    To check if two CakePath objects are not equal, we use `IsNotEqualTo`:
-
     {{ bp_img_path('Is Not Equal To') }}
 
 ## Advanced Usage
@@ -275,7 +250,7 @@ To extract the leaf of a CakePath object as another CakePath object, we use `Clo
 === "C++"
 
     ```cpp hl_lines="3"
-    FCakePath SourcePath{ TEXT("x/game/data") };
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
 
     FCakePath PathLeaf{ SourcePath.CloneLeaf() }; // => "data"
     ```
@@ -285,8 +260,9 @@ To extract the leaf of a CakePath object as another CakePath object, we use `Clo
 
 To get the leaf of a CakePath object as a string, we use `CloneLeafString`:
 === "C++"
+
     ```cpp hl_lines="3"
-    FCakePath SourcePath{ TEXT("x/game/data") };
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
 
     FString LeafString{ SourcePath.CloneLeafString() }; // => "data"
     ```
@@ -295,45 +271,69 @@ To get the leaf of a CakePath object as a string, we use `CloneLeafString`:
     {{ bp_img_path('Clone Leaf String') }}
 
 !!! note
-    The leaf can always be empty, so don't forget to check in the situations where that matters.
+    The leaf can be empty, so don't forget to check in the situations where that matters.
 
 #### Modifying the Leaf
-We can modify the leaf of a CakePath via `SetLeaf`:
-=== "C++"
-
-    ```c++ hl_lines="3"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
-
-    SourcePath.SetLeaf(FCakePath{ TEXTVIEW("items") }); // path is now "x/game/items"
-    ```
-
-=== "Blueprint"
-    {{ bp_img_path('Set Leaf') }}
-
-We can get a copy of the CakePath with a new leaf via `CloneWithNewLeaf`, submitting a CakePath argument that is the leaf the cloned CakePath should use:
+We can change the leaf of a CakePath via `SetLeaf`, passing either a string or CakePath that contains the new leaf.
 === "C++"
 
     ```c++ hl_lines="4"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data") };
-    FCakePath NewLeaf   { TEXTVIEW("items")     };
+    // FStringView overload
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
 
-    FCakePath WithNewLeaf{ SourcePath.CloneWithNewLeaf(NewLeaf) };// path is "x/game/items"
+    SourcePath.SetLeaf( TEXTVIEW("items") ); // path is now "/x/game/items"
+    ```
+
+    ```c++ hl_lines="5"
+    // FCakePath overload
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
+    FCakePath Leaf      { TEXTVIEW("items")        };
+
+    SourcePath.SetLeaf(Leaf); // path is now "/x/game/items"
+    ```
+=== "Blueprint"
+    {{ bp_img_path('Set Leaf') }}
+
+In the example above, the path is `/x/game/items` after the leaf has been changed.
+
+We can get a copy of the CakePath with a new leaf via `CloneWithNewLeaf`, submitting a string or CakePath argument that holds the new leaf:
+=== "C++"
+
+    ```c++ hl_lines="5"
+    // FStringView overload
+	FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
+
+	FCakePath WithNewLeaf{ 
+		SourcePath.CloneWithNewLeaf(TEXTVIEW("items")) 
+	};// path is "/x/game/items"
+    ```
+
+    ```c++ hl_lines="6"
+    // FCakePath overload
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
+    FCakePath NewLeaf   { TEXTVIEW("items")        };
+
+    FCakePath WithNewLeaf{ 
+        SourcePath.CloneWithNewLeaf(NewLeaf) 
+    };// path is "/x/game/items"
     ```
 === "Blueprint"
     {{ bp_img_path('Clone With New Leaf') }}
+
+In the example above, the path is `/x/game/items` after the leaf has been changed.
 
 !!! note 
     Even though the examples show changing the leaf with single-component paths, leaf manipulation methods can also change the leaf with a multi-component path as well. 
 
 ### Parent Path Manipulation
-The parent path of a given path is all path components to the left of the path leaf; the parent path of `x/game/data` is `x/game/`.
+The parent path of a given path is all path components to the left of the path leaf; the parent path of `/x/game/data` is `/x/game/`.
 
 #### Parent Path Extraction
 To clone a CakePath's parent path as a new CakePath object, we use `CloneParentPath`:
 === "C++"
 
     ```cpp hl_lines="3"
-    FCakePath SourcePath{ TEXT("x/game/data") };
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
 
     FCakePath ParentPath{ SourcePath.CloneParentPath() };
     ```
@@ -341,12 +341,14 @@ To clone a CakePath's parent path as a new CakePath object, we use `CloneParentP
 === "Blueprint"
     {{ bp_img_path('Clone Parent Path') }}
 
+In the example above, the cloned parent path is `/x/game`.
+
 When we want the parent path as a string, we can use `CloneParentPathString`:
 
 === "C++"
 
     ```cpp hl_lines="3"
-    FCakePath SourcePath{ TEXT("x/game/data") };
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data") };
 
     FString ParentPathString{ SourcePath.CloneParentPathString() };
     ```
@@ -354,36 +356,61 @@ When we want the parent path as a string, we can use `CloneParentPathString`:
 === "Blueprint"
     {{ bp_img_path('Clone Parent Path String') }}
 
+In the example above, the cloned parent path string is `/x/game`.
+
 !!! note
     The parent path can always be empty, so don't forget to check in the situations where that matters.
 
 #### Modifying the Parent Path
-We can modify the parent path of an existing CakePath object via `SetParentPath`:
+We can modify the parent path of an existing CakePath object via `SetParentPath`, submitting a string or CakePath that holds the new parent path.
 
 === "C++"
 
-    ```c++ hl_lines="4"
-    FCakePath ParentSourcePath{ TEXTVIEW("x/game/data")      };
-    FCakePath NewParent       { TEXTVIEW("z/network/remote") };
+    ```c++ hl_lines="5"
+    // FStringView overload
+    FCakePath ParentSourcePath{ TEXTVIEW("/x/game/data")      };
+    FString   NewParent       { TEXTVIEW("/z/network/remote") };
 
-    ParentSourcePath.SetParentPath(NewParent); // Path is now "z/network/remote/data"
+    ParentSourcePath.SetParentPath(NewParent); // Path is now "/z/network/remote/data"
     ```
+    ```c++ hl_lines="5"
+    // FCakePath overload
+    FCakePath ParentSourcePath{ TEXTVIEW("/x/game/data")      };
+    FCakePath NewParent       { TEXTVIEW("/z/network/remote") };
+
+    ParentSourcePath.SetParentPath(NewParent); // Path is now "/z/network/remote/data"
+    ```
+
 === "Blueprint"
     {{ bp_img_path('Set Parent Path') }}
 
-To get a copy of a CakePath with a new parent path, we use `CloneWithNewParent`, submitting a CakePath argument that has the new parent path the cloned CakePath should use: 
+In the example above, the path is `/z/network/remote/data` after changing the parent.
+
+To get a copy of a CakePath with a new parent path, we use `CloneWithNewParent`, submitting a string or CakePath argument holds the new parent path:
 === "C++"
 
-    ```c++ hl_lines="4"
-    FCakePath SourcePath{ TEXTVIEW("x/game/data")          };
-    FCakePath NewParent { TEXTVIEW("z/network/remote")     };
+    ```c++ hl_lines="6"
+    // FStringView overload
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data")          };
+    FString   NewParent { TEXTVIEW("/z/network/remote")     };
 
-    FCakePath WithNewParent{ SourcePath.CloneWithNewParent(NewParent) };// path is "z/network/remote/data"
+    FCakePath WithNewParent{ 
+        SourcePath.CloneWithNewParent(NewParent) 
+    };// path is "/z/network/remote/data"
+    ```
+    ```c++ hl_lines="6"
+    // FCakePath overload
+    FCakePath SourcePath{ TEXTVIEW("/x/game/data")          };
+    FCakePath NewParent { TEXTVIEW("/z/network/remote")     };
+
+    FCakePath WithNewParent{ 
+        SourcePath.CloneWithNewParent(NewParent) 
+    };// path is "/z/network/remote/data"
     ```
 === "Blueprint"
     {{ bp_img_path('Clone With New Parent') }}
 
-In both examples, the final path will be: `z/network/remote/data`.
+In the example above, the final path will be: `/z/network/remote/data`.
 
 ### Absolute Paths
 CakePath objects can convert from relative paths into absolute paths. When converting relative paths into absolute paths, the location of the executable will be used as the anchor point for expansion. Thus, if we have a relative path `game/data` and our executable resides on `/x/other/game.exe`, converting `game/data` into absolute form will result in the path `/x/other/game/data/`.
@@ -392,35 +419,46 @@ However, if a path is already in absolute form then any absolute conversion will
 !!! hint
     The executable location used for absolute path conversion will be different when you are running the Unreal Editor versus running a packaged project. Make sure you know the context in which your absolute conversions will be executed to avoid any surprises.
 
+To build an absolute path explicitly, we use `BuildPathAbsolute`:
 === "C++"
-    We can build an absolute path explicitly from a relative path source with `BuildPathAbsolute`:
 
-    ```c++
-    FCakePath AbsolutePath{ FCakePath::BuildPathAbsolute(TEXTVIEW("game/data")) };
+    ```c++ hl_lines="2"
+    FCakePath AbsolutePath{ 
+        FCakePath::BuildPathAbsolute( TEXTVIEW("game/data") ) 
+    };
     ```
-    To build an absolute path from multiple string-like objects, we use `BuildPathCombinedAbsolute`:
+=== "Blueprint"
+    {{ bp_img_path('Build Path Absolute') }}
 
-    ```c++ 
-    FCakePath CombinedAbsPath{ FCakePath::BuildPathCombinedAbsolute( 
+To build an absolute path from two or more path strings, we use `BuildPathCombinedAbsolute`:
+=== "C++"
+
+    ```c++ hl_lines="2-5"
+    FCakePath CombinedAbsPath{ 
+		FCakePath::BuildPathCombinedAbsolute( 
 			TEXTVIEW("misc/data"), 
 			TEXTVIEW("animations/hero") 
 		)
 	};
     ```
-    !!! note
-        This function is a variadic template and can accept an indefinite number of string-like arguments.
-
 === "Blueprint"
-    To build a CakePath and ensure it is in absolute form, we use `BuildCakePathAbsolute`.
-    {{ bp_img_path('Build Cake Path Absolute') }}
-
-    To build an absolute CakePath combined from two source path strings, use `BuildCakePathCombinedAbsolute`:
-    {{ bp_img_path('Build Cake Path Combined Absolute') }}
+    {{ bp_img_path('Build Path Combined Absolute') }}
 
 Using a pre-existing CakePath as the base path, we can create combined absolute paths via `CombineAbsolute`:
+
 === "C++"
 
-    ```c++ hl_lines="4"
+    ```c++ hl_lines="6"
+    // FStringView overload
+    FCakePath SourceRelative{ TEXTVIEW("src/systems")  };
+    FString   NetworkDir    { TEXTVIEW("network/main") };
+
+    FCakePath NetworkingPath{ 
+        SourceRelative.CombineAbsolute( NetworkDir ) 
+    };
+    ```
+    ```c++ hl_lines="6"
+    // FCakePath overload
     FCakePath SourceRelative{ TEXTVIEW("src/systems")  };
     FCakePath NetworkDir    { TEXTVIEW("network/main") };
 
@@ -428,11 +466,13 @@ Using a pre-existing CakePath as the base path, we can create combined absolute 
         SourceRelative.CombineAbsolute( NetworkDir ) 
     };
     ```
+
 === "Blueprint"
     {{ bp_img_path('Combine Absolute') }}
 
 To clone a CakePath object and ensure the cloned path is in absolute form use `CloneAbsolute`.
 === "C++"
+
     ```c++ hl_lines="3"
     FCakePath SourcePath{ TEXTVIEW("other/misc") };
 
@@ -447,11 +487,14 @@ If we just need the absolute path as a string, we can use `ClonePathStringAbsolu
 
 === "C++"
 
-    ```c++ hl_lines="3"
+    ```c++ hl_lines="4"
     FCakePath SourcePath{ TEXTVIEW("other/misc") };
 
-    FString ClonedAbsPathString{ SourcePath.ClonePathStringAbsolute() };
+    FString ClonedAbsPathString{ 
+        SourcePath.ClonePathStringAbsolute() 
+    };
     ```
+
 === "Blueprint"
     {{ bp_img_path('Clone Path String Absolute') }}
 
@@ -474,42 +517,43 @@ As an example, let's say that we are attempting to move a directory tree into an
 === "C++"
     --8<-- "ad-parampacks.md"
 
-    ```c++ hl_lines="6-9"
-    FCakePath    SourcePath{ TEXTVIEW("x/game/data/misc/saves") };
-    FCakePath HostDirectory{ TEXTVIEW("x/game/data")            };
-    FCakePath DestDirectory{ TEXTVIEW("y/archive/data")         };
+    ```c++ hl_lines="5-9"
+    FCakePath    SourcePath{ TEXTVIEW("/x/game/data/misc/saves") };
+    FCakePath HostDirectory{ TEXTVIEW("/x/game/data")            };
+    FCakePath DestDirectory{ TEXTVIEW("/y/archive/data")         };
 
-    // FinalPath:  "y/archive/data/misc/saves"
-    FCakePath FinalPath = SourcePath.CloneWithSubpathReplaced({ 
+    FCakePath FinalPath  = SourcePath.CloneWithSubpathReplaced({ 
         .OriginalSubpath = HostDirectory, 
         .NewSubpath      = DestDirectory 
     });
 
+    // FinalPath: "/y/archive/data/misc/saves"
     UE_LOG(LogTemp, Warning, TEXT("ReplaceSubpath path: [%s]"), **FinalPath);
     ```
 === "Blueprint"
     {{ bp_img_path('Clone With Subpath Replaced') }}
 
-In the example above, by using `CloneWithSubpathReplaced` we were able to replace the subpath `x/game/data` with `y/archive/data` while maintaining the rest of the relative tree `misc/saves`. The resultant path is `y/archive/data/misc/saves`.
+In the example above, by using `CloneWithSubpathReplaced` we were able to replace the subpath `/x/game/data` with `/y/archive/data` while maintaining the rest of the relative tree `misc/saves`. The resultant path is `/y/archive/data/misc/saves`.
 
 If we want to change a subpath of an existing CakePath object instead of generating a copy, we can use `SubpathReplaceInline`:
 
 === "C++"
 
-    ```c++ hl_lines="6-8"
+    ```c++ hl_lines="5-8"
 	FCakePath    SourcePath{ TEXTVIEW("x/game/data/misc/saves") };
 	FCakePath HostDirectory{ TEXTVIEW("x/game/data")            };
 	FCakePath DestDirectory{ TEXTVIEW("y/archive/data")         };
 
-	// SourcePath is now:  "y/archive/data/misc/saves"
 	SourcePath.SubpathReplaceInline({ 
         .OriginalSubpath = HostDirectory,
         .NewSubpath      = DestDirectory 
     });
 
+	// SourcePath is now: "/y/archive/data/misc/saves"
 	UE_LOG(LogTemp, Warning, TEXT("SubpathReplaceInline path: [%s]"), **SourcePath); 
     ```
+
 === "Blueprint"
     {{ bp_img_path('Subpath Replace Inline') }}
 
-As with the previous example, the resultant path is `y/archive/data/misc/saves`.
+As with the previous example, the resultant path is `/y/archive/data/misc/saves`.

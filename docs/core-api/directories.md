@@ -10,6 +10,7 @@ CakeFS provides CakeDir objects that offer a comprehensive and ergonomic interfa
 The simplest way to construct an FCakeDir is to submit a string or an FCakePath that represents the directory path we want to use.
 
 === "C++"
+
 	```c++ 
 	FCakeDir DirectoryViaString{ TEXTVIEW("X:/game") };
 
@@ -17,7 +18,6 @@ The simplest way to construct an FCakeDir is to submit a string or an FCakePath 
 		FCakePath{ TEXTVIEW("X:/game") }
 	};
 	```
-
 === "Blueprint"
 	{{ bp_img_dir('Make Cake Dir') }}
 
@@ -664,12 +664,12 @@ We can get the stat data for a CakeDir's referenced directory via `QueryStatData
 
 
 ## Directory Traversal 
-Directory traversal is a vital part of working with file systems, and Cake Directory objects offer a comprehensive set of traversal interfaces. At its core, a traversal operation involves invoking a user-supplied callback function on each directory element (file or subdirectory) that is being visited by the traversal function.
+Directory traversal is a vital part of working with file systems, and CakeDir objects offer a comprehensive set of traversal interfaces. At its core, a traversal operation involves invoking a user-supplied callback function on each directory element (file or subdirectory) that is being visited by the traversal function.
 
 ### Traversal Overview
 Before we examine the traversal interfaces, it is important to understand some terminology and guiding principles behind CakeFS's traversal design. A traversal has three main traits that define its behavior: 
 
-1. **Style**: Determines the behavior of the traversal operation.
+1. **Style**: Determines the functional behavior of the traversal operation.
 1. **Target**: Determines what kind of element (directories, files, or both) will be visited by a traversal operation.
 1. **Depth**: Determines if a traversal is allowed to continue down into children subdirectories.
 
@@ -686,12 +686,12 @@ There are three styles of traversal that are offered by CakeFS, listed from simp
 
 An unguarded traversal will visit every target element at the specified depth. The caller has no ability to terminate the traversal early. In essence, this is traversal with no error handling. 
 
-A guarded traversal will attempt to visit every target element at a specified depth, but it can be stopped early by the caller if an error is encountered. In essence, this is traversal with error handling enabled. The goal of a guarded traversal is still to visit all target elements at the specified depth.
+A guarded traversal will attempt to visit every target element at a specified depth, but it can be stopped early by the caller if an error is encountered. In essence, this is traversal with error handling enabled. 
 
-A search traversal will visit target elements at the specified depth until a caller-defined condition is met or an error is encountered. As the name implies, a search traversal does not always expect to visit every target element within a directory -- it wishes to terminate as soon as it finds what it is looking for. Search traversals can be terminated early in two states -- if an error is encountered or if the search has found what it needs. If a search traversal visits all target elements and the search is not satisfied, then this traversal will be considered a failure (in terms of searching, not in terms of errors).
+A search traversal will visit target elements at the specified depth until a caller-defined condition is met or an error is encountered. As the name implies, a search traversal does not always expect to visit every target element within a directory -- it wishes to terminate as soon as it finds what it is looking for. Search traversals can be terminated early in two states -- if an error is encountered or if the search has found what it needs. If a search traversal visits all target elements and the search is not satisfied, then this traversal will be considered a failed search.
 
 #### Traversal Function Naming
-Traversal functions utilize the following naming pattern: `Traverse<style><target>`. Unguarded traversals do not have a style identifier in their name because they are the simplest form. Let's say we wish to traverse the files of a directory. We could use the following functions to traverse the files with each style:
+Traversal functions utilize the following naming pattern: `Traverse<style>?<target>`. Unguarded traversals do not have a style identifier in their name because they are the simplest form. Let's say we wish to traverse the files of a directory. We could use the following functions to traverse the files with each style:
 
 1. Unguarded Traversal: `TraverseFiles`
 1. Guarded Traversal: `TraverseGuardedFiles`
@@ -721,10 +721,10 @@ Every traversal function will require a callback that is meant to handle each ta
 ### Using Traversals
 --8<-- "disclaimer-error-handling-traversal.md"
 
-Using traversals with Cake Directory objects follows a common pattern: we select a style and target by using a particular function, and then we submit an {{ policy_link('OpDepth') }} parameter that determines the traversal depth and a callback parameter that will be called each time a target element is visited. The callback signature will change based upon the style and target element, and some functions will accept more parameters beyond the depth and callback. We will now look at examples using each traversal style.
+Using traversals with CakeDir objects follows a common pattern: we select a style and target by using a particular function, and then we submit an {{ policy_link('OpDepth') }} parameter that determines the traversal depth and a callback parameter that will be called each time a target element is visited. The callback signature will change based upon the style and target element, and some functions will accept more parameters beyond the depth and callback. We will now look at examples using each traversal style.
 
 #### Unguarded Traversals
-Unguarded Traversals are the simplest form of traversal. Unless the traversal fails to launch due to an error, it will visit every target element at a specified depth for a given Cake Directory object. The user has no control over the traversal operation's termination, and the traversal will not stop until all elements at the specified depth are visited.
+Unguarded Traversals are the simplest form of traversal. Unless the traversal fails to launch due to an error, it will visit every target element at a specified depth for a given CakeDir object. The user has no control over the traversal operation's termination, and the traversal will not stop until all elements at the specified depth are visited.
 The callback signature for unguarded traversals must accept the input parameters for the target element, and the callback should return void since no traversal control is granted to the caller.
 
 === "C++"
@@ -749,10 +749,11 @@ The callback signature for unguarded traversals must accept the input parameters
 For now, let's say we just want to print the name of each file or directory. We'll start by defining our callback:
 
 === "C++"
+
     ```c++ 
 	auto PrintItemLeaf = [](FCakePath ItemPath, bool bIsDir) -> void
 	{
-		const FString Leaf { ItemPath.CloneLeafAsString() };
+		const FString Leaf { ItemPath.CloneLeafString() };
 
 		if (bIsDir)
 		{
@@ -773,11 +774,11 @@ We're now ready to launch our traversal, choosing the desired traversal depth wh
 === "C++"
 
     ```c++ hl_lines="17"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
 	auto PrintItemLeaf = [](FCakePath ItemPath, bool bIsDir) -> void
 	{
-		const FString Leaf { ItemPath.CloneLeafAsString() };
+		const FString Leaf { ItemPath.CloneLeafString() };
 
 		if (bIsDir)
 		{
@@ -791,9 +792,8 @@ We're now ready to launch our traversal, choosing the desired traversal depth wh
 
 	if (!DirectoryGame.TraverseItems(ECakePolicyOpDepth::Shallow, PrintItemLeaf))
 	{
-		UE_LOG(LogTemp, Error, TEXT("Unguarded item traveral failed to launch!"))
+		UE_LOG(LogTemp, Error, TEXT("Unguarded item traveral failed to launch!"));
 	}
-
     ```
     
 === "Blueprint"
@@ -832,9 +832,16 @@ For this example, we'll use a guarded traversal over files to query the file siz
     ```c++ 
 	auto QueryFileSizeGuarded = [](FCakeFile File) -> ECakeSignalGuarded
 	{
-		if (TCakeOrderFile<int64> FileSizeOrder = File.QueryFileSizeInBytes())
+		TCakeOrderFile<int64> FileSizeOrder{ File.QueryFileSizeInBytes() };
+
+		if (FileSizeOrder.IsValid())
 		{
-			UE_LOG(LogTemp, Warning, TEXT("[%s] ([%d] bytes)"), *File.CloneFileName(), *FileSizeOrder);
+			UE_LOG(LogTemp, Warning, 
+				TEXT("[%s] ([%d] bytes)"), 
+				*File.CloneFileName(), 
+				*FileSizeOrder
+			);
+
 			return ECakeSignalGuarded::Continue;
 		}
 
@@ -851,13 +858,20 @@ We're now ready to launch our traversal, choosing the desired traversal depth wh
 === "C++"
 
     ```c++ hl_lines="14"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
 	auto QueryFileSizeGuarded = [](FCakeFile File) -> ECakeSignalGuarded
 	{
-		if (TCakeOrderFile<int64> FileSizeOrder = File.QueryFileSizeInBytes())
+		TCakeOrderFile<int64> FileSizeOrder{ File.QueryFileSizeInBytes() };
+
+		if (FileSizeOrder.IsValid())
 		{
-			UE_LOG(LogTemp, Warning, TEXT("[%s] ([%d] bytes)"), *File.CloneFileName(), *FileSizeOrder);
+			UE_LOG(LogTemp, Warning, 
+				TEXT("[%s] ([%d] bytes)"), 
+				*File.CloneFileName(), 
+				*FileSizeOrder
+			);
+
 			return ECakeSignalGuarded::Continue;
 		}
 
@@ -866,7 +880,7 @@ We're now ready to launch our traversal, choosing the desired traversal depth wh
 
 	if (!DirectoryGame.TraverseGuardedFiles(ECakePolicyOpDepth::Shallow, QueryFileSizeGuarded))
 	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to check all file sizes!"))
+		UE_LOG(LogTemp, Error, TEXT("Failed to check all file sizes!"));
 	}
     ```
     
@@ -942,7 +956,7 @@ We're now ready to launch our traversal, choosing the desired traversal depth wh
 === "C++"
 
     ```c++ hl_lines="17"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")} };
+	FCakeDir DirectoryGame{ TEXTVIEW("X:/game") };
 
 	FCakeDir ConfigDir{};
 	FString ConfigName{ TEXT("config") };
@@ -960,26 +974,31 @@ We're now ready to launch our traversal, choosing the desired traversal depth wh
 
 	if (DirectoryGame.TraverseSearchSubdirs(ECakePolicyOpDepth::Deep, ConfigDirSearch))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Found config at path: [%s]"), *ConfigDir.GetPathString())
+		UE_LOG(LogTemp, Warning, 
+			TEXT("Found config at path: [%s]"), 
+			*ConfigDir.GetPathString()
+		);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("No config directory was found!"))
+		UE_LOG(LogTemp, Warning, TEXT("No config directory was found!"));
 	}
-
     ```
+
     The result from a search traversal will only return true if the search was successful, so we can branch on the result and safely use `ConfigDir` when it returns true. This is the most basic way to use the results from a search traversal, please see [traversal error handling](/core-api/error-handling/#traversal-error-handling-idioms) for a more detailed look at how to work with search traversal results.
+
 === "Blueprint"
 	{{ bp_img_dir('Traversal Example Search Launch') }}
 
 #### Filtered Traversals
-Filtered traversals are a special kind of traversal that only works with files and uses the CakeDir object's file extension filter to select which files to visit. A filtered traversal works with file traversals of any style. Every style has a files function that has the suffix `WithFilter`:
+Filtered traversals are a special kind of traversal that only works with files and uses the CakeDir object's file extension filter to select which files to visit. Every style has a files function that has the suffix `WithFilter`:
 
 1. `TraverseFilesWithFilter`
 1. `TraverseGuardedFilesWithFilter`
 1. `TraverseSearchFilesWithFilter`
 
-These functions add parameters in addition to the standard parameter list for that traversal style. These parameters allow us to control how the extension filter should be used to select which files to visit during the traversal operation. The default behavior of a filtered traversal is to visit any files whose file extensions are in the extension filter set.
+The default behavior of a filtered traversal is to visit any files whose file extensions are in the extension filter set. We can modify this default behavior through extra parameters, and we'll examine how in a bit.
+
 Let's start with a basic example: we'll use the filter to visit only `.txt` files in a directory and read the text data. Since we're using a file IO operation during each traversal step, we should use a guarded traversal so we can respond to errors.
 
 === "C++"
@@ -987,12 +1006,13 @@ Let's start with a basic example: we'll use the filter to visit only `.txt` file
 
 	Unless you have changed the [default policy values](/core-api/special-types/policies/#default-policy-values) manually, the default behavior of the extension filter is to visit any files whose file extensions are in the extension filter set.
 
-    ```c++ hl_lines="13-14"
+    ```c++ hl_lines="14-15"
 	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game")}, TEXTVIEW("txt") };
 
 	auto ReadTextFiles = [](FCakeFile File) -> ECakeSignalGuarded
 	{
-		if (TCakeOrderFile<FString> ReadOrder = File.ReadTextFile())
+		TCakeOrderFile<FString> ReadOrder{ File.ReadTextFile() };
+		if (ReadOrder.IsValid())
 		{
 			UE_LOG(LogTemp, Warning, TEXT("[%s]: [%s]"), *File.CloneFileName(), **ReadOrder);
 			return ECakeSignalGuarded::Continue;
@@ -1016,9 +1036,12 @@ We can customize which files should be visited via the filter settings parameter
 
 === "C++"
 
-    ```c++ hl_lines="10-14"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game/build/win64")}, TEXTVIEW("bin|obj|rsp|pdb") };
-	
+    ```c++ hl_lines="13-17"
+	FCakeDir DirectoryGame{ 
+		FCakePath{ TEXTVIEW("X:/game/build/win64") }, 
+		TEXTVIEW("bin | obj | rsp | pdb") 
+	};
+
 	TArray<FCakeFile> FilesOfInterest{};
 
 	auto GatherFiles = [&FilesOfInterest](FCakeFile File) -> void
@@ -1038,11 +1061,13 @@ We can customize which files should be visited via the filter settings parameter
 	{
 		for (const FCakeFile& File : FilesOfInterest)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Doing work with file: [%s]"), *File.CloneFileName())
+			UE_LOG(LogTemp, Warning, 
+				TEXT("Doing work with file: [%s]"), 
+				*File.CloneFileName()
+			);
 			// ... do some work
 		}
 	}
-
     ```
 === "Blueprint"
 	{{ bp_img_dir('Traversal Example Filtered Collect Files') }}
@@ -1078,13 +1103,15 @@ This function is meant to be used when we want to copy the extension filter of a
 
 
 === "C++"
+
     ```c++ hl_lines="4"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game/build/win64")}, TEXTVIEW("txt") };
-	FCakePath NewGameDir{ TEXTVIEW("Y:/game/cake-arena/win64") };
+	FCakeDir  DirectoryGame{ FCakePath{TEXTVIEW("X:/game/build/win64")}, TEXTVIEW("txt") };
+	FCakePath NewGameDir   { TEXTVIEW("Y:/game/cake-arena/win64")                        };
 
 	FCakeDir CakeArenaDir{ DirectoryGame.CloneWithNewPath(NewGameDir) };
 	// Path: "Y:/game/cake-arena/win64"
 	// Ext Filter: [".txt"]
+
     ```
 
 === "Blueprint"
@@ -1099,11 +1126,11 @@ Sometimes we might want to clone a CakeDir object and just change its parent pat
 === "C++"
 
     ```c++ hl_lines="5 10"
-	FCakeDir DirectoryGame{ FCakePath{TEXTVIEW("X:/game/build/win64")}, TEXTVIEW("txt") };
+	FCakeDir  DirectoryGame{ FCakePath{TEXTVIEW("X:/game/build/win64")}, TEXTVIEW("txt") };
 
-	FCakePath OtherParent{ TEXTVIEW("Y:/archive/build") };
+	FCakePath OtherParent  { TEXTVIEW("Y:/archive/build") };
 
-	FCakeDir OtherGameDir{ DirectoryGame.CloneWithNewParent(OtherParent) };
+	FCakeDir  OtherGameDir { DirectoryGame.CloneWithNewParent(OtherParent) };
 	// Path: "Y:/archive/build/win64
 	// Ext Filter: [".txt"]
 
@@ -1119,22 +1146,19 @@ Sometimes we might want to clone a CakeDir object and just change its parent pat
 
 The cloned directory will hold the path: `Y:/archive/build/win64`.
 
-We can use the {{ policy_link('ExtFilterClone') }} parameter (optional in C++) to control whether the cloned directory should copy the source directory's file extension filter.
-
 ### Building Child Items
 We can easily build CakePaths, CakeFiles, and CakeDirs that are parented under another CakeDir's directory path with the `BuildChild` family of functions. These are convenience functions meant to be used when a caller simply wants to create a child item without having to create any intermediate objects (e.g., the CakePath for a subsequent CakeFile).
 
 #### BuildChildPath
-To build CakePath objects that are automatically parented under a CakeDir's directory path, we use `BuildChildPath`, passing a string-like argument that contains the __relative__ path to be parented:
+To build CakePath objects that are automatically parented under a CakeDir's directory path, we use `BuildChildPath`, passing the desired __relative__ path string:
 
 === "C++"
     ```c++ hl_lines="4"
-	FCakeDir ProjectDir{ FCakePath{TEXTVIEW("X:/cake-arena")} };
+	FCakeDir ProjectDir{ TEXTVIEW("X:/cake-arena") };
 
 	FCakePath AssetsPath{ 
 		ProjectDir.BuildChildPath( TEXTVIEW("data/assets") ) 
 	};
-	// Path: "X:/cake-arena/data/assets"
     ```
 
 === "Blueprint"
@@ -1143,7 +1167,7 @@ To build CakePath objects that are automatically parented under a CakeDir's dire
 In the example above, the returned CakePath's path will be `X:/cake-arena/data/assets`.
 
 #### BuildChildFile
-To build CakeFile objects whose file paths are automatically parented under a CakeDir's directory path, we use `BuildChildFile`, passing a string-like argument that contains the __relative__ file path to be parented:
+To build CakeFile objects whose file paths are automatically parented under a CakeDir's directory path, we use `BuildChildFile`, passing the desired __relative__ file path string:
 
 === "C++"
     ```c++ hl_lines="4"
@@ -1161,7 +1185,7 @@ To build CakeFile objects whose file paths are automatically parented under a Ca
 In the example above, the returned CakeFile's file path will be `X:/cake-arena/items/health-potion.dat`.
 
 #### BuildChildDir
-To build CakeDir objects whose directory paths are automatically parented under a CakeDir's directory path, we use `BuildChildDir`, passing a string-like argument that contains the __relative__ directory path to be parented:
+To build CakeDir objects whose directory paths are automatically parented under a CakeDir's directory path, we use `BuildChildDir`, passing the desired __relative__ directory path string:
 
 === "C++"
     ```c++ hl_lines="4"
@@ -1178,4 +1202,4 @@ To build CakeDir objects whose directory paths are automatically parented under 
 
 In the example above, the returned CakeDir's directory path will be `X:/cake-arena/items`.
 
-We can also use the {{ policy_link('ExtFilterClone') }} parameter (optional in C++) to control whether or not the child directory should copy the parent directory's file extension filter.
+We can also use the {{ policy_link('ExtFilterClone') }} parameter to control whether or not the child directory should copy the parent directory's file extension filter.

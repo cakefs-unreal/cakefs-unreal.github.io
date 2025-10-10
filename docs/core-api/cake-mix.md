@@ -20,14 +20,14 @@ CakeMixLibrary provides a suite of advanced functionality built on top of the Ca
 Directory Work is defined as any operation that involves traversing a target CakeDir object's elements in order to accomplish some kind of work. The kind of work can vary greatly, from counting elements at a specific depth to gathering elements into an array for future processing.
 
 ### Directory Work Error Handling
-Every function involving directory work will use an {{ link_outcomes('ECakeOutcomeDirWork', 'ecakeoutcomedirwork') }} to indicate the outcome of the overall work process. There are only a few types of errors we can encounter in directory work operations:
+Every function involving directory work will return an {{ link_results('FCakeResultDirWork', 'fcakeresultdirwork') }} to indicate the outcome of the overall work process. There are only a few types of errors we can encounter in directory work operations:
 
 1. If the source directory does not exist, `SourceDirectoryDoesNotExist` will be assigned to the outcome.
 1. If the traversal operation associated with the work fails to launch, `TraversalDidNotLaunch` will be assigned to the outcome.
 1. If the directory work encounters an error that causes it to abort, `Aborted` will be assigned to the error.
 1. Otherwise, `WorkCompleted` will be assigned to the outcome.
 
-__Not all directory work functions will generate `Aborted` outcomes__. Some directory work is free from critical errors assuming it can start. Each function group in this section will have a short error handling section to provide guidance regarding the `Aborted` outcome value. Furthermore, feel free to reference the 
+__Not all directory work functions will generate `Aborted` outcomes__. Some directory work is free from critical errors assuming it can start. Each function group in this section will have a short error handling section to provide guidance regarding the `Aborted` outcome value. 
 
 The remaining outcomes here involve helping the caller ensure the operation itself actually was able to successfully run. Remember that traversal can fail to launch in a [variety of circumstances](/core-api/special-types/outcomes/#did-not-launch). However, since the outcome has a specific value to inform you when the source directory doesn't exist, the only scenarios you need to worry about for traversals being launched are:
 
@@ -49,11 +49,11 @@ Gather error handling is very simple -- assuming the directory work operation su
     The `Gather` functions return the CakeMix exclusive order type [TCakeMixBatch](#tcakemixbatch). 
 
 === "Blueprint"
-	Regardless as to which Gather function we use, the return types will follow a similar form. We get a an {{ link_outcomes('ECakeOutcomeDirWork', 'ecakeoutcomedirwork') }} that indicates outcome of the gather operation, and an array that contains all gathered elements.
+	Regardless as to which Gather function we use, the return types will follow a similar form. We get an {{ link_results('FCakeResultDirWork', 'fcakeresultdirwork') }} that indicates result of the gather operation and an array that contains all gathered elements.
 
     {{ bp_img_cakemix('Gather Return Type Example') }}
 
-	Since our example shows Gather Subdirs, our returned array will be an array of CakeDir objects. If we were gathering files, this would be an array of CakeFile objects.
+	Since our example shows Gather Subdirs our returned array will be an array of CakeDir objects. If we were gathering files this would be an array of CakeFile objects.
 
 
 To gather all files in a directory at a specific depth, we use `GatherFiles`:
@@ -376,7 +376,7 @@ The Count functions do not return an `Aborted` directory work outcome. Assuming 
 	}
     ```
 === "Blueprint"
-    The Count functions give us back a DirWork result type and an integer that represents the number of target elements found in the source directory at the specified depth.
+    The Count functions give us back a {{ link_results('FCakeResultDirWork', 'fcakeresultdirwork') }} result type and an integer that represents the number of target elements found in the source directory at the specified depth.
 
 	In this example we'll use Count Files, but the basic usage pattern is the same for all variants.
 
