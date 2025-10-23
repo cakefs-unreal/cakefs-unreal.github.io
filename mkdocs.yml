@@ -75,26 +75,20 @@ nav:
     - Error Handling:
       - Error Handling Patterns: core-api/error-handling.md
       - Error Maps: core-api/error-maps.md
-    - Special Types:
-      - Policies: core-api/special-types/policies.md
-      - Outcomes: core-api/special-types/outcomes.md
-      - Signals: core-api/special-types/signals.md
-      - Results: core-api/special-types/results.md
-      - Cake Orders: core-api/special-types/cake-orders.md
-      - Settings: core-api/special-types/settings.md
-    - Advanced Usage: 
-      - Overview: core-api/advanced-usage.md
-      - Utility Libraries:
-        - CakeMix: core-api/cake-mix.md
-        - CakeAsyncFS: core-api/cake-async-fs.md
-      - CakeFS Services:
-        - CakeFS Services Overview: core-api/services.md
-  - Examples: 
-    - Overview: examples/examples.md
-    - Basic:
-      - Discovering Unreal Modules: examples/basic/discovering_unreal_modules.md
-
-  - Future Development: future-dev/future-development.md
+    - Fundamental Types:
+      - Policies: core-api/fundamental-types/policies.md
+      - Outcomes: core-api/fundamental-types/outcomes.md
+      - Signals: core-api/fundamental-types/signals.md
+      - Results: core-api/fundamental-types/results.md
+      - Cake Orders: core-api/fundamental-types/cake-orders.md
+      - Settings: core-api/fundamental-types/settings.md
+  - Advanced API Documentation: 
+    - Overview: advanced-api/advanced-usage.md
+    - Utility Libraries:
+      - CakeMix: advanced-api/cake-mix.md
+      - CakeAsyncFS: advanced-api/cake-async-fs.md
+    - CakeFS Services:
+      - CakeFS Services Overview: advanced-api/services.md
 watch:
   - tables
 

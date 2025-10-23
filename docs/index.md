@@ -1,6 +1,6 @@
 # Welcome
 ![CakeFS](/img/home/splash-1.png)
-CakeFS is a plugin for Unreal Engine that provides an ergonomic and comprehensive API for IO related tasks. CakeFS is built directly on top of Unreal Engine's low level IO interfaces, leveraging its maturity and stability while providing an enriched and modernized set of objects and APIs to provide a first-class developer experience for common IO related tasks. 
+CakeFS is a plugin for Unreal Engine that provides an ergonomic and comprehensive API for filesystem operations. CakeFS is built directly on top of Unreal Engine's filesystem interfaces, leveraging its maturity and stability while providing an enriched and modernized set of objects and APIs to provide a first-class developer experience.
 
 <div class="grid cards" markdown>
 
@@ -8,7 +8,7 @@ CakeFS is a plugin for Unreal Engine that provides an ergonomic and comprehensiv
 
     ---
 
-    Want to learn more? 
+    Want a quick preview? 
 
     [:octicons-arrow-right-24: Take the Tour](/tour/)
 

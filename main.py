@@ -31,6 +31,9 @@ def img_install(label: str, file_name: str, section: str) -> str:
 def abs_link_coreapi():
     return '/core-api'
 
+def abs_link_advapi():
+    return '/advanced-api'
+
 def abs_link_special_types():
     return '/core-api/special-types'
 
@@ -48,6 +51,9 @@ def link_under(base_link, child_link, subsec: str|None = None):
 
 def link_under_coreapi(child_link, subsec: str|None = None):
     return link_under(abs_link_coreapi(), child_link, subsec)
+
+def link_under_advapi(child_link, subsec: str|None = None):
+    return link_under(abs_link_advapi(), child_link, subsec)
 
 def link_under_special_types(child_link, subsec: str|None = None):
     return link_under(abs_link_special_types(), child_link, subsec)
@@ -238,6 +244,10 @@ All of the following C++ examples will assume this has already been included.
         return inline_link(label, link_under_special_types('policies', subsec))
 
     @env.macro
+    def link_errorhandling(label='Error Handling', subsec: str|None = None):
+        return inline_link(label, link_under_coreapi('error-handling', subsec))
+    
+    @env.macro
     def link_errormap(label='Error Maps', subsec: str|None = None):
         return inline_link(label, link_under_coreapi('error-maps', subsec))
 
@@ -255,15 +265,15 @@ All of the following C++ examples will assume this has already been included.
 
     @env.macro
     def link_cakemix(label='CakeMix', subsec: str|None = None):
-        return inline_link(label, link_under_coreapi('cake-mix', subsec))
+        return inline_link(label, link_under_advapi('cake-mix', subsec))
 
     @env.macro
     def link_cake_async(label='CakeFS Async', subsec: str|None = None):
-        return inline_link(label, link_under_coreapi('async-io', subsec))
+        return inline_link(label, link_under_advapi('cake-async-fs', subsec))
 
     @env.macro
     def link_cakeservices(label='CakeFS Services', subsec: str|None = None):
-        return inline_link(label, link_under_coreapi('services', subsec))
+        return inline_link(label, link_under_advapi('services', subsec))
 
     @env.macro
     def bp_currently_unsupported(feature_label: str):

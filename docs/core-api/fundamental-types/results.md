@@ -52,14 +52,14 @@ Both IO result types have an extremely similar design and interface. The only me
 
 	```c++
 	FCakeResultFileIO ResultFile{ ECakeOutcomeFileIO::Ok };
-	FCakeResultDirIO ResultDir{ ECakeOutcomeDirIO::Ok };
+	FCakeResultDirIO  ResultDir { ECakeOutcomeDirIO::Ok  };
 	```
 
 	There also exist convenience static functions for each value of the associated outcome value that we can use instead:
 
 	```c++
 	FCakeResultFileIO ResultFile{ FCakeResultFileIO::Ok() };
-	FCakeResultDirIO ResultDir{ FCakeResultDirIO::Ok() };
+	FCakeResultDirIO  ResultDir { FCakeResultDirIO::Ok()  };
 	```
 
 	These can be especially helpful for more readable return values from functions that return the Result types:
@@ -80,18 +80,22 @@ Both IO result types have an extremely similar design and interface. The only me
 When writing functions that return Result types, we will encounter scenarios when we want to return either an Ok or some error outcome if a particular operation succeeds or fails. We can use the `OkOrErr` static utility function for this, which accepts a `bool` indicating success/failure and an outcome value that represents the error that has occurred if the operation failed. If the `bool` argument is true, then a Result type with an `Ok` outcome is created; otherwise, a Result type with the outcome argument is created instead.
 
 === "C++"
-	```c++
+	```c++ hl_lines="2 6 10 14"
 	FCakeResultFileIO ResultOkFile{ 
-		FCakeResultFileIO::OkOrErr(true, ECakeOutcomeFileIO::DoesNotExist) }; // => Ok
+		FCakeResultFileIO::OkOrErr(true, ECakeOutcomeFileIO::DoesNotExist) 
+	}; // => Ok
 
 	FCakeResultFileIO ResultDNEFile{ 
-		FCakeResultFileIO::OkOrErr(false, ECakeOutcomeFileIO::DoesNotExist) }; // => DoesNotExist
+		FCakeResultFileIO::OkOrErr(false, ECakeOutcomeFileIO::DoesNotExist) 
+	}; // => DoesNotExist
 
 	FCakeResultDirIO ResultOkDir{ 
-		FCakeResultDirIO::OkOrErr(true, ECakeOutcomeDirIO::FailedDelete) }; // => Ok
+		FCakeResultDirIO::OkOrErr(true, ECakeOutcomeDirIO::FailedDelete) 
+	}; // => Ok
 
 	FCakeResultFileIO ResultFailedDeleteDir{ 
-		FCakeResultDirIO::OkOrErr(false, ECakeOutcomeDirIO::FailedDelete) }; // => FailedDelete
+		FCakeResultDirIO::OkOrErr(false, ECakeOutcomeDirIO::FailedDelete) 
+	}; // => FailedDelete
 	```
 
 === "Blueprint"
@@ -252,16 +256,20 @@ FCakeResultSearch SearchTraversalOp()
 ### Common Utility
 Both `operator==` and `operator!=` are defined on traversal result types. The equality logic merely compares the two outcome values:
 === "C++"
-	```c++
+	```c++ hl_lines="2 5 9 12"
 	const bool bAreEqualTraversal{ 
-		FCakeResultTraversal::Completed() == FCakeResultTraversal::Completed() }; // => true
+		FCakeResultTraversal::Completed() == FCakeResultTraversal::Completed() 
+	}; // => true
 	const bool bAreNotEqualTraversal{ 
-		FCakeResultTraversal::Completed() != FCakeResultTraversal::Completed() }; // => false
+		FCakeResultTraversal::Completed() != FCakeResultTraversal::Completed() 
+	}; // => false
 
 	const bool bAreEqualSearch{ 
-		FCakeResultSearch::Succeeded() == FCakeResultSearch::Succeeded() }; // => true
+		FCakeResultSearch::Succeeded() == FCakeResultSearch::Succeeded() 
+	}; // => true
 	const bool bAreNotEqualSearch{ 
-		FCakeResultSearch::Succeeded() != FCakeResultSearch::Succeeded() }; // => false
+		FCakeResultSearch::Succeeded() != FCakeResultSearch::Succeeded() 
+	}; // => false
 	```
 
 === "Blueprint"

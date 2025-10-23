@@ -1,9 +1,6 @@
 # Advanced CakeFS
 Welcome to the advanced section of CakeFS! All of the sections in this area will assume that users are comfortable and familiar with fundamental principles established in the [Core API](/core-api) section.
 
-## Tour of Advanced Features
-This section will give a brief tour of the advanced sections covered in this documentation. 
-
 ## Utility Libraries 
 There are two higher level library implementations that are built on CakeFS's core objects: CakeMix and Async CakeFS. 
 
