@@ -1097,7 +1097,7 @@ To check if a directory contains any items, files, or subdirectories, we can use
 
 	{{ bp_img_dir('Contains Any Subdirs') }}
 
-### Advanced CakeDir Clone Functions
+### Advanced Clone Functions
 #### CloneWithNewPath
 This function is meant to be used when we want to copy the extension filter of a preexisting CakeDir object but use a different directory path. We merely need to submit the CakePath object that represents the new path the cloned object should have, and the extension filter will be copied for us.
 

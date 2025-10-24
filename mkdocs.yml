@@ -2,7 +2,7 @@ site_name: CakeFS
 site_url: https://cakeio-unreal.github.io
 theme:
   name: material
-  logo: assets/DocIcon256.png
+  logo: assets/SiteIcon.png
   font:
     text: Onest
     code: Fira Code
@@ -12,14 +12,14 @@ theme:
       toggle:
         icon: material/brightness-7 
         name: Switch to dark mode
-      primary: black
+      primary: pink
 
     # Palette toggle for dark mode
     - scheme: slate
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-      primary: black 
+      primary: pink 
 
   features:
     - navigation.tabs

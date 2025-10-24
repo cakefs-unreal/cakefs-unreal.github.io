@@ -60,7 +60,7 @@ With our initial gathering example, we gathered all files found in the source di
 === "Blueprint"
 	{{ bp_img_tour('Gather With Filter') }}
 
-To accomplish this new goal, we only had to make minor modifications. Our CakeDir object was given a file extension filter that contains the extensions `jpg`, `jpeg`, and `png.`. Now, when we run `GatherFilesWithFilter`, we will only get files with one of those extensions in the returned array.
+To accomplish this new goal, we only had to make minor modifications. Our CakeDir object was given a file extension filter that contains the extensions `jpg`, `jpeg`, and `png.` Now, when we run `GatherFilesWithFilter`, we will only get files with one of those extensions in the returned array.
 
 CakeMix library contains useful utility functions like the ones we've seen; they're there to help reduce boilerplate in a variety of common filesystem operations. However, there's no magic behind these functions. In the next example, we'll write our own Gather operation directly using a CakeDir object instead.
 
@@ -102,11 +102,11 @@ CakeMix can provide us with some very terse and expressive ways to accomplish co
 
 	{{ bp_img_tour('Dir Traversal Gather Callback') }}
 
-	In addition to all the standard directory operations you might expect (create, delete, copy, &c.), CakeDir objects offer us a powerful set of traversal interfaces. While some of the details differ, all of these traversal functions follow a common core design pattern: we need to specify a depth for the traversal and supply a callback that will be invoked on each item that is visited. In our case, all we need to do is take each file we are passed and add it to our ImageFiles collection. Remember, since we are using the file extension filter in this traversal, it will only be called when it encounters a file whose extension is contained in the filter.
+In addition to all the standard directory operations you might expect (create, delete, copy, &c.), CakeDir objects offer us a powerful set of traversal interfaces. While some of the details differ, all of these traversal functions follow a common core design pattern: we need to specify a depth for the traversal and supply a callback that will be invoked on each item that is visited. In our case, all we need to do is take each file we are passed and add it to our ImageFiles collection. Remember, since we are using the file extension filter in this traversal, it will only be called when it encounters a file whose extension is contained in the filter.
 
 
-	!!! note
-		If you want to see what CakeDir offers, check out the {{ link_cakedir() }} documentation for more details.
+!!! note
+	If you want to see what CakeDir offers, check out the {{ link_cakedir() }} documentation for more details.
 
 ## Working With Files
 
