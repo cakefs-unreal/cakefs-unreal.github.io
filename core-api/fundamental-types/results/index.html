@@ -1,0 +1,2061 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://cakeio-unreal.github.io/core-api/fundamental-types/results/">
+      
+      
+        <link rel="prev" href="../signals/">
+      
+      
+        <link rel="next" href="../cake-orders/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Results - CakeFS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Onest:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Onest";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CakeFS" class="md-header__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CakeFS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Results
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../tour/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tour
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../overview/" class="md-tabs__link">
+          
+  
+  
+  Core API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../advanced-api/advanced-usage/" class="md-tabs__link">
+          
+  
+  
+  Advanced API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CakeFS" class="md-nav__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    CakeFS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tour
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Core API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core Objects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Core Objects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paths
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../file-extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Directories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Error Handling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Error Handling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling Patterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../error-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamental Types
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamental Types
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../outcomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Outcomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Signals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      IO Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IO Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cakeresultfileio" class="md-nav__link">
+    <span class="md-ellipsis">
+      CakeResultFileIO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cakeresultdirio" class="md-nav__link">
+    <span class="md-ellipsis">
+      CakeResultDirIO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-io-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building IO Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-io-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using IO Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-traversal-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Traversal Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Directory Traversal Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cakeresulttraversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      CakeResultTraversal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cakeresultsearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      CakeResultSearch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-form_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-traversal-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building Traversal Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-utility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Utility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-fcakeresulttraversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using FCakeResultTraversal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-fcakeresultsearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using FCakeResultSearch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fcakeresultdirwork" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCakeResultDirWork
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fcakeresultbatchop" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCakeResultBatchOp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cake-orders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cake Orders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced-api/advanced-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Utility Libraries
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Utility Libraries
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced-api/cake-mix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeMix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced-api/cake-async-fs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeAsyncFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            CakeFS Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced-api/services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Results</h1>
+
+<h2 id="overview">Overview</h2>
+<details class="info">
+<summary>Source Location: Results</summary>
+<p>The following types are all defined in the following header:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CakeIO/CakeResults.h&quot;</span>
+</code></pre></div></p>
+</details>
+<p>Result types are lightweight structs that wrap <a href="../outcomes/">Outcome</a> types and provide various convenience functions. They are returned from functions that involve IO operations.</p>
+<h2 id="io-results">IO Results</h2>
+<h3 id="cakeresultfileio">CakeResultFileIO</h3>
+<p>This result type is returned from any IO operation function involving a file, and it wraps an <a href="../outcomes/#ecakeoutcomefileio">ECakeOutcomeFileIO</a> outcome value.</p>
+<h3 id="cakeresultdirio">CakeResultDirIO</h3>
+<p>This result type is returned from any IO operation function involving a directory, and it wraps an <a href="../outcomes/#ecakeoutcomedirio">ECakeOutcomeDirIO</a> outcome value.</p>
+<h3 id="common-form">Common Form</h3>
+<p>Both IO result types have an extremely similar design and interface. The only meaningful difference is the outcome member field in each struct, which will hold values associated with the relevant IO operations. This field is named <code>Outcome</code> on both structs:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeResultFileIO</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><a href="#__codelineno-1-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="cm">/** The outcome value generated by the file IO operation associated with this result. */</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="hll"><a href="#__codelineno-1-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeFileIO</span><span class="w"> </span><span class="n">Outcome</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeFileIO</span><span class="o">::</span><span class="n">NoOp</span><span class="w"> </span><span class="p">};</span>
+</span><a id="__codelineno-1-5" name="__codelineno-1-5"></a><a href="#__codelineno-1-5"><span class="linenos" data-linenos=" 5 "></span></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><a href="#__codelineno-1-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><a href="#__codelineno-1-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="p">};</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><a href="#__codelineno-1-8"><span class="linenos" data-linenos=" 8 "></span></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><a href="#__codelineno-1-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeResultDirIO</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><a href="#__codelineno-1-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">{</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><a href="#__codelineno-1-11"><span class="linenos" data-linenos="11 "></span></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><a href="#__codelineno-1-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="cm">/** The outcome value generated by the directory IO operation associated with this result. */</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="hll"><a href="#__codelineno-1-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeDirIO</span><span class="w"> </span><span class="n">Outcome</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeDirIO</span><span class="o">::</span><span class="n">NoOp</span><span class="w"> </span><span class="p">};</span>
+</span><a id="__codelineno-1-14" name="__codelineno-1-14"></a><a href="#__codelineno-1-14"><span class="linenos" data-linenos="14 "></span></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><a href="#__codelineno-1-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><a href="#__codelineno-1-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="File And Dir Results" src="../img/bp/results/file-and-dir-results.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="building-io-results">Building IO Results</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Result types have a default constructor, which will create a Result type that by default holds a <code>NoOp</code> outcome value:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">DefaultResultFile</span><span class="p">{};</span><span class="w"> </span><span class="c1">// =&gt; ECakeOutcomeFileIO::NoOp</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeResultDirIO</span><span class="w">  </span><span class="n">DefaultResultDir</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="c1">// =&gt; ECakeOutcomeDirIO::NoOp</span>
+</code></pre></div>
+<p>We can set the desired outcome value in directly via the constructor:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultFile</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeResultDirIO</span><span class="w">  </span><span class="n">ResultDir</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeDirIO</span><span class="o">::</span><span class="n">Ok</span><span class="w">  </span><span class="p">};</span>
+</code></pre></div>
+<p>There also exist convenience static functions for each value of the associated outcome value that we can use instead:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultFile</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeResultDirIO</span><span class="w">  </span><span class="n">ResultDir</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultDirIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">()</span><span class="w">  </span><span class="p">};</span>
+</code></pre></div>
+<p>These can be especially helpful for more readable return values from functions that return the Result types:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="nf">ReadFile</span><span class="p">()</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="hll"><a href="#__codelineno-5-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">();</span>
+</span><a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Building a result type is simple, we just need to use the appropriate make function and select the desired outcome value the result should hold.</p>
+<p><img alt="File And Dir Build" src="../img/bp/results/file-and-dir-build.png" /></p>
+</div>
+</div>
+</div>
+<p>When writing functions that return Result types, we will encounter scenarios when we want to return either an Ok or some error outcome if a particular operation succeeds or fails. We can use the <code>OkOrErr</code> static utility function for this, which accepts a <code>bool</code> indicating success/failure and an outcome value that represents the error that has occurred if the operation failed. If the <code>bool</code> argument is true, then a Result type with an <code>Ok</code> outcome is created; otherwise, a Result type with the outcome argument is created instead.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultOkFile</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="hll"><a href="#__codelineno-6-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">OkOrErr</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">ECakeOutcomeFileIO</span><span class="o">::</span><span class="n">DoesNotExist</span><span class="p">)</span><span class="w"> </span>
+</span><a id="__codelineno-6-3" name="__codelineno-6-3"></a><a href="#__codelineno-6-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; Ok</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><a href="#__codelineno-6-4"><span class="linenos" data-linenos=" 4 "></span></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><a href="#__codelineno-6-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultDNEFile</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="hll"><a href="#__codelineno-6-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">    </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">OkOrErr</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">ECakeOutcomeFileIO</span><span class="o">::</span><span class="n">DoesNotExist</span><span class="p">)</span><span class="w"> </span>
+</span><a id="__codelineno-6-7" name="__codelineno-6-7"></a><a href="#__codelineno-6-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; DoesNotExist</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><a href="#__codelineno-6-8"><span class="linenos" data-linenos=" 8 "></span></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><a href="#__codelineno-6-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="n">FCakeResultDirIO</span><span class="w"> </span><span class="n">ResultOkDir</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><a href="#__codelineno-6-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">FCakeResultDirIO</span><span class="o">::</span><span class="n">OkOrErr</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">ECakeOutcomeDirIO</span><span class="o">::</span><span class="n">FailedDelete</span><span class="p">)</span><span class="w"> </span>
+</span><a id="__codelineno-6-11" name="__codelineno-6-11"></a><a href="#__codelineno-6-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; Ok</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><a href="#__codelineno-6-12"><span class="linenos" data-linenos="12 "></span></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><a href="#__codelineno-6-13"><span class="linenos" data-linenos="13 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultFailedDeleteDir</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="hll"><a href="#__codelineno-6-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="n">FCakeResultDirIO</span><span class="o">::</span><span class="n">OkOrErr</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">ECakeOutcomeDirIO</span><span class="o">::</span><span class="n">FailedDelete</span><span class="p">)</span><span class="w"> </span>
+</span><a id="__codelineno-6-15" name="__codelineno-6-15"></a><a href="#__codelineno-6-15"><span class="linenos" data-linenos="15 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; FailedDelete</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="File And Dir Ok Or Err" src="../img/bp/results/file-and-dir-ok-or-err.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="using-io-results">Using IO Results</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The the following examples use only a CakeResultFileIO object, but the usage for CakeResultDirIO is exactly the same.</p>
+</div>
+<p>Results have a minimal interface, offering just a few utility methods for common operations. Often callers will want to know if an error has occurred to determine if they should examine the outcome value in detail. For this purpose, we can use <code>IsOk</code>, which returns true if the outcome value is either <code>Ok</code> or <code>NoOp</code>, and returns false otherwise: </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="w">    </span><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultOkFile</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="hll"><a href="#__codelineno-7-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultOkFile</span><span class="p">.</span><span class="n">IsOk</span><span class="p">())</span>
+</span><a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><a href="#__codelineno-7-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">        </span><span class="c1">// ... We can proceed, no error occurred ...</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><a href="#__codelineno-7-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><a href="#__codelineno-7-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">    </span><span class="k">else</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><a href="#__codelineno-7-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><a href="#__codelineno-7-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">ResultOkFile</span><span class="p">.</span><span class="n">Outcome</span><span class="p">)</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><a href="#__codelineno-7-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><a href="#__codelineno-7-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">            </span><span class="c1">// ... Time to assess what error occurred ...</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a><a href="#__codelineno-7-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a><a href="#__codelineno-7-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+Result types also have <code>operator bool</code>, which is equivalent to calling <code>IsOk</code>:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultOkFile</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="hll"><a href="#__codelineno-8-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultOkFile</span><span class="p">)</span>
+</span><a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><a href="#__codelineno-8-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="c1">// ... We can proceed, no error occurred.</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><a href="#__codelineno-8-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="File Is Ok" src="../img/bp/results/file-is-ok.png" /></p>
+</div>
+</div>
+</div>
+<p>There are some situations where we might want to ensure that an operation actually occurred, and so we can use <code>IsOkStrict</code>, which only returns true if the outcome value is <code>Ok</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a><span class="w">    </span><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultOkFile</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="hll"><a href="#__codelineno-9-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultOkFile</span><span class="p">.</span><span class="n">IsOkStrict</span><span class="p">())</span>
+</span><a id="__codelineno-9-3" name="__codelineno-9-3"></a><a href="#__codelineno-9-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><a href="#__codelineno-9-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">        </span><span class="c1">// ... We can proceed, the operation actually was performed and it succeeded ...</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><a href="#__codelineno-9-5"><span class="linenos" data-linenos="5 "></span></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="File Is Ok Strict" src="../img/bp/results/file-is-ok-strict.png" /></p>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are unfamiliar with the differences between <code>Ok</code> and <code>NoOp</code>, please see <a href="../outcomes/#ok-and-no-op">this section</a>.</p>
+</div>
+<p>The Result types have <code>operator==</code> and <code>operator!=</code> defined, which just compare against the outcome values stored by each Result type:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">C++</label><label for="__tabbed_6_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos="1 "></span></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">bFileEqual</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">());</span><span class="w">  </span><span class="c1">// =&gt; true</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">bFileNotEqual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">());</span><span class="w"> </span><span class="c1">// =&gt; false</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="File Result Equality" src="../img/bp/results/file-result-equality.png" /></p>
+</div>
+</div>
+</div>
+<p>Finally, there is a <code>ToString</code> convenience function, which generates a human-readable string of the Result's held outcome value:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">C++</label><label for="__tabbed_7_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">LogOutcome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">FString</span><span class="o">&amp;</span><span class="w"> </span><span class="n">OutcomeStr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><a href="#__codelineno-11-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Got outcome: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">OutcomeStr</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><a href="#__codelineno-11-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">};</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><a href="#__codelineno-11-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><a href="#__codelineno-11-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">ResultFile</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">::</span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><a href="#__codelineno-11-6"><span class="linenos" data-linenos="6 "></span></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="hll"><a href="#__codelineno-11-7"><span class="linenos" data-linenos="7 "></span></a><span class="n">LogOutcome</span><span class="p">(</span><span class="w"> </span><span class="n">ResultFile</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="File Result To String" src="../img/bp/results/file-result-to-string.png" /></p>
+</div>
+</div>
+</div>
+<h2 id="directory-traversal-results">Directory Traversal Results</h2>
+<p>Directory traversal result types are returned from any CakeDir traversal function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are not familiar with directory traversal, please read <a href="../../directories/#directory-traversal">this section</a> first.</p>
+</div>
+<h3 id="cakeresulttraversal">CakeResultTraversal</h3>
+<p>This result wraps an <a href="../outcomes/#ecakeoutcometraversal">ECakeOutcomeTraversal</a> outcome value and is returned from any unguarded or guarded traversal function. </p>
+<h3 id="cakeresultsearch">CakeResultSearch</h3>
+<p>This result wraps an <a href="../outcomes/#ecakeoutcometraversal">ECakeOutcomeTraversal</a> outcome value and is returned from any search traversal function.</p>
+<h3 id="common-form_1">Common Form</h3>
+<p>As with IO result types, the traversal types have a similar design and interface. However, the usage patterns are a bit more divergent due to the differences in <a href="../../directories/#traversal-styles">traversal style</a> behavior:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">C++</label><label for="__tabbed_8_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeResultTraversal</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><a href="#__codelineno-12-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><a href="#__codelineno-12-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeTraversal</span><span class="w"> </span><span class="n">Outcome</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeTraversal</span><span class="o">::</span><span class="n">DidNotLaunch</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><a href="#__codelineno-12-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">};</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><a href="#__codelineno-12-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><a href="#__codelineno-12-6"><span class="linenos" data-linenos="6 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeResultSearch</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><a href="#__codelineno-12-7"><span class="linenos" data-linenos="7 "></span></a><span class="p">{</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><a href="#__codelineno-12-8"><span class="linenos" data-linenos="8 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeSearch</span><span class="w"> </span><span class="n">Outcome</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeSearch</span><span class="o">::</span><span class="n">DidNotLaunch</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><a href="#__codelineno-12-9"><span class="linenos" data-linenos="9 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Result Traversal Search" src="../img/bp/results/result-traversal-search.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="building-traversal-results">Building Traversal Results</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>We can use the default constructor to make a traversal result type, which will have the default outcome value of <code>DidNotLaunch</code>:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">ResultDefaultTraversal</span><span class="p">{};</span><span class="w"> </span><span class="c1">// =&gt; DidNotLaunch</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><a href="#__codelineno-13-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeResultSearch</span><span class="w">    </span><span class="n">ResultDefaultSearch</span><span class="p">{};</span><span class="w"> </span><span class="c1">// =&gt; DidNotLaunch</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more information about the <code>DidNotLaunch</code> outcome value, see <a href="../outcomes/#did-not-launch">this section</a></p>
+</div>
+<p>We can construct a traversal result type by submitting the desired outcome value as an argument:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">ResultTraversal</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; Completed</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><a href="#__codelineno-14-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeResultSearch</span><span class="w">    </span><span class="n">ResultSearch</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="w">    </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; Succeeded</span>
+</code></pre></div></p>
+<p>There are static convenience functions for constructing a traversal result type for each value in their associated outcome type:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">ResultTraversal</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()};</span><span class="w"> </span><span class="c1">// =&gt; Completed</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><a href="#__codelineno-15-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeResultSearch</span><span class="w">    </span><span class="n">ResultSearch</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w">   </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; Succeeded</span>
+</code></pre></div>
+<p>These functions can help make returning these types a bit more ergonomic and readable:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><a href="#__codelineno-16-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="nf">GuardedTraversalOp</span><span class="p">()</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><a href="#__codelineno-16-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><a href="#__codelineno-16-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><a href="#__codelineno-16-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">();</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><a href="#__codelineno-16-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="p">}</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><a href="#__codelineno-16-6"><span class="linenos" data-linenos=" 6 "></span></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><a href="#__codelineno-16-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="n">FCakeResultSearch</span><span class="w"> </span><span class="nf">SearchTraversalOp</span><span class="p">()</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><a href="#__codelineno-16-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">{</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><a href="#__codelineno-16-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><a href="#__codelineno-16-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">();</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><a href="#__codelineno-16-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">}</span>
+</code></pre></div></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="Result Traversal Search Build" src="../img/bp/results/result-traversal-search-build.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="common-utility">Common Utility</h3>
+<p>Both <code>operator==</code> and <code>operator!=</code> are defined on traversal result types. The equality logic merely compares the two outcome values:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">C++</label><label for="__tabbed_11_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><a href="#__codelineno-17-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">bAreEqualTraversal</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="hll"><a href="#__codelineno-17-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()</span><span class="w"> </span>
+</span><a id="__codelineno-17-3" name="__codelineno-17-3"></a><a href="#__codelineno-17-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; true</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><a href="#__codelineno-17-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">bAreNotEqualTraversal</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="hll"><a href="#__codelineno-17-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()</span><span class="w"> </span>
+</span><a id="__codelineno-17-6" name="__codelineno-17-6"></a><a href="#__codelineno-17-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; false</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><a href="#__codelineno-17-7"><span class="linenos" data-linenos=" 7 "></span></a>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><a href="#__codelineno-17-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">bAreEqualSearch</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="hll"><a href="#__codelineno-17-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w"> </span>
+</span><a id="__codelineno-17-10" name="__codelineno-17-10"></a><a href="#__codelineno-17-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; true</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a><a href="#__codelineno-17-11"><span class="linenos" data-linenos="11 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">bAreNotEqualSearch</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="hll"><a href="#__codelineno-17-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w"> </span>
+</span><a id="__codelineno-17-13" name="__codelineno-17-13"></a><a href="#__codelineno-17-13"><span class="linenos" data-linenos="13 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; false</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Result Traversal Equality" src="../img/bp/results/result-traversal-equality.png" /></p>
+</div>
+</div>
+</div>
+<p>We can use <code>ToString</code> to get a human-readable string that represents the outcome value that a particular traversal result type currently holds:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">C++</label><label for="__tabbed_12_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><a href="#__codelineno-18-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">LogTraversalOutcome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">FString</span><span class="o">&amp;</span><span class="w"> </span><span class="n">OutcomeStr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><a href="#__codelineno-18-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Got outcome: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">OutcomeStr</span><span class="p">)</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><a href="#__codelineno-18-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">};</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><a href="#__codelineno-18-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><a href="#__codelineno-18-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">ResultTraversal</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()};</span><span class="w"> </span><span class="c1">// =&gt; Completed</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><a href="#__codelineno-18-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">FCakeResultSearch</span><span class="w">    </span><span class="n">ResultSearch</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w">   </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; Succeeded</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a><a href="#__codelineno-18-7"><span class="linenos" data-linenos="7 "></span></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a><a href="#__codelineno-18-8"><span class="linenos" data-linenos="8 "></span></a><span class="n">LogTraversalOutcome</span><span class="p">(</span><span class="n">ResultTraversal</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a><a href="#__codelineno-18-9"><span class="linenos" data-linenos="9 "></span></a><span class="n">LogTraversalOutcome</span><span class="p">(</span><span class="n">ResultSearch</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Result Traversal Search To String" src="../img/bp/results/result-traversal-search-to-string.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="using-fcakeresulttraversal">Using FCakeResultTraversal</h3>
+<p>As mentioned earlier, this result type will be returned by both unguarded and guarded traversal styles.  </p>
+<p>To check if the traversal completed successfully, we can use <code>WasCompleted</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">C++</label><label for="__tabbed_13_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><a href="#__codelineno-19-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">ResultTraversal</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><a href="#__codelineno-19-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="hll"><a href="#__codelineno-19-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultTraversal</span><span class="p">.</span><span class="n">WasCompleted</span><span class="p">())</span>
+</span><a id="__codelineno-19-4" name="__codelineno-19-4"></a><a href="#__codelineno-19-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">{</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><a href="#__codelineno-19-5"><span class="linenos" data-linenos="5 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><a href="#__codelineno-19-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">}</span>
+</code></pre></div>
+<p>We can also use <code>operator bool</code> instead, which is equivalent to calling <code>WasCompleted</code>:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><a href="#__codelineno-20-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">ResultTraversal</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><a href="#__codelineno-20-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="hll"><a href="#__codelineno-20-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultTraversal</span><span class="p">)</span>
+</span><a id="__codelineno-20-4" name="__codelineno-20-4"></a><a href="#__codelineno-20-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">{</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5"></a><a href="#__codelineno-20-5"><span class="linenos" data-linenos="5 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a><a href="#__codelineno-20-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Traversal Was Completed" src="../img/bp/results/traversal-was-completed.png" /></p>
+</div>
+</div>
+</div>
+<p>We can check for the other possible outcomes via <code>WasNotLaunched</code> and <code>WasAborted</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">C++</label><label for="__tabbed_14_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><a href="#__codelineno-21-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">ResultTraversal</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultTraversal</span><span class="o">::</span><span class="n">Completed</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><a href="#__codelineno-21-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><a href="#__codelineno-21-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultTraversal</span><span class="p">.</span><span class="n">WasNotLaunched</span><span class="p">())</span>
+</span><a id="__codelineno-21-4" name="__codelineno-21-4"></a><a href="#__codelineno-21-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5"></a><a href="#__codelineno-21-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a><a href="#__codelineno-21-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">}</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="hll"><a href="#__codelineno-21-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultTraversal</span><span class="p">.</span><span class="n">WasAborted</span><span class="p">())</span>
+</span><a id="__codelineno-21-8" name="__codelineno-21-8"></a><a href="#__codelineno-21-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">{</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9"></a><a href="#__codelineno-21-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10"></a><a href="#__codelineno-21-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Traversal Outcome Shortcuts" src="../img/bp/results/traversal-outcome-shortcuts.png" /></p>
+</div>
+</div>
+</div>
+<p>These are merely convenience functions that can enhance legibility in some situations, since we could have just branched on the outcome value contained in the result. Use whatever style you prefer.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember, unguarded traversals will never return an <code>Aborted</code> outcome.</p>
+</div>
+<h3 id="using-fcakeresultsearch">Using FCakeResultSearch</h3>
+<p>This result type is only used in <a href="../../directories/#search-traversals">search traversals</a>. The important thing to remember is that we have a more complex way to define success and failure with search traversals via the <a href="../outcomes/#ecakeoutcomesearch">search outcome</a> values. A search traversal can successfully run without errors but still fail if the search did not achieve its goal. </p>
+<p>To check if the search was a success, we can use <code>WasSuccessful</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">C++</label><label for="__tabbed_15_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><a href="#__codelineno-22-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultSearch</span><span class="w"> </span><span class="n">ResultSearch</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><a href="#__codelineno-22-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="hll"><a href="#__codelineno-22-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultSearch</span><span class="p">.</span><span class="n">WasSuccessful</span><span class="p">())</span>
+</span><a id="__codelineno-22-4" name="__codelineno-22-4"></a><a href="#__codelineno-22-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">{</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><a href="#__codelineno-22-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><a href="#__codelineno-22-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">}</span>
+</code></pre></div>
+We can also use <code>operator bool</code> instead, which is equivalent to calling <code>WasSuccessful</code>:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><a href="#__codelineno-23-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultSearch</span><span class="w"> </span><span class="n">ResultSearch</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><a href="#__codelineno-23-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="hll"><a href="#__codelineno-23-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultSearch</span><span class="p">)</span>
+</span><a id="__codelineno-23-4" name="__codelineno-23-4"></a><a href="#__codelineno-23-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">{</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><a href="#__codelineno-23-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><a href="#__codelineno-23-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Search Was Successful" src="../img/bp/results/search-was-successful.png" /></p>
+</div>
+</div>
+</div>
+<p>We can check if a search failed via <code>WasFailure</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">C++</label><label for="__tabbed_16_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><a href="#__codelineno-24-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultSearch</span><span class="w"> </span><span class="n">ResultSearch</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()};</span><span class="w"> </span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><a href="#__codelineno-24-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="hll"><a href="#__codelineno-24-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultSearch</span><span class="p">.</span><span class="n">WasFailure</span><span class="p">())</span>
+</span><a id="__codelineno-24-4" name="__codelineno-24-4"></a><a href="#__codelineno-24-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">{</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a><a href="#__codelineno-24-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-24-6" name="__codelineno-24-6"></a><a href="#__codelineno-24-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Search Was Failure" src="../img/bp/results/search-was-failure.png" /></p>
+</div>
+</div>
+</div>
+<p>We can also check for the error outcomes via <code>WasAborted</code> and <code>WasNotLaunched</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">C++</label><label for="__tabbed_17_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><a href="#__codelineno-25-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeResultSearch</span><span class="w"> </span><span class="n">ResultSearch</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeResultSearch</span><span class="o">::</span><span class="n">Succeeded</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><a href="#__codelineno-25-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="hll"><a href="#__codelineno-25-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultSearch</span><span class="p">.</span><span class="n">WasNotLaunched</span><span class="p">())</span>
+</span><a id="__codelineno-25-4" name="__codelineno-25-4"></a><a href="#__codelineno-25-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a><a href="#__codelineno-25-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a><a href="#__codelineno-25-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">}</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="hll"><a href="#__codelineno-25-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ResultSearch</span><span class="p">.</span><span class="n">WasAborted</span><span class="p">())</span>
+</span><a id="__codelineno-25-8" name="__codelineno-25-8"></a><a href="#__codelineno-25-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">{</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9"></a><a href="#__codelineno-25-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10"></a><a href="#__codelineno-25-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Search Outcome Shortcuts" src="../img/bp/results/search-outcome-shortcuts.png" /></p>
+</div>
+</div>
+</div>
+<p>These are merely convenience functions that can enhance legibility in some situations. Since the outcome value is public we could have branched on the outcome value itself. Use whatever style you prefer.</p>
+<h2 id="advanced-results">Advanced Results</h2>
+<h3 id="fcakeresultdirwork">FCakeResultDirWork</h3>
+<p>FCakeResultDirWork is used extensively in <a href="/core-api/cake-mix">CakeMixLibrary</a> functions. It wraps an <a href="../outcomes/#ecakeoutcomedirwork">ECakeOutcomeDirWork</a> value and provides a minimal set of convenience functions. We will merely show the full set of convenience functions here, but understand that not all outcomes apply to every directory work operation. See <a href="/core-api/cake-mix/#directory-work-error-handling">this section</a> for more details.</p>
+<p>To check if the directory work operation completed successfully without any errors, we can use <code>WorkWasCompleted</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">C++</label><label for="__tabbed_18_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><a href="#__codelineno-26-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultDirWork</span><span class="w"> </span><span class="n">DirWorkResult</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><a href="#__codelineno-26-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeDirWork</span><span class="o">::</span><span class="n">WorkCompleted</span><span class="w"> </span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><a href="#__codelineno-26-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">};</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a><a href="#__codelineno-26-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="hll"><a href="#__codelineno-26-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">DirWorkResult</span><span class="p">.</span><span class="n">WorkWasCompleted</span><span class="p">())</span>
+</span><a id="__codelineno-26-6" name="__codelineno-26-6"></a><a href="#__codelineno-26-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">{</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7"></a><a href="#__codelineno-26-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a><a href="#__codelineno-26-8"><span class="linenos" data-linenos="8 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Dir Work Work Was Completed" src="../img/bp/results/dir-work-work-was-completed.png" /></p>
+</div>
+</div>
+</div>
+<p>To check if the directory work operation failed because the source directory did not exist, we can use <code>SourceDirDidNotExist</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">C++</label><label for="__tabbed_19_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><a href="#__codelineno-27-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultDirWork</span><span class="w"> </span><span class="n">DirWorkResult</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><a href="#__codelineno-27-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeDirWork</span><span class="o">::</span><span class="n">WorkCompleted</span><span class="w"> </span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a><a href="#__codelineno-27-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">};</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><a href="#__codelineno-27-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="hll"><a href="#__codelineno-27-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">DirWorkResult</span><span class="p">.</span><span class="n">SourceDirDidNotExist</span><span class="p">())</span>
+</span><a id="__codelineno-27-6" name="__codelineno-27-6"></a><a href="#__codelineno-27-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">{</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a><a href="#__codelineno-27-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><a href="#__codelineno-27-8"><span class="linenos" data-linenos="8 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Dir Work Source Dir Did Not Exist" src="../img/bp/results/dir-work-source-dir-did-not-exist.png" /></p>
+</div>
+</div>
+</div>
+<p>To check if the directory work operation failed because the directory traversal could not launch, we can use <code>TraversalWasNotLaunched</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">C++</label><label for="__tabbed_20_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><a href="#__codelineno-28-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultDirWork</span><span class="w"> </span><span class="n">DirWorkResult</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><a href="#__codelineno-28-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeDirWork</span><span class="o">::</span><span class="n">WorkCompleted</span><span class="w"> </span>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><a href="#__codelineno-28-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">};</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><a href="#__codelineno-28-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="hll"><a href="#__codelineno-28-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">DirWorkResult</span><span class="p">.</span><span class="n">TraversalWasNotLaunched</span><span class="p">())</span>
+</span><a id="__codelineno-28-6" name="__codelineno-28-6"></a><a href="#__codelineno-28-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">{</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7"></a><a href="#__codelineno-28-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><a href="#__codelineno-28-8"><span class="linenos" data-linenos="8 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Dir Work Traversal Was Not Launched" src="../img/bp/results/dir-work-traversal-was-not-launched.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="fcakeresultbatchop">FCakeResultBatchOp</h3>
+<p>This result type is used in the async exclusive <a href="/core-api/async-io/#batch-operations">Batch Operation</a> functions. It wraps an <a href="../outcomes/#ecakeoutcomebatchop">ECakeOutcomeBatchOp</a> value and provides a few utility functions. </p>
+<p>BatchOp outcomes can hold a NoOp value, and this indicates that the batch operation was skipped because the collection of items sent to it was empty. This means we have a meaningful distinction between Ok and NoOp, and thus we have both <code>IsOk</code> and <code>IsOkStrict</code> member functions we can use to distinguish between these events.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">C++</label><label for="__tabbed_21_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><a href="#__codelineno-29-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="w">    </span><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">BatchResult</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeBatchOp</span><span class="o">::</span><span class="n">Ok</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a><a href="#__codelineno-29-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="hll"><a href="#__codelineno-29-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">BatchResult</span><span class="p">.</span><span class="n">IsOk</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+</span><a id="__codelineno-29-4" name="__codelineno-29-4"></a><a href="#__codelineno-29-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5"></a><a href="#__codelineno-29-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">        </span><span class="c1">// ... </span>
+<a id="__codelineno-29-6" name="__codelineno-29-6"></a><a href="#__codelineno-29-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7"></a><a href="#__codelineno-29-7"><span class="linenos" data-linenos=" 7 "></span></a>
+<a id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="hll"><a href="#__codelineno-29-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">BatchResult</span><span class="p">.</span><span class="n">IsOkStrict</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+</span><a id="__codelineno-29-9" name="__codelineno-29-9"></a><a href="#__codelineno-29-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10"></a><a href="#__codelineno-29-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11"></a><a href="#__codelineno-29-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Batch Op Is Ok" src="../img/bp/results/batch-op-is-ok.png" /></p>
+</div>
+</div>
+</div>
+<p>Batch operations can be aborted early by the user supplied callback; thus we can also check to see if the batch operation was aborted:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:2"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">C++</label><label for="__tabbed_22_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><a href="#__codelineno-30-1"><span class="linenos" data-linenos="1 "></span></a><span class="w">    </span><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">BatchResult</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeOutcomeBatchOp</span><span class="o">::</span><span class="n">Ok</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a><a href="#__codelineno-30-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="hll"><a href="#__codelineno-30-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">BatchResult</span><span class="p">.</span><span class="n">WasAborted</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+</span><a id="__codelineno-30-4" name="__codelineno-30-4"></a><a href="#__codelineno-30-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a><a href="#__codelineno-30-5"><span class="linenos" data-linenos="5 "></span></a><span class="w">        </span><span class="c1">// ... </span>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a><a href="#__codelineno-30-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Batch Op Was Aborted" src="../img/bp/results/batch-op-was-aborted.png" /></p>
+</div>
+</div>
+</div>
+<p>Batch operations also contain a field that holds the number of items that were successfully processed during the operation. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:2"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">C++</label><label for="__tabbed_23_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><a href="#__codelineno-31-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">BatchResult</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a><a href="#__codelineno-31-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeBatchOp</span><span class="o">::</span><span class="n">Ok</span><span class="w"> </span>
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a><a href="#__codelineno-31-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">};</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a><a href="#__codelineno-31-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-31-5" name="__codelineno-31-5"></a><a href="#__codelineno-31-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-31-6" name="__codelineno-31-6"></a><a href="#__codelineno-31-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;%d item(s) processed.&quot;</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="hll"><a href="#__codelineno-31-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">    </span><span class="n">BatchResult</span><span class="p">.</span><span class="n">TotalProcessed</span>
+</span><a id="__codelineno-31-8" name="__codelineno-31-8"></a><a href="#__codelineno-31-8"><span class="linenos" data-linenos="8 "></span></a><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Batch Op Total Processed" src="../img/bp/results/batch-op-total-processed.png" /></p>
+</div>
+</div>
+</div>
+<p>There are two convenience functions we can do that involve the number of items processed. When we only want to know if at least one item was processed, we can use <code>DidAnyWork</code>. This will return true whenever the field <code>TotalProcessed</code> is greater than zero:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:2"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">C++</label><label for="__tabbed_24_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><a href="#__codelineno-32-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">BatchResult</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-32-2" name="__codelineno-32-2"></a><a href="#__codelineno-32-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeBatchOp</span><span class="o">::</span><span class="n">Ok</span><span class="w"> </span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a><a href="#__codelineno-32-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">};</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4"></a><a href="#__codelineno-32-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="hll"><a href="#__codelineno-32-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">BatchResult</span><span class="p">.</span><span class="n">DidAnyWork</span><span class="p">())</span>
+</span><a id="__codelineno-32-6" name="__codelineno-32-6"></a><a href="#__codelineno-32-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">{</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><a href="#__codelineno-32-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8"></a><a href="#__codelineno-32-8"><span class="linenos" data-linenos="8 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Batch Op Did Any Work" src="../img/bp/results/batch-op-did-any-work.png" /></p>
+</div>
+</div>
+</div>
+<p>There is an important nuance to consider with <code>DidAnyWork</code>: just because some work was done does not mean that the batch operation was completed without error. We can use the function <code>DidWorkWithoutErrors</code> which will return true only when the outcome result is <code>Ok</code> and <code>ItemsProcessed</code> is greater than zero. With this function, we can be sure that work was done and the batch operation was not aborted early due to any errors:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:2"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">C++</label><label for="__tabbed_25_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><a href="#__codelineno-33-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">BatchResult</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><a href="#__codelineno-33-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">ECakeOutcomeBatchOp</span><span class="o">::</span><span class="n">Ok</span><span class="w"> </span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a><a href="#__codelineno-33-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">};</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a><a href="#__codelineno-33-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="hll"><a href="#__codelineno-33-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">BatchResult</span><span class="p">.</span><span class="n">DidWorkWithoutErrors</span><span class="p">())</span>
+</span><a id="__codelineno-33-6" name="__codelineno-33-6"></a><a href="#__codelineno-33-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">{</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7"></a><a href="#__codelineno-33-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8"></a><a href="#__codelineno-33-8"><span class="linenos" data-linenos="8 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Batch Op Did Work Without Errors" src="../img/bp/results/batch-op-did-work-without-errors.png" /></p>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.sections", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

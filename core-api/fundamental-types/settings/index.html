@@ -1,0 +1,1652 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://cakeio-unreal.github.io/core-api/fundamental-types/settings/">
+      
+      
+        <link rel="prev" href="../cake-orders/">
+      
+      
+        <link rel="next" href="../../../advanced-api/advanced-usage/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Settings - CakeFS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Onest:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Onest";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CakeFS" class="md-header__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CakeFS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Settings
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../tour/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tour
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../overview/" class="md-tabs__link">
+          
+  
+  
+  Core API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../advanced-api/advanced-usage/" class="md-tabs__link">
+          
+  
+  
+  Advanced API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CakeFS" class="md-nav__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    CakeFS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tour
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Core API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core Objects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Core Objects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paths
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../file-extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Directories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Error Handling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Error Handling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling Patterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../error-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamental Types
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamental Types
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../outcomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Outcomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Signals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cake-orders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cake Orders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#designated-initializers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Designated Initializers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fcakesettingsnewitem" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCakeSettingsNewItem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fcakesettingsfilehandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCakeSettingsFileHandle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCakeSettingsFileHandle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ecakefileopenmode" class="md-nav__link">
+    <span class="md-ellipsis">
+      ECakeFileOpenMode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecakefilewritemode" class="md-nav__link">
+    <span class="md-ellipsis">
+      ECakeFileWriteMode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fcakesettingsextfilter" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCakeSettingsExtFilter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fcakesettingsasynctask" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCakeSettingsAsyncTask
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced-api/advanced-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Utility Libraries
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Utility Libraries
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced-api/cake-mix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeMix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced-api/cake-async-fs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeAsyncFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            CakeFS Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../advanced-api/services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Settings</h1>
+
+<h2 id="overview">Overview</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following section only applies to native C++ CakeFS code.</p>
+</div>
+<details class="info">
+<summary>Source Location: Settings</summary>
+<p>The following types are all defined in the following header:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CakeIO/CakeSettings.h&quot;</span>
+</code></pre></div></p>
+</details>
+<p>CakeFS uses lightweight structs called Settings to group associated function parameters that are used across multiple functions. These structs help enforce regular argument ordering, reduce the length of function signatures, and provide a single location in source code where defaults can be set. Furthermore, because CakeFS takes advantage of C++20, we can use designated initializer syntax in order to allow for a much more ergonomic handling of optional parameters. </p>
+<h2 id="designated-initializers">Designated Initializers</h2>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For all the gory details about designated initializers and more, please see <a href="https://en.cppreference.com/w/cpp/language/aggregate_initialization">this reference</a>.</p>
+</div>
+<p>Since CakeFS uses C++20, we have access to designated initializers. Designated initializers are a compact and expressive way to create structs, initializing some or all of its members. When we group function parameters into structs, we can use designated initializers at function callsites. There are many benefits to this approach: We can more safely consume parameter lists with consecutive parameters of the same type, we can add clarity to function callsites via more self-documenting code, and we can eliminate much of the tedious boilerplate that can result from default parameters in C++. For these reasons and more, CakeFS uses structs to group parameters whenever possible.     </p>
+<p>Let's take a look at some quick examples using designated initalizer syntax to get familiar with it. We'll use FCakeFile's <code>CreateTextFile</code> function as our example. Let's look at the function signature:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">CreateTextFile</span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">FStringView</span><span class="w"> </span><span class="n">FileContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">),</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><a href="#__codelineno-1-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">FCakeSettingsCreateTextFile</span><span class="w"> </span><span class="n">CreateSettings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><a href="#__codelineno-1-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</code></pre></div></p>
+<p><code>CreateTextFile</code> uses a settings struct, CreateTextFile. As we can see, it is given a default value, which is a cryptic <code>{}</code> value. This is simply aggregate initialization where the default values of every member field are used. If we look at the definition of FCakeSettingsCreateTextFile, we can see what those would be:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="cm">/** Settings struct used in text file creation IO operations. */</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="n">CakeFS_API</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeSettingsCreateTextFile</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="cm">/** Determines if any missing parents in the file path should be created. */</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><a href="#__codelineno-2-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">ECakePolicyMissingParents</span><span class="w"> </span><span class="n">MissingParentPolicy</span><span class="p">{</span><span class="w"> </span><span class="n">CakePolicies</span><span class="o">::</span><span class="n">MissingParentsDefault</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><a href="#__codelineno-2-6"><span class="linenos" data-linenos=" 6 "></span></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><a href="#__codelineno-2-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="cm">/** Determines the character encoding that should be used when writing text data to the file. */</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><a href="#__codelineno-2-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="n">ECakePolicyCharEncoding</span><span class="w"> </span><span class="n">CharEncodingPolicy</span><span class="p">{</span><span class="w"> </span><span class="n">CakePolicies</span><span class="o">::</span><span class="n">CharEncodingDefault</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><a href="#__codelineno-2-9"><span class="linenos" data-linenos=" 9 "></span></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><a href="#__codelineno-2-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">};</span>
+</code></pre></div>
+<p>In this case, we can see that <code>{}</code> is equivalent to setting <code>MissingParentPolicy</code> to <code>MissingParentsDefault</code> and <code>CharEncodingPolicy</code> to <code>CharEncodingDefault</code>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Remember, you can change the defaults at both the struct settings definition and the CakePolicies namespace, so you can configure the defaults to whatever best works for your project.</p>
+</div>
+<p>The important thing to remember is that if we just want to use the default settings for a parameter struct, we just need to use <code>{}</code>. This can be helpful in situations where we have multiple settings structs and just need to get to a settings struct further down the parameter list. </p>
+<p>Let's use a designated initalizer to specify all of the FCakeSettingsCreateTextFile values explicitly:</p>
+<p><div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeFile</span><span class="w"> </span><span class="n">ReadmeFile</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/readme.md&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><a href="#__codelineno-3-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">CreateTextFile</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><a href="#__codelineno-3-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="n">ReadmeFile</span><span class="p">.</span><span class="n">CreateTextFile</span><span class="p">(</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><a href="#__codelineno-3-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">        </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;This is the readme file!&quot;</span><span class="p">),</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><a href="#__codelineno-3-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><a href="#__codelineno-3-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">            </span><span class="p">.</span><span class="n">MissingParentPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ECakePolicyMissingParents</span><span class="o">::</span><span class="n">CreateMissing</span><span class="p">,</span>
+</span><a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="hll"><a href="#__codelineno-3-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">            </span><span class="p">.</span><span class="n">CharEncodingPolicy</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ECakePolicyCharEncoding</span><span class="o">::</span><span class="n">UTF8</span>
+</span><a id="__codelineno-3-9" name="__codelineno-3-9"></a><a href="#__codelineno-3-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><a href="#__codelineno-3-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><a href="#__codelineno-3-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">};</span>
+</code></pre></div>
+Designated initializer syntax looks much like an initializer list, except that we explicitly name each member field, prefixed by the <code>.</code> character. It should be noted that designated initializers in C++ are supposed to list the members in the same order as their declaration. </p>
+<p>The advantage of designated initializers becomes apparent when we only want to change a single default parameter, leaving the rest to their default values. This time, let's say we want to write a text file and the only thing we want to change is the character encoding. With designated initializers, we can just omit the MissingParentPolicy member field and fill in the CharEncodingPolicy:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeFile</span><span class="w"> </span><span class="n">ReadmeFile</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/readme.md&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">CreateTextFile</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><a href="#__codelineno-4-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="n">ReadmeFile</span><span class="p">.</span><span class="n">CreateTextFile</span><span class="p">(</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><a href="#__codelineno-4-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">        </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;This is the readme file!&quot;</span><span class="p">),</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><a href="#__codelineno-4-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><a href="#__codelineno-4-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">            </span><span class="p">.</span><span class="n">CharEncodingPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ECakePolicyCharEncoding</span><span class="o">::</span><span class="n">ANSI</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><a href="#__codelineno-4-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><a href="#__codelineno-4-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><a href="#__codelineno-4-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">};</span>
+</code></pre></div>
+Now we have a close approximation to keyword arguments in other programming languages. If the two policies contained within our settings struct were just independent parameters, we would have been forced to specify a value for the MissingParentsPolicy even though we just wanted it to maintain its default setting.</p>
+<p>One important detail to keep in mind when using designated initializers is that we must keep the order of the members the same as their declaration. If one member is declared before another, we must preserve that order. We can skip members, but we just have to make sure that the members we list maintain the same relative declaration order. Let's look at a quick example:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">UserData</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="n">int32</span><span class="w"> </span><span class="n">WarpCubes</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="p">};</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="n">int32</span><span class="w"> </span><span class="n">GoldenKeys</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="p">};</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">int32</span><span class="w"> </span><span class="n">SilverCoins</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">55</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><a href="#__codelineno-5-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">};</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><a href="#__codelineno-5-7"><span class="linenos" data-linenos=" 7 "></span></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><a href="#__codelineno-5-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="n">UserData</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><a href="#__codelineno-5-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="p">.</span><span class="n">WarpCubes</span><span class="w">   </span><span class="o">=</span><span class="w">  </span><span class="mi">5</span><span class="p">,</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><a href="#__codelineno-5-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="p">.</span><span class="n">SilverCoins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">33</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><a href="#__codelineno-5-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">};</span>
+</code></pre></div></p>
+<p>Here we skipped specifying a value for GoldenKey, and so its default value of 3 will be used. However, this initializer is still valid, because WarpCubes is declared before SilverCoins.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">UserData</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="p">.</span><span class="n">SilverCoins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><a href="#__codelineno-6-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="p">.</span><span class="n">WarpCubes</span><span class="w">   </span><span class="o">=</span><span class="w">  </span><span class="mi">5</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><a href="#__codelineno-6-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">};</span>
+</code></pre></div>
+<p>The example above is not valid, because SilverCoins is not declared before WarpCubes in the definition of the UserData struct. </p>
+<h2 id="fcakesettingsnewitem">FCakeSettingsNewItem</h2>
+<p>This settings struct allows users to configure the overwrite and missing parent behavior desired when a new file or directory is created. It contains two Cake Policies as member fields: <a href="/core-api/special-types/policies/#overwriteitems">OverwriteItems</a> and <a href="/core-api/special-types/policies/#missingparents">MissingParents</a>. </p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeSettingsNewItem</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="cm">/** Determines if the new item can overwrite a prexisting item. */</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><a href="#__codelineno-7-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="n">ECakePolicyOverwriteItems</span><span class="w"> </span><span class="n">OverwritePolicy</span><span class="p">{</span><span class="w"> </span><span class="n">CakePolicies</span><span class="o">::</span><span class="n">OverwriteItemsDefault</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><a href="#__codelineno-7-5"><span class="linenos" data-linenos=" 5 "></span></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><a href="#__codelineno-7-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">    </span><span class="cm">/** Determines if any parent directories that don&#39;t exist in the new item&#39;s destination </span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><a href="#__codelineno-7-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="cm">     path can be created. */</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><a href="#__codelineno-7-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="n">ECakePolicyMissingParents</span><span class="w"> </span><span class="n">MissingParentPolicy</span><span class="p">{</span><span class="w"> </span><span class="n">CakePolicies</span><span class="o">::</span><span class="n">MissingParentsDefault</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><a href="#__codelineno-7-9"><span class="linenos" data-linenos=" 9 "></span></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><a href="#__codelineno-7-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">};</span>
+</code></pre></div>
+<p>An example of explicitly setting the CopyItem values using designated initializer syntax:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">DirectoryGame</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/game&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><a href="#__codelineno-8-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">DirectoryArchive</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;Z:/archive&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos=" 3 "></span></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><a href="#__codelineno-8-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="n">FCakeFile</span><span class="w"> </span><span class="n">ReadmeFile</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><a href="#__codelineno-8-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">DirectoryGame</span><span class="p">.</span><span class="n">BuildChildPath</span><span class="p">(</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><a href="#__codelineno-8-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="n">FCakePath</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;info/readme.md&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><a href="#__codelineno-8-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="p">};</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><a href="#__codelineno-8-8"><span class="linenos" data-linenos=" 8 "></span></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><a href="#__codelineno-8-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ReadmeFile</span><span class="p">.</span><span class="n">CopyFile</span><span class="p">(</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><a href="#__codelineno-8-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="o">*</span><span class="n">DirectoryArchive</span><span class="p">,</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><a href="#__codelineno-8-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="hll"><a href="#__codelineno-8-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="p">.</span><span class="n">OverwritePolicy</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">ECakePolicyOverwriteItems</span><span class="o">::</span><span class="n">DoNotOverwriteExistingItems</span><span class="p">,</span>
+</span><a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="hll"><a href="#__codelineno-8-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="p">.</span><span class="n">MissingParentPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ECakePolicyMissingParents</span><span class="o">::</span><span class="n">CreateMissing</span>
+</span><a id="__codelineno-8-14" name="__codelineno-8-14"></a><a href="#__codelineno-8-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="p">})</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a><a href="#__codelineno-8-15"><span class="linenos" data-linenos="15 "></span></a><span class="p">)</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><a href="#__codelineno-8-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">{</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><a href="#__codelineno-8-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Failed copying readme file!&quot;</span><span class="p">))</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><a href="#__codelineno-8-18"><span class="linenos" data-linenos="18 "></span></a><span class="p">}</span>
+</code></pre></div></p>
+<h2 id="fcakesettingsfilehandle">FCakeSettingsFileHandle</h2>
+<p>This settings struct contains two fields, one describing the read/write permissions for a file handle, and the other specifying how data should be written to the file. </p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">CakeFS_API</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeSettingsFileHandle</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><a href="#__codelineno-9-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><a href="#__codelineno-9-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">ECakeFileOpenMode</span><span class="w">  </span><span class="n">OpenMode</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ECakeFileOpenMode</span><span class="o">::</span><span class="n">Read</span><span class="w">           </span><span class="p">};</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><a href="#__codelineno-9-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">ECakeFileWriteMode</span><span class="w"> </span><span class="n">WriteMode</span><span class="p">{</span><span class="w"> </span><span class="n">ECakeFileWriteMode</span><span class="o">::</span><span class="n">OverwriteData</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><a href="#__codelineno-9-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">};</span>
+</code></pre></div>
+<h3 id="ecakefileopenmode">ECakeFileOpenMode</h3>
+<p>This enum determines how the file should be opened via the file handle.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Enum Value</th>
+<th style="text-align: left;">Display Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Read</td>
+<td style="text-align: left;">Read</td>
+<td style="text-align: left;">The file should be opened as read-only.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Write</td>
+<td style="text-align: left;">Write</td>
+<td style="text-align: left;">The file should be opened as write-only.</td>
+</tr>
+<tr>
+<td style="text-align: left;">ReadAndWrite</td>
+<td style="text-align: left;">Read And Write</td>
+<td style="text-align: left;">The file should be opened as read and write.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ecakefilewritemode">ECakeFileWriteMode</h3>
+<p>This enum determines how data should be written by the file handle.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Enum Value</th>
+<th style="text-align: left;">Display Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">OverwriteData</td>
+<td style="text-align: left;">Overwrite Data</td>
+<td style="text-align: left;">New data will overwrite old data.</td>
+</tr>
+<tr>
+<td style="text-align: left;">AppendData</td>
+<td style="text-align: left;">Append Data</td>
+<td style="text-align: left;">New data will be appended to old data.</td>
+</tr>
+</tbody>
+</table>
+<p>When opening a file handle in read-only mode, the write mode is completely ignored. The easiest way to open a file handle this way is via a <a href="#designated-initializers">designated initializer</a>:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos="1 "></span></a><span class="w">    </span><span class="n">TUniquePtr</span><span class="o">&lt;</span><span class="n">IFileHandle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadOnlyHandle</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">        </span><span class="n">SrcOrc</span><span class="p">.</span><span class="n">OpenFileHandleUnique</span><span class="p">({</span><span class="w"> </span><span class="p">.</span><span class="n">OpenMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ECakeFileOpenMode</span><span class="o">::</span><span class="n">Read</span><span class="w"> </span><span class="p">})</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><a href="#__codelineno-10-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="p">};</span>
+</code></pre></div></p>
+<h2 id="fcakesettingsextfilter">FCakeSettingsExtFilter</h2>
+<p>This settings struct is utilized by <a href="/core-api/directories/#filtered-traversals">filtered directory traversals</a>. It contains two Cake Policies: 
+<a href="/core-api/special-types/policies/#extfiltermode">ExtFilterMode</a>
+ and 
+<a href="/core-api/special-types/policies/#extmatchmode">ExtMatchMode</a>
+. </p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeSettingsExtFilter</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><a href="#__codelineno-11-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><a href="#__codelineno-11-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">ECakePolicyExtFilterMode</span><span class="w"> </span><span class="n">FilterMode</span><span class="p">{</span><span class="w"> </span><span class="n">CakePolicies</span><span class="o">::</span><span class="n">ExtFilterModeDefault</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><a href="#__codelineno-11-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">ECakePolicyExtMatchMode</span><span class="w">  </span><span class="n">MatchMode</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">CakePolicies</span><span class="o">::</span><span class="n">ExtMatchModeDefault</span><span class="w">  </span><span class="p">};</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><a href="#__codelineno-11-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">};</span>
+</code></pre></div>
+<h2 id="advanced-settings">Advanced Settings</h2>
+<h3 id="fcakesettingsasynctask">FCakeSettingsAsyncTask</h3>
+<p>This struct is used whenever we launch an <a href="/advanced-api/cake-async-fs/">async</a> task. It lets us set the task priority, task flags, and which thread the completion callback should be called from.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeSettingsAsyncTask</span><span class="w"> </span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><a href="#__codelineno-12-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><a href="#__codelineno-12-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">ETaskPriority</span><span class="w"> </span><span class="n">Priority</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">ETaskPriority</span><span class="o">::</span><span class="n">Normal</span><span class="w">              </span><span class="p">};</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><a href="#__codelineno-12-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">ETaskFlags</span><span class="w">    </span><span class="n">TaskFlags</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">ETaskFlags</span><span class="o">::</span><span class="n">DoNotRunInsideBusyWait</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><a href="#__codelineno-12-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><a href="#__codelineno-12-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="c1">//...</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><a href="#__codelineno-12-7"><span class="linenos" data-linenos="7 "></span></a><span class="p">};</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The priority and task flags are types defined by Unreal Engine. ETaskPriority is defined in <code>Tasks.h</code>, and <code>ETaskFlags</code> is defined in <code>TaskPrivate.h</code>.</p>
+</div>
+<p>By default, the task priority will be normal and the flags indicate that the task should not be run in a busy-wait context. Considering these are all IO operations, it is difficult to imagine a scenario where a busy-wait context could be appropriate, but the option remains for callers to set their own flags. General advice here is to use the default settings and only consider changing them if profiling shows a benefit. </p>
+<p>The final member is of type <code>ECallbackThread</code>, which is a custom enum defined directly in the FCakeSettingsAsyncTask struct:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos="1 "></span></a><span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ECallbackThread</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><a href="#__codelineno-13-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><a href="#__codelineno-13-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">        </span><span class="cm">/** The completion callback should be called in the game thread. */</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><a href="#__codelineno-13-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">        </span><span class="n">CallbackInGameThread</span><span class="p">,</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><a href="#__codelineno-13-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><a href="#__codelineno-13-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">        </span><span class="cm">/** The completion callback should be called in the thread used by the Async Task. */</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><a href="#__codelineno-13-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">        </span><span class="n">CallbackInAsyncThread</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><a href="#__codelineno-13-8"><span class="linenos" data-linenos="8 "></span></a><span class="w">    </span><span class="p">};</span>
+</code></pre></div>
+<p>Every Cake Async IO operation will require the caller to provide a callback that is invoked when the async IO operation has completed. We can choose to have the completion callback occur in the game thread or in the thread that the async IO operation was run in. </p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeSettingsAsyncTask</span><span class="w"> </span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><a href="#__codelineno-14-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><a href="#__codelineno-14-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">ECallbackThread</span><span class="w"> </span><span class="n">CallbackThread</span><span class="p">{</span><span class="w"> </span><span class="n">ECallbackThread</span><span class="o">::</span><span class="n">CallbackInGameThread</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><a href="#__codelineno-14-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">};</span>
+</code></pre></div>
+<p>The default value is to call the completion callback in the game thread, as this can eliminate many complications that arise from callbacks being invoked on a different thread. We can freely update any Slate / Widget GUI without first waiting to return to the game thread, for instance. Use whichever callback style works best for your current context.</p>
+<p>There are a variety of convenience static functions that create FCakeSettingsAsyncTask objects with various settings. It is not an exhaustive set of functions, but it covers some common settings you might desire:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">FCakeSettingsAsyncTask</span><span class="w"> </span><span class="nf">PriorityNormal_CallbackGameThread</span><span class="p">()</span><span class="w"> </span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><a href="#__codelineno-15-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><a href="#__codelineno-15-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FCakeSettingsAsyncTask</span><span class="p">(</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><a href="#__codelineno-15-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">        </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">ETaskPriority</span><span class="o">::</span><span class="n">Normal</span><span class="p">,</span><span class="w"> </span><span class="n">ECallbackThread</span><span class="o">::</span><span class="n">CallbackInGameThread</span><span class="p">);</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><a href="#__codelineno-15-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="p">}</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><a href="#__codelineno-15-6"><span class="linenos" data-linenos=" 6 "></span></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><a href="#__codelineno-15-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">FCakeSettingsAsyncTask</span><span class="w"> </span><span class="nf">PriorityHigh_CallbackGameThread</span><span class="p">()</span><span class="w"> </span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><a href="#__codelineno-15-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">{</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a><a href="#__codelineno-15-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FCakeSettingsAsyncTask</span><span class="p">(</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><a href="#__codelineno-15-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">ETaskPriority</span><span class="o">::</span><span class="n">High</span><span class="p">,</span><span class="w"> </span><span class="n">ECallbackThread</span><span class="o">::</span><span class="n">CallbackInGameThread</span><span class="p">);</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><a href="#__codelineno-15-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">}</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a><a href="#__codelineno-15-12"><span class="linenos" data-linenos="12 "></span></a>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a><a href="#__codelineno-15-13"><span class="linenos" data-linenos="13 "></span></a><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">FCakeSettingsAsyncTask</span><span class="w"> </span><span class="nf">PriorityNormal_CallbackAsyncThread</span><span class="p">()</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><a href="#__codelineno-15-14"><span class="linenos" data-linenos="14 "></span></a><span class="p">{</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a><a href="#__codelineno-15-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FCakeSettingsAsyncTask</span><span class="p">(</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a><a href="#__codelineno-15-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">        </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">ETaskPriority</span><span class="o">::</span><span class="n">Normal</span><span class="p">,</span><span class="w"> </span><span class="n">ECallbackThread</span><span class="o">::</span><span class="n">CallbackInAsyncThread</span><span class="p">);</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17"></a><a href="#__codelineno-15-17"><span class="linenos" data-linenos="17 "></span></a><span class="p">}</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><a href="#__codelineno-15-18"><span class="linenos" data-linenos="18 "></span></a>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><a href="#__codelineno-15-19"><span class="linenos" data-linenos="19 "></span></a><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">FCakeSettingsAsyncTask</span><span class="w"> </span><span class="nf">PriorityHigh_CallbackAsyncThread</span><span class="p">()</span><span class="w"> </span>
+<a id="__codelineno-15-20" name="__codelineno-15-20"></a><a href="#__codelineno-15-20"><span class="linenos" data-linenos="20 "></span></a><span class="p">{</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21"></a><a href="#__codelineno-15-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FCakeSettingsAsyncTask</span><span class="p">(</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22"></a><a href="#__codelineno-15-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">        </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">ETaskPriority</span><span class="o">::</span><span class="n">High</span><span class="p">,</span><span class="w"> </span><span class="n">ECallbackThread</span><span class="o">::</span><span class="n">CallbackInAsyncThread</span><span class="p">);</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23"></a><a href="#__codelineno-15-23"><span class="linenos" data-linenos="23 "></span></a><span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.sections", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

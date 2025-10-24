@@ -1,0 +1,1738 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://cakeio-unreal.github.io/core-api/file-extensions/">
+      
+      
+        <link rel="prev" href="../paths/">
+      
+      
+        <link rel="next" href="../files/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>File Extensions - CakeFS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Onest:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Onest";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CakeFS" class="md-header__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CakeFS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              File Extensions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tour/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tour
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../overview/" class="md-tabs__link">
+          
+  
+  
+  Core API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../advanced-api/advanced-usage/" class="md-tabs__link">
+          
+  
+  
+  Advanced API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CakeFS" class="md-nav__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    CakeFS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tour
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Core API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core Objects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Core Objects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paths
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    File Extensions
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Extensions
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#source-code-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source Code Information
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-extension-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Extension Classification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-file-extension-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building File Extension Objects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-the-file-extension-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading the File Extension String
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifying-the-file-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modifying the File Extension
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-file-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combining File Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classifying-a-file-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classifying a File Extension
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-extension-equality" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Extension Equality
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#viewing-a-file-extension-in-single-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viewing a File Extension in Single form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extracting-a-file-extension-in-single-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extracting a File Extension in Single Form
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Directories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Error Handling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Error Handling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling Patterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamental Types
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamental Types
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamental-types/policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamental-types/outcomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Outcomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamental-types/signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Signals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamental-types/results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamental-types/cake-orders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cake Orders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamental-types/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-api/advanced-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Utility Libraries
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Utility Libraries
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-api/cake-mix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeMix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-api/cake-async-fs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeAsyncFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            CakeFS Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-api/services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>File Extensions</h1>
+
+<h2 id="overview">Overview</h2>
+<p>CakeFS offers FileExtension objects provide a type-safe way to extract, examine, classify, and manipulate file extensions. </p>
+<h3 id="source-code-information">Source Code Information</h3>
+<p>FCakeFileExt is defined in <code>CakeIO/CakeFileExt.h</code>.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CakeIO/CakeFileExt.h&quot;</span>
+</code></pre></div>
+<p>All of the following C++ examples will assume this has already been included.</p>
+<h2 id="file-extension-classification">File Extension Classification</h2>
+<p>Before we look at the File Extension object interface, it is important to understand how CakeFS classifies file extensions. CakeFS defines two distinct types of file extension: <strong>single</strong> file extensions and <strong>multi</strong> file extensions.</p>
+<blockquote>
+<p><strong>Single File Extension</strong>: A file extension that contains only one file extension component: e.g., <code>.txt</code> or <code>.bin</code></p>
+<p><strong>Multi File Extension</strong>: A file extension that contains more than one file extension component: e.g., <code>.cdr.txt</code> or <code>.bin.dat.zip</code></p>
+</blockquote>
+<p>CakeFS represents file extension types via the enum ECakeFileExtType. File extensions that are empty will have the value <code>None</code>, file extensions with one component will be assigned the value <code>Single</code>, and file extensions with more than one component will have the value <code>Multi</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">EmptyExt</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ECakeFileExtType</span><span class="o">::</span><span class="n">None</span><span class="p">;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">SingleExt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ECakeFileExtType</span><span class="o">::</span><span class="n">Single</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><a href="#__codelineno-1-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">MultiExt</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ECakeFileExtType</span><span class="o">::</span><span class="n">Multi</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="File Ext Types" src="../img/bp/file-ext/file-ext-types.png" /></p>
+</div>
+</div>
+</div>
+<h2 id="basic-usage">Basic Usage</h2>
+<h3 id="building-file-extension-objects">Building File Extension Objects</h3>
+<p>We build an FCakeFileExt object by supplying a string that represents the file extension we want to store.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It doesn't matter if we include the leading <code>.</code> character for our file extension input arguments.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">TextExt</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">BinaryExt</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;bin&quot;</span><span class="p">)</span><span class="w">  </span><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Make Cake File Ext" src="../img/bp/file-ext/make-cake-file-ext.png" /></p>
+</div>
+</div>
+</div>
+<p>To create an FCakeFileExt by extracting the file extension from a file name, we can use the static function <code>BuildFileExtFromFilePath</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakePath</span><span class="w">    </span><span class="n">SourceFile</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;data/example_file.txt&quot;</span><span class="p">)</span><span class="w">                  </span><span class="p">};</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="hll"><a href="#__codelineno-3-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtFromFile</span><span class="p">{</span><span class="w"> </span><span class="n">FCakeFileExt</span><span class="o">::</span><span class="n">BuildFileExtFromFilePath</span><span class="p">(</span><span class="n">SourceFile</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Build Cake File Ext From File Path" src="../img/bp/file-ext/build-cake-file-ext-from-file-path.png" /></p>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Many operating systems allow for the <code>.</code> character to be in directory names as well. If the leaf component of the path you submit is not a file but contains a <code>.</code> character, you will get an incorrect file extension extracted. </p>
+</div>
+<p>We can use <code>Clone</code> to make an independent copy of a CakeFileExt object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">TextExt</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">TextClone</span><span class="p">{</span><span class="w"> </span><span class="n">TextExt</span><span class="p">.</span><span class="n">Clone</span><span class="p">()</span><span class="w">  </span><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Clone" src="../img/bp/file-ext/clone.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="reading-the-file-extension-string">Reading the File Extension String</h3>
+<p>To read the file extension string we use <code>GetFileExtString</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">LogExt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">FString</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ExtStr</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Extension String: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">ExtStr</span><span class="p">);</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">TextExt</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="hll"><a href="#__codelineno-5-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">LogExt</span><span class="p">(</span><span class="w"> </span><span class="n">TextExt</span><span class="p">.</span><span class="n">GetFileExtString</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+</span><a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="hll"><a href="#__codelineno-5-7"><span class="linenos" data-linenos="7 "></span></a><span class="n">LogExt</span><span class="p">(</span><span class="o">*</span><span class="n">TextExt</span><span class="p">);</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>operator*</code> can be used to achieve the same effect.</p>
+</div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Get File Ext String" src="../img/bp/file-ext/get-file-ext-string.png" /></p>
+</div>
+</div>
+</div>
+<p>To get an independent copy of the file extension string, we use <code>CloneFileExtString</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">C++</label><label for="__tabbed_6_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">TextExt</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w">             </span><span class="p">};</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FString</span><span class="w">      </span><span class="n">TextExtStr</span><span class="p">{</span><span class="w"> </span><span class="n">TextExt</span><span class="p">.</span><span class="n">CloneFileExtString</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Clone File Ext String" src="../img/bp/file-ext/clone-file-ext-string.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="modifying-the-file-extension">Modifying the File Extension</h3>
+<p>To change the extension string to another string that represents a file extension, we can use the member function <code>SetFileExt</code>, submitting either a string or an FCakeFileExt object.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">C++</label><label for="__tabbed_7_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">SourceExt</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="hll"><a href="#__codelineno-7-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">SourceExt</span><span class="p">.</span><span class="n">SetFileExt</span><span class="p">(</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;bin.dat&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="c1">// =&gt; &quot;.bin.dat&quot;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Set File Ext" src="../img/bp/file-ext/set-file-ext.png" /></p>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>SetFileExt</code> is designed to accept strings that <strong>only</strong> represent file extensions. (e.g., <code>".txt"</code> or <code>".bin.dat"</code>). It is not meant for path-like strings that contain file names and file extensions. (e.g., <code>"data.bin.dat"</code>, <code>"items/desc.txt"</code>) Use <code>SetFileExtFromFilePath</code> for that instead.</p>
+</div>
+<p>To set the file extension using a file path, we can use the member function <code>SetFileExtFromFilePath</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">C++</label><label for="__tabbed_8_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">SourceExt</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w">                    </span><span class="p">};</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><a href="#__codelineno-8-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakePath</span><span class="w">    </span><span class="n">ItemsDb</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;/y/data/assets/items.db&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="hll"><a href="#__codelineno-8-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">SourceExt</span><span class="p">.</span><span class="n">SetFileExtFromFilePath</span><span class="p">(</span><span class="n">ItemsDb</span><span class="p">);</span><span class="w"> </span><span class="c1">// =&gt; &quot;.db&quot;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Set File Ext From File Path" src="../img/bp/file-ext/set-file-ext-from-file-path.png" /></p>
+</div>
+</div>
+</div>
+<p>We can check if a CakeFileExt holds any file extension via the member function <code>IsEmpty</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">C++</label><label for="__tabbed_9_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">SourceExt</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w">     </span><span class="p">};</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><a href="#__codelineno-9-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="hll"><a href="#__codelineno-9-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">IsEmpty</span><span class="p">{</span><span class="w"> </span><span class="n">SourceExt</span><span class="p">.</span><span class="n">IsEmpty</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; false</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Is Empty" src="../img/bp/file-ext/is-empty.png" /></p>
+</div>
+</div>
+</div>
+<p>To clear any existing file extension, we can use the member function <code>Reset</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">C++</label><label for="__tabbed_10_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">SourceExt</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w">     </span><span class="p">};</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="hll"><a href="#__codelineno-10-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">SourceExt</span><span class="p">.</span><span class="n">Reset</span><span class="p">();</span>
+</span><a id="__codelineno-10-4" name="__codelineno-10-4"></a><a href="#__codelineno-10-4"><span class="linenos" data-linenos="4 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">IsEmpty</span><span class="p">{</span><span class="w"> </span><span class="n">SourceExt</span><span class="p">.</span><span class="n">IsEmpty</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; true</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Reset" src="../img/bp/file-ext/reset.png" /></p>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>Reset</code> takes an optional parameter that can reserve a new size for the internal <code>FString</code> that will hold the file extension string. Leave this at zero if you don't require a specific reserved size.</p>
+</div>
+<h3 id="combining-file-extensions">Combining File Extensions</h3>
+<p>To create a CakeFileExt object that combines two other file extensions together, we use <code>Combine</code>: </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">C++</label><label for="__tabbed_11_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtTxt</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><a href="#__codelineno-11-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtCdr</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.cdr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><a href="#__codelineno-11-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="hll"><a href="#__codelineno-11-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtCdrTxt</span><span class="p">{</span><span class="w"> </span><span class="n">ExtCdr</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">ExtTxt</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; &quot;.cdr.txt&quot;</span>
+</span></code></pre></div>
+We can also use <code>operator+</code> to achieve the same effect:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtTxt</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><a href="#__codelineno-12-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtCdr</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.cdr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><a href="#__codelineno-12-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="hll"><a href="#__codelineno-12-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtCdrTxt</span><span class="p">{</span><span class="w"> </span><span class="n">ExtCdr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ExtTxt</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; &quot;.cdr.txt&quot;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Combine" src="../img/bp/file-ext/combine.png" /></p>
+</div>
+</div>
+</div>
+<p>We can append another file extension onto a preexisting CakeFileExt object with CombineInline:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">C++</label><label for="__tabbed_12_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-cpp highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtSrc</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w">     </span><span class="p">};</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><a href="#__codelineno-13-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtCdr</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.cdr&quot;</span><span class="p">)</span><span class="w">     </span><span class="p">};</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><a href="#__codelineno-13-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtBinDat</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.bin.dat&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><a href="#__codelineno-13-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><a href="#__codelineno-13-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">ExtSrc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ExtCdr</span><span class="p">;</span><span class="w"> </span><span class="c1">// =&gt; &quot;.txt.cdr&quot;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><a href="#__codelineno-13-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">ExtSrc</span><span class="p">.</span><span class="n">CombineInline</span><span class="p">(</span><span class="n">ExtBinDat</span><span class="p">);</span><span class="w"> </span><span class="c1">// =&gt; &quot;.txt.cdr.bin.dat&quot;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Combine Inline" src="../img/bp/file-ext/combine-inline.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="classifying-a-file-extension">Classifying a File Extension</h3>
+<p>We can get the <a href="#file-extension-classification">file extension classification</a> of a CakeFileExt via <code>ClassifyFileExt</code>, which returns the corresponding file extension type as an ECakeFileExtType enum value:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">C++</label><label for="__tabbed_13_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtNone</span><span class="w">  </span><span class="p">{};</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><a href="#__codelineno-14-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtSingle</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w">     </span><span class="p">};</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><a href="#__codelineno-14-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtMulti</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.cdr.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><a href="#__codelineno-14-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="hll"><a href="#__codelineno-14-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">ECakeFileExtType</span><span class="w"> </span><span class="n">ExtType</span><span class="p">{</span><span class="w"> </span><span class="n">ExtNone</span><span class="p">.</span><span class="n">ClassifyFileExt</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; None</span>
+</span><a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="hll"><a href="#__codelineno-14-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">ExtType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ExtSingle</span><span class="p">.</span><span class="n">ClassifyFileExt</span><span class="p">();</span><span class="w"> </span><span class="c1">// =&gt; Single</span>
+</span><a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="hll"><a href="#__codelineno-14-7"><span class="linenos" data-linenos="7 "></span></a><span class="n">ExtType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ExtMulti</span><span class="p">.</span><span class="n">ClassifyFileExt</span><span class="p">();</span><span class="w"> </span><span class="c1">// =&gt; Multi</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Classify File Ext" src="../img/bp/file-ext/classify-file-ext.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="file-extension-equality">File Extension Equality</h3>
+<p>We check file extension equality using <code>operator==</code> and <code>operator!=</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">C++</label><label for="__tabbed_14_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtA</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><a href="#__codelineno-15-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtB</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.cdr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><a href="#__codelineno-15-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="hll"><a href="#__codelineno-15-4"><span class="linenos" data-linenos="4 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">bIsEqual</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="n">ExtA</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ExtB</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; false</span>
+</span><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="hll"><a href="#__codelineno-15-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">bIsNotEqual</span><span class="p">{</span><span class="w"> </span><span class="n">ExtA</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ExtB</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; true</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>To check if one FileExtension object is equal to another, we use <code>IsEqualTo</code>:</p>
+<p><img alt="Is Equal To" src="../img/bp/file-ext/is-equal-to.png" /></p>
+<p>To check if one FileExtension object is not equal to another, we use <code>IsNotEqualTo</code>:</p>
+<p><img alt="Is Not Equal To" src="../img/bp/file-ext/is-not-equal-to.png" /></p>
+</div>
+</div>
+</div>
+<h2 id="advanced-usage">Advanced Usage</h2>
+<h3 id="viewing-a-file-extension-in-single-form">Viewing a File Extension in Single form</h3>
+<p>Sometimes we might want to only take into account the last component of a file extension. To do this, we can use <code>CloneSingle</code>, which will return a CakeFileExt object that contains the final component of its source file extension.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">C++</label><label for="__tabbed_15_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><a href="#__codelineno-16-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtSingle</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span><span class="w">     </span><span class="p">};</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><a href="#__codelineno-16-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ExtMulti</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;.cdr.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><a href="#__codelineno-16-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="hll"><a href="#__codelineno-16-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">ClonedSingle</span><span class="p">{</span><span class="w"> </span><span class="n">ExtSingle</span><span class="p">.</span><span class="n">CloneSingle</span><span class="p">()</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; &quot;.txt&quot;</span>
+</span><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="hll"><a href="#__codelineno-16-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">ClonedSingle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ExtMulti</span><span class="p">.</span><span class="n">CloneSingle</span><span class="p">();</span><span class="w"> </span><span class="c1">// =&gt; &quot;.txt&quot;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Clone Single" src="../img/bp/file-ext/clone-single.png" /></p>
+</div>
+</div>
+</div>
+<p>In the example above, each cloned CakeFileExt will have the extension <code>.txt</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As the examples show, <code>CloneSingle</code> will always return the trailing component on a file extension (assuming there is one), so it is safe to use on both single and multi extensions. This means that <code>CloneSingle</code> is a valuable tool when you are processing file extensions and only care about examining the trailing extension component regardless as to how many actual extensions the file might have.</p>
+</div>
+<h3 id="extracting-a-file-extension-in-single-form">Extracting a File Extension in Single Form</h3>
+<p>There are functions that allow us to extract only the trailing file extension component from a given file path.</p>
+<p>We can extract just the trailing extension component from a file name using <code>BuildFileExtFromFilePathSingle</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">C++</label><label for="__tabbed_16_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><a href="#__codelineno-17-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakePath</span><span class="w"> </span><span class="n">SecretItemsDb</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;/x/game/data/secret/items.bin.db&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><a href="#__codelineno-17-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><a href="#__codelineno-17-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">SingleFromFilePath</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="hll"><a href="#__codelineno-17-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">FCakeFileExt</span><span class="o">::</span><span class="n">BuildFileExtFromFilePathSingle</span><span class="p">(</span><span class="n">SecretItemsDb</span><span class="p">)</span><span class="w"> </span>
+</span><a id="__codelineno-17-5" name="__codelineno-17-5"></a><a href="#__codelineno-17-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">};</span><span class="w"> </span><span class="c1">// =&gt; &quot;.db&quot;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Build Cake File Ext From File Path Single" src="../img/bp/file-ext/build-cake-file-ext-from-file-path-single.png" /></p>
+</div>
+</div>
+</div>
+<p>In the example above, the CakeFileExt will have the extension <code>.db</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.sections", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2100 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://cakeio-unreal.github.io/advanced-api/cake-async-fs/">
+      
+      
+        <link rel="prev" href="../cake-mix/">
+      
+      
+        <link rel="next" href="../services/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>CakeAsyncFS - CakeFS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Onest:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Onest";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cakeasyncfs-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CakeFS" class="md-header__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CakeFS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CakeAsyncFS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tour/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tour
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../core-api/overview/" class="md-tabs__link">
+          
+  
+  
+  Core API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../advanced-usage/" class="md-tabs__link">
+          
+  
+  
+  Advanced API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CakeFS" class="md-nav__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    CakeFS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tour
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Core API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core Objects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Core Objects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paths
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/file-extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Directories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Error Handling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Error Handling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling Patterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/error-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamental Types
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamental Types
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/outcomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Outcomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Signals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/cake-orders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cake Orders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Utility Libraries
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Utility Libraries
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cake-mix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeMix
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    CakeAsyncFS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeAsyncFS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cakeasyncfs-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      CakeAsyncFS Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CakeAsyncFS Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessing-cakeasyncfs-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing CakeAsyncFS Interfaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-api-differences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key API Differences
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safely-using-cakeasyncfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safely using CakeAsyncFS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Safely using CakeAsyncFS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-costs-of-asynchronous-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the costs of asynchronous code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-safety-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      General safety guidelines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#async-callback-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Async callback guidelines
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Async Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Async Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      File IO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directory-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory IO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-directory-io-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      File / Directory IO Pitfalls
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directory-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Traversal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cakemix" class="md-nav__link">
+    <span class="md-ellipsis">
+      CakeMix
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unique-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unique Interfaces
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unique Interfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#batch-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Batch Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#batch-operation-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Operation Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            CakeFS Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>CakeAsyncFS</h1>
+
+<h2 id="cakeasyncfs-overview">CakeAsyncFS Overview</h2>
+<p>CakeFS offers asynchronous versions for most of the core filesystem operations, including CakeMix operations. The usage of these asynchronous functions is similar to the synchronous functions, but with a few changes. This documentation will not exhaustively cover each function, since the functions behave identically to their synchronous counterparts, with the exception that they are executed in an asynchronous context. Instead, this documentation will focus on the differences between the synchronous / asynchronous interfaces and provide a few examples involving them. Finally, there are a few special interfaces unique to CakeFS Async which will be covered.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This library and its documentation require a firm understanding of CakeFS fundamentals and its core objects.</p>
+</div>
+<h3 id="accessing-cakeasyncfs-interfaces">Accessing CakeAsyncFS Interfaces</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The C++ interfaces for asynchronous IO are contained within the <code>CakeFS Async</code> namespace.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All CakeFS Async interfaces can be found in the following header:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CakeFS/Async/CakeFS Async.h&quot;</span>
+</code></pre></div></p>
+</div>
+<p>It is important to understand that CakeFS Async is not meant to be the single solution for any asynchronous code involving CakeFS objects and interfaces. This is a key difference between the C++ and Blueprint APIs for CakeFS Async. Blueprint offers much less options to its users for asynchronous interactions, whereas asynchronous code in C++ is complicated and Unreal Engine offers many different approaches for multithreaded execution. Being a general purpose API it cannot meet every requirement for every user and thus developing your own implementation often can be the correct solution since it will give more control over error handling, performance, and other characteristics. Using the core CakeFS objects and interfaces in an asynchronous context is quite straightforward since the objects are lightweight and easy to pass by value. The source code for CakeAsyncFS can also be viewed as a reference point when developing your own async implementations.</p>
+</div>
+<div class="tabbed-block">
+<p>CakeFS provides async functionality in the form of latent Blueprint nodes. As with any Blueprint latent node we can only use these nodes in event graphs:</p>
+<p><img alt="Async Node Example" src="../img/bp/async/async-node-example.png" /></p>
+<p>Typing "CakeAsync" in an action window will show us every async function available to us:</p>
+<p><img alt="Async Suite Keyword" src="../img/bp/async/async-suite-keyword.png" /></p>
+<p>A more precise way to filter is to drag off the node of a relevant Cake object, such as a CakeFile, and then type "Async" to find all the async nodes related to that object:</p>
+<p><img alt="CakeFile Async Suite Example" src="../img/bp/async/cakefile-async-suite-example.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="key-api-differences">Key API Differences</h3>
+<p>While much of the asynchronous interfaces mirror their synchronous counterparts, there are some key differences. It is important to learn these differences before we look at specific usage examples.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<blockquote>
+<p>Async Function Return Type</p>
+</blockquote>
+<p>All Async functions return an <code>FCakeAsyncTask</code>, which is just a minimal type wrapper that contains the Unreal <code>TTask</code> type utilized by CakeFS Async:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeAsyncTask</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><a href="#__codelineno-1-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">UE</span><span class="o">::</span><span class="n">Tasks</span><span class="o">::</span><span class="n">TTask</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Task</span><span class="p">{};</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><a href="#__codelineno-1-4"><span class="linenos" data-linenos="4 "></span></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><a href="#__codelineno-1-5"><span class="linenos" data-linenos="5 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="kt">bool</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">IsValid</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><a href="#__codelineno-1-6"><span class="linenos" data-linenos="6 "></span></a><span class="p">};</span>
+</code></pre></div>
+<p>Sometimes callers might want to cache the Task, but often we just need to know whether the task launched successfully. To check this, we just need to ensure that the inner <code>TTask</code>'s IsValid() member function returns true. Operator bool has been defined to return this so that we can use simple code forms like: </p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">AsyncCakeFS</span><span class="o">::</span><span class="n">SomeAsyncFunction</span><span class="p">())</span><span class="w"> </span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span><span class="w">  </span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Some function failed to launch!&quot;</span><span class="p">));</span><span class="w"> </span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">}</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><a href="#__codelineno-2-5"><span class="linenos" data-linenos=" 5 "></span></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><a href="#__codelineno-2-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="c1">// Equivalent to</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><a href="#__codelineno-2-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="n">FCakeAsyncTask</span><span class="w"> </span><span class="n">Task</span><span class="p">{</span><span class="w"> </span><span class="n">AsyncCakeFS</span><span class="o">::</span><span class="n">SomeAsyncFunction</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><a href="#__codelineno-2-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Task</span><span class="p">.</span><span class="n">IsValid</span><span class="p">())</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><a href="#__codelineno-2-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="p">{</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><a href="#__codelineno-2-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Some function failed to launch!&quot;</span><span class="p">));</span><span class="w"> </span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><a href="#__codelineno-2-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>TTask</code> is defined in <code>Tasks/Task.h</code></p>
+</div>
+<blockquote>
+<p>Async Function Signatures</p>
+</blockquote>
+<p>The function signatures for async IO operations follow a regular pattern. As mentioned earlier, all functions return <code>FCakeAsyncTasks</code>. Any types that the synchronous IO operation would return instead will be supplied via parameters to a callback that is invoked when the async operation is done. </p>
+<p>The parameter lists will follow a standard ordering: if there is a target object (e.g., the file for a move operation), the target object is the first parameter. Next, all non-optional parameters used by the IO operation will be listed. The last non-optional parameter will always be the async specific callback invoked when the async operation is done. Generally this callback will also pass back the results of the operation, which will vary in type based upon the operation being used. The first <em>optional</em> parameter in an asynchronous function signature will be an <a href="/core-api/special-types/settings/#fcakesettingsasynctask">FCakeSettingsAsyncTask</a>. We can use this to customize the behavior of the asynchronous operation. Finally, if there are any remaining <em>optional</em> parameters that the IO operation takes they will be listed after the settings struct.</p>
+<p>Let's look at an example by comparing CakeDir's <code>CreateDir</code> signature versus the CakeFS Async <code>CreateDir</code> signature: </p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// CakeDir </span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FCakeResultDirIO</span><span class="w">  </span><span class="n">CreateDir</span><span class="p">(</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><a href="#__codelineno-3-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="n">ECakePolicyMissingParents</span><span class="w"> </span><span class="n">MissingParentPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CakePolicies</span><span class="o">::</span><span class="n">MissingParentsDefault</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><a href="#__codelineno-3-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><a href="#__codelineno-3-5"><span class="linenos" data-linenos=" 5 "></span></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><a href="#__codelineno-3-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="c1">// CakeFS Async </span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><a href="#__codelineno-3-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FCakeAsyncTask</span><span class="w"> </span><span class="n">CreateDir</span><span class="p">(</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><a href="#__codelineno-3-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="n">FCakeDir</span><span class="w"> </span><span class="n">SourceDir</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><a href="#__codelineno-3-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneDirIO</span><span class="w"> </span><span class="n">TaskDoneCallback</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><a href="#__codelineno-3-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">FCakeSettingsAsyncTask</span><span class="w"> </span><span class="n">TaskSettings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{},</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><a href="#__codelineno-3-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">ECakePolicyMissingParents</span><span class="w"> </span><span class="n">MissingParentPolicy</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><a href="#__codelineno-3-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="n">CakePolicies</span><span class="o">::</span><span class="n">MissingParentsDefault</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><a href="#__codelineno-3-13"><span class="linenos" data-linenos="13 "></span></a><span class="p">);</span>
+</code></pre></div>
+<p>Let's compare the differences of the parameter lists. Since <code>CreateDir</code> is a member function on an <code>FCakeDir</code> object, the async variant needs the object it should call <code>CreateDir</code> on as the first parameter. Secondly, we need to provide a callback, which is a delegate that will receive the <code>FCakeResultDirIO</code> returned from the <code>CreateDir</code> operation. There are no required parameters for CakeDir's <code>CreateDir</code> function, and so the first optional parameter in CakeFS Async's <code>CreateDir</code> function is the async settings struct. The last parameter is the optional missing parents policy parameter used by CakeDir's <code>CreateDir</code>.</p>
+<p>Let's try calling both the synchronous and asynchronous versions using the same FCakeDir object. For this example, we will assume that the default values for all optional parameters are acceptable.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">GameDir</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">ReportCreateDirResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeResultDirIO</span><span class="w"> </span><span class="n">DirResult</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><a href="#__codelineno-4-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><a href="#__codelineno-4-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><a href="#__codelineno-4-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;CreateDir Result: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">DirResult</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><a href="#__codelineno-4-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="p">};</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><a href="#__codelineno-4-8"><span class="linenos" data-linenos=" 8 "></span></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><a href="#__codelineno-4-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="c1">// Synchronous Version</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><a href="#__codelineno-4-10"><span class="linenos" data-linenos="10 "></span></a><span class="n">ReportCreateDirResult</span><span class="p">(</span><span class="n">GameDir</span><span class="p">.</span><span class="n">CreateDir</span><span class="p">());</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><a href="#__codelineno-4-11"><span class="linenos" data-linenos="11 "></span></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><a href="#__codelineno-4-12"><span class="linenos" data-linenos="12 "></span></a><span class="c1">// Asynchronous Version</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><a href="#__codelineno-4-13"><span class="linenos" data-linenos="13 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">CakeFS</span><span class="w"> </span><span class="n">Async</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">CreateDir</span><span class="p">(</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><a href="#__codelineno-4-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="n">GameDir</span><span class="p">,</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a><a href="#__codelineno-4-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneDirIO</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">ReportCreateDirResult</span><span class="p">)))</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><a href="#__codelineno-4-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">{</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><a href="#__codelineno-4-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><a href="#__codelineno-4-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;AsyncCreateDir failed to launch!&quot;</span><span class="p">));</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><a href="#__codelineno-4-19"><span class="linenos" data-linenos="19 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<blockquote>
+<p>Task Priority</p>
+</blockquote>
+<p>Every CakeFS async node has a Task Priority parameter. This is an <code>ECakeTaskPriority</code>, which is an enum that partially mirrors a native Unreal enum:</p>
+<p><img alt="Cake Task Priority" src="../img/bp/async/cake-task-priority.png" /></p>
+<p>This priority helps the Unreal Task system scheduler select when the task should be run. In many situations, you probably won't have to change this from the default value of Normal. If you have a task that isn't a high priority, you can use one of the <code>Background</code> settings to defer the task to a lower priority. Use profiling to help inform and guide your decisions about which priority works best for your situation.</p>
+<p>The priority order from highest to lowest is as follows:</p>
+<ol>
+<li>High</li>
+<li>Normal</li>
+<li>Background High</li>
+<li>Background Normal</li>
+<li>Background Low</li>
+</ol>
+<blockquote>
+<p>Failure to Launch</p>
+</blockquote>
+<p>Every async node can fail to properly launch its async task due to some form of invalid arguments. Usually this occurs when a user sends in an invalid reference or forgets to submit a valid callback. When an async node fails to launch, the OnTaskLaunchFailure path will be taken. Assuming the task launches successfully, the associated Complete path will be taken when the async operation resolves:</p>
+<p><img alt="Async Task Launch Failure" src="../img/bp/async/async-task-launch-failure.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you have CakeFS logging enabled, you will get a warning that gives more context regarding why the task could not be launched.</p>
+</div>
+</div>
+</div>
+</div>
+<h2 id="safely-using-cakeasyncfs">Safely using CakeAsyncFS</h2>
+<p>The following two sections are provided to ensure that users who are unfamiliar with asynchronous code can get a general idea about how to safely consider and leverage the CakeAsyncFS. If you are an advanced C++ programmer, these are sections that likely can be skimmed over quickly. If you are a Blueprint programmer, please pay careful attention. CakeFS's goal is to provide as much parity with the C++ interfaces as possible, and as such it offers some powerful constructs for Blueprint programmers; however, these constructs can easily get you into trouble if you don't wield them carefully, so it is critical to understand the general expectations upon which the API was designed.</p>
+<h3 id="understanding-the-costs-of-asynchronous-code">Understanding the costs of asynchronous code</h3>
+<p>Asynchronous code can offer better performance and the appealing prospect of non-blocking calls, but it comes at a cost of code complexity and introduces a class of bugs that are incredibly hard to identify and fix. Because of this, you must carefully assess the benefits that an asynchronous interface are offering you before you commit to using them. Once you are certain you want to use an asynchronous interface, always choose the simplest and safest way to express the problem, and only pursue a more complicated solution if profiling results demand it. Being clever here can get you into far more trouble than you imagined; keep it simple and as easy as possible to reason about. Finally, do not assume that asynchronous code will outperform synchronous code. Always profile and measure! Your intuition is rarely right.</p>
+<h3 id="general-safety-guidelines">General safety guidelines</h3>
+<p>In general, the lifetimes of any parameters do not have be carefully considered, since the CakeAsyncFS interfaces always take their own copies. However, in any async operation that involves a user-supplied callback, <strong>it is the user's responsibility to ensure that any data captured or used by that callback is used in a threadsafe manner</strong>. This is especially important when using the async Blueprint interfaces, as Blueprint users will have fewer options to ensure thread safety. It is vital to ensure that nothing else can read or write to any variables that are being used while the asynchronous operation is occurring. </p>
+<p>The following async interfaces include user supplied callbacks that are invoked in an asynchronous context:
+    * Directory Traversal callbacks
+    * Gather Custom callbacks
+    * Batch Operation callbacks</p>
+<h3 id="async-callback-guidelines">Async callback guidelines</h3>
+<p>Async callbacks have a few constraints that must be considered in both C++ and Blueprint:
+1) UObjects cannot be created within the async callback. UObjects can only be created on the Game Thread.
+2) Many common functions must be called from the game thread -- this is especially true for gameplay related code and anything involving widgets / Slate. If you invoke these functions from another thread you will likely trigger a crash. In general, avoid any gameplay related updates from async callbacks, and also do not update the UI from within the async callbacks. When CakeFS offers progress updates (such as Batch Operations), you can configure them to be called from the game thread to enable easy UI updates. Blueprint progress updates only are called from the game thread for the sake of simplicity.
+3) Always check the validity of any UObjects before using them from the async callback.</p>
+<p>There are a few basic guidelines that can dramatically improve the safety and reliability of async operations. </p>
+<p>1) Whenever possible, favor using Gather operations in conjunction with Batch operations. This relieves the caller of doing any container maintenance or upkeep, and reduces the amount of areas where asynchronous code must occur. Furthermore, batch operations offer a version that includes a progress report, which will default to sending its reports to the Game thread, which makes displaying the progress of a batch operation seamless and feel much like a synchronous call.</p>
+<p>2) When writing asynchronous callbacks, keep as much data local to the callback function as possible. This reduces the amount of variables you have to keep threadsafe.</p>
+<p>3) When writing to data outside of an asynchronous callback (e.g., the calling class), ensure that this data is private and the callback's owner can safely keep others from viewing / writing to that data. </p>
+<p>4) When writing asynchronous Directory Traversal, try to ensure that the traversal callback requires no external state to accomplish its goals.</p>
+<h2 id="async-examples">Async Examples</h2>
+<h3 id="file-io">File IO</h3>
+<p>Let's examine async file IO using the async version of CakeFile's <code>DeleteFile</code>. Since we are using the asynchronous function which is not a member function, we need to pass the CakeFile object as the first argument to the async version.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The namespace CakeFS Async::File contains asynchronous versions of all the <a href="/core-api/files/#io-operations">FCakeFile IO Operations</a>.</p>
+<p>The result callback signature for file IO requires one parameter: an <a href="/core-api/special-types/results/#fcakeresultfileio">FCakeResultFileIO</a> that the IO operation returned.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeFile</span><span class="w"> </span><span class="n">FileItemsDb</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">FCakePath</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/items/potions.db&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos=" 4 "></span></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">ReportDetails</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">DeleteResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><a href="#__codelineno-5-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">{</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><a href="#__codelineno-5-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Result of the file deletion operation: [%s]&quot;</span><span class="p">),</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><a href="#__codelineno-5-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">        </span><span class="o">*</span><span class="n">DeleteResult</span><span class="p">.</span><span class="n">ToString</span><span class="p">())</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><a href="#__codelineno-5-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="p">};</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><a href="#__codelineno-5-10"><span class="linenos" data-linenos="10 "></span></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="hll"><a href="#__codelineno-5-11"><span class="linenos" data-linenos="11 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">CakeFS</span><span class="w"> </span><span class="n">Async</span><span class="o">::</span><span class="n">File</span><span class="o">::</span><span class="n">DeleteFile</span><span class="p">(</span>
+</span><a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="hll"><a href="#__codelineno-5-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">FileItemsDb</span><span class="p">,</span>
+</span><a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="hll"><a href="#__codelineno-5-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneFileIO</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">ReportDetails</span><span class="p">)))</span>
+</span><a id="__codelineno-5-14" name="__codelineno-5-14"></a><a href="#__codelineno-5-14"><span class="linenos" data-linenos="14 "></span></a><span class="p">{</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><a href="#__codelineno-5-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><a href="#__codelineno-5-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;AsyncCreateDir failed to launch!&quot;</span><span class="p">));</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><a href="#__codelineno-5-17"><span class="linenos" data-linenos="17 "></span></a><span class="p">}</span>
+</code></pre></div>
+<p>Before moving on, we should also note that reading file data is slightly different with CakeFS Async.
+To keep lifetime management simple, only the read interfaces which return <a href="special-types/cake-orders.md#tcakeorder">TCakeOrderFile</a> types are supported.</p>
+<p>Let's look at a brief example using <code>ReadTextFile</code>:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeFile</span><span class="w"> </span><span class="n">FileReadme</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">FCakePath</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/readme.txt&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><a href="#__codelineno-6-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><a href="#__codelineno-6-4"><span class="linenos" data-linenos=" 4 "></span></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><a href="#__codelineno-6-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnReadTextComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><a href="#__codelineno-6-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">{</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><a href="#__codelineno-6-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ReadText</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><a href="#__codelineno-6-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><a href="#__codelineno-6-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Readme file data: [%s]&quot;</span><span class="p">),</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><a href="#__codelineno-6-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">            </span><span class="o">*</span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span><span class="p">);</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a><a href="#__codelineno-6-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><a href="#__codelineno-6-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">};</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><a href="#__codelineno-6-13"><span class="linenos" data-linenos="13 "></span></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><a href="#__codelineno-6-14"><span class="linenos" data-linenos="14 "></span></a><span class="n">CakeFS</span><span class="w"> </span><span class="nf">Async::File::ReadTextFile</span><span class="p">(</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a><a href="#__codelineno-6-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="n">FileReadme</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><a href="#__codelineno-6-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneFileReadText</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnReadTextComplete</span><span class="p">)</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a><a href="#__codelineno-6-17"><span class="linenos" data-linenos="17 "></span></a><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Async Example File DeleteFile" src="../img/bp/async/async-example-file-deletefile.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="directory-io">Directory IO</h3>
+<p>In this example, we'll use an async version of <code>DeleteDir</code> to delete the directory our CakeDir object references.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The namespace <code>CakeFS Async::Dir</code> contains asynchronous versions of all the <a href="/core-api/directories/#io-operations">FCakeDir IO Operations</a>.</p>
+<p>The result callback signature for directory IO requires one parameter: an <a href="../core-api/special-types/results.md#fcakeresultdirio">FCakeResultDirIO</a> that the IO operation returned.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">DirItems</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">FCakePath</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/items&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><a href="#__codelineno-7-4"><span class="linenos" data-linenos=" 4 "></span></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><a href="#__codelineno-7-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnDeleteDirComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeResultDirIO</span><span class="w"> </span><span class="n">DeleteResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><a href="#__codelineno-7-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">{</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><a href="#__codelineno-7-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">DeleteResult</span><span class="p">)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><a href="#__codelineno-7-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><a href="#__codelineno-7-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;The directory was successfully deleted!&quot;</span><span class="p">));</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><a href="#__codelineno-7-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a><a href="#__codelineno-7-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="k">else</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a><a href="#__codelineno-7-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a><a href="#__codelineno-7-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Failed deleting directory: [%s]&quot;</span><span class="p">),</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a><a href="#__codelineno-7-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">            </span><span class="o">*</span><span class="n">DeleteResult</span><span class="p">.</span><span class="n">ToString</span><span class="p">())</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><a href="#__codelineno-7-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a><a href="#__codelineno-7-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">};</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a><a href="#__codelineno-7-17"><span class="linenos" data-linenos="17 "></span></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a><a href="#__codelineno-7-18"><span class="linenos" data-linenos="18 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">CakeFS</span><span class="w"> </span><span class="n">Async</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">DeleteDir</span><span class="p">(</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a><a href="#__codelineno-7-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="n">DirItems</span><span class="p">,</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a><a href="#__codelineno-7-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneDirIO</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnDeleteDirComplete</span><span class="p">)))</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a><a href="#__codelineno-7-21"><span class="linenos" data-linenos="21 "></span></a><span class="p">{</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22"></a><a href="#__codelineno-7-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23"></a><a href="#__codelineno-7-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;AsyncCreateDir failed to launch!&quot;</span><span class="p">));</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24"></a><a href="#__codelineno-7-24"><span class="linenos" data-linenos="24 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Async Example Dir DeleteDir" src="../img/bp/async/async-example-dir-deletedir.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="file-directory-io-pitfalls">File / Directory IO Pitfalls</h3>
+<p>CakeFS Async interfaces use their own private copy of source objects in order to eliminate many potential lifetime problems, and this has important implications in IO operations that change the path information on file or directory objects. Normally, when a move or change name operation (e.g., <code>MoveFile</code> or <code>ChangeDirName</code>) succeeds, the associated object automatically updates its path information. However, since a copy of the source object is used in asynchronous contexts, this means that your source object will <strong>not</strong> update itself when the operation occurs. <strong>Therefore, if you plan on using an object after an async move / change name operation, you must update the path information manually.</strong></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Remember to check the move result via <code>IsOkStrict</code> instead of just <code>IsOk</code>, since a move operation can return a <code>NoOp</code> in certain situations, and we only want to update the path information if a move actually occurred.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeFile</span><span class="w"> </span><span class="n">FileItemsDb</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><a href="#__codelineno-8-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">FCakePath</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/items/items.db&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><a href="#__codelineno-8-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="n">FCakePath</span><span class="w"> </span><span class="n">DestDir</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;Y:/cake-archive/items/&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><a href="#__codelineno-8-5"><span class="linenos" data-linenos=" 5 "></span></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><a href="#__codelineno-8-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnAsyncMoveComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><a href="#__codelineno-8-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="p">[</span><span class="n">FileItemsDb</span><span class="p">,</span><span class="w"> </span><span class="n">DestDir</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">MoveResult</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><a href="#__codelineno-8-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">{</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><a href="#__codelineno-8-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">MoveResult</span><span class="p">.</span><span class="n">IsOkStrict</span><span class="p">())</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><a href="#__codelineno-8-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="hll"><a href="#__codelineno-8-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">        </span><span class="n">FCakePath</span><span class="w"> </span><span class="n">NewPath</span><span class="p">{</span><span class="w"> </span>
+</span><a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="hll"><a href="#__codelineno-8-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">            </span><span class="n">FileItemsDb</span><span class="p">.</span><span class="n">GetPath</span><span class="p">().</span><span class="n">CloneWithNewParent</span><span class="p">(</span><span class="n">DestDir</span><span class="p">)</span><span class="w"> </span>
+</span><a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="hll"><a href="#__codelineno-8-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="p">};</span>
+</span><a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="hll"><a href="#__codelineno-8-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="n">FileItemsDb</span><span class="p">.</span><span class="n">SetPath</span><span class="p">(</span><span class="n">NewPath</span><span class="p">);</span>
+</span><a id="__codelineno-8-15" name="__codelineno-8-15"></a><a href="#__codelineno-8-15"><span class="linenos" data-linenos="15 "></span></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><a href="#__codelineno-8-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;New file path is: [%s]&quot;</span><span class="p">),</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><a href="#__codelineno-8-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">            </span><span class="o">*</span><span class="n">FileItemsDb</span><span class="p">.</span><span class="n">GetPathString</span><span class="p">());</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><a href="#__codelineno-8-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><a href="#__codelineno-8-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="k">else</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><a href="#__codelineno-8-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><a href="#__codelineno-8-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Failed moving file: [%s]&quot;</span><span class="p">),</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a><a href="#__codelineno-8-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">            </span><span class="o">*</span><span class="n">MoveResult</span><span class="p">.</span><span class="n">ToString</span><span class="p">())</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><a href="#__codelineno-8-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a><a href="#__codelineno-8-24"><span class="linenos" data-linenos="24 "></span></a><span class="p">};</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a><a href="#__codelineno-8-25"><span class="linenos" data-linenos="25 "></span></a>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a><a href="#__codelineno-8-26"><span class="linenos" data-linenos="26 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">CakeFS</span><span class="w"> </span><span class="n">Async</span><span class="o">::</span><span class="n">File</span><span class="o">::</span><span class="n">MoveFile</span><span class="p">(</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a><a href="#__codelineno-8-27"><span class="linenos" data-linenos="27 "></span></a><span class="w">    </span><span class="n">FileItemsDb</span><span class="p">,</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a><a href="#__codelineno-8-28"><span class="linenos" data-linenos="28 "></span></a><span class="w">    </span><span class="n">DestDir</span><span class="p">,</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29"></a><a href="#__codelineno-8-29"><span class="linenos" data-linenos="29 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneFileIO</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnAsyncMoveComplete</span><span class="p">)))</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30"></a><a href="#__codelineno-8-30"><span class="linenos" data-linenos="30 "></span></a><span class="p">{</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a><a href="#__codelineno-8-31"><span class="linenos" data-linenos="31 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32"></a><a href="#__codelineno-8-32"><span class="linenos" data-linenos="32 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;AsyncMoveFile failed to launch!&quot;</span><span class="p">));</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33"></a><a href="#__codelineno-8-33"><span class="linenos" data-linenos="33 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Async Pitfalls Path" src="../img/bp/async/async-pitfalls-path.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="directory-traversal">Directory Traversal</h3>
+<p>Asynchronous directory traversal is quite similar to synchronous traversal, but we must always remain cognizant of the fact that our traversal callback is being invoked on a different thread. This means that all sorts of wonderful thread-related nightmares can befall upon us, so we must be vigilant when we choose to use this asynchronous traversal.</p>
+<p>If you need a refresher on how to safely write async callbacks, refer back to the <a href="#async-callback-guidelines">async callback guidelines</a> section of this documentation.</p>
+<p>We'll now look at two examples, one involving unguarded traversal and the other involving search traversal. Our unguarded traversal will simply print the directory names it encounters, and our search traversal will look for a readme file and stop immediately once the first file that matches our criteria is found. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">C++</label><label for="__tabbed_6_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>All async traversal operations are contained in namespace CakeFS Async::Dir.</p>
+<p>As with our File / Directory IO result callbacks, traversal callbacks just require one parameter, which is the associated result type for that traversal style. This means <a href="../core-api/special-types/results.md#fcakeresulttraversal">FCakeResultTraversal</a> for unguarded / guarded traversals, and <a href="../core-api/special-types/results.md#fcakeresultsearch">FCakeResultSearch</a> for search traversals.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">DirItems</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><a href="#__codelineno-9-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">FCakePath</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/items&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><a href="#__codelineno-9-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><a href="#__codelineno-9-4"><span class="linenos" data-linenos=" 4 "></span></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><a href="#__codelineno-9-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnTraversalComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">ResultTraversal</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><a href="#__codelineno-9-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">{</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><a href="#__codelineno-9-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Traversal Result: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">ResultTraversal</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><a href="#__codelineno-9-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">};</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><a href="#__codelineno-9-9"><span class="linenos" data-linenos=" 9 "></span></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><a href="#__codelineno-9-10"><span class="linenos" data-linenos="10 "></span></a><span class="n">CakeFS</span><span class="w"> </span><span class="nf">Async::Dir::TraverseSubdirs</span><span class="p">(</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><a href="#__codelineno-9-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">DirItems</span><span class="p">,</span><span class="w"> </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span><span class="p">,</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><a href="#__codelineno-9-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="p">[](</span><span class="n">FCakeDir</span><span class="w"> </span><span class="n">NextDir</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a><a href="#__codelineno-9-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Found subdir: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">NextDir</span><span class="p">.</span><span class="n">CloneDirName</span><span class="p">())</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><a href="#__codelineno-9-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><a href="#__codelineno-9-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneTraversal</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnTraversalComplete</span><span class="p">)</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a><a href="#__codelineno-9-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">);</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a><a href="#__codelineno-9-17"><span class="linenos" data-linenos="17 "></span></a>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a><a href="#__codelineno-9-18"><span class="linenos" data-linenos="18 "></span></a>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a><a href="#__codelineno-9-19"><span class="linenos" data-linenos="19 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnSearchComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeResultSearch</span><span class="w"> </span><span class="n">ResultSearch</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a><a href="#__codelineno-9-20"><span class="linenos" data-linenos="20 "></span></a><span class="p">{</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a><a href="#__codelineno-9-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Search Result: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">ResultSearch</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a><a href="#__codelineno-9-22"><span class="linenos" data-linenos="22 "></span></a><span class="p">};</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a><a href="#__codelineno-9-23"><span class="linenos" data-linenos="23 "></span></a>
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a><a href="#__codelineno-9-24"><span class="linenos" data-linenos="24 "></span></a><span class="n">CakeFS</span><span class="w"> </span><span class="nf">Async::Dir::TraverseSearchFiles</span><span class="p">(</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a><a href="#__codelineno-9-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">    </span><span class="n">DirItems</span><span class="p">,</span><span class="w"> </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span><span class="p">,</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a><a href="#__codelineno-9-26"><span class="linenos" data-linenos="26 "></span></a><span class="w">    </span><span class="p">[](</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalSearch</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a><a href="#__codelineno-9-27"><span class="linenos" data-linenos="27 "></span></a>
+<a id="__codelineno-9-28" name="__codelineno-9-28"></a><a href="#__codelineno-9-28"><span class="linenos" data-linenos="28 "></span></a><span class="w">        </span><span class="n">FString</span><span class="w"> </span><span class="n">FileName</span><span class="p">{</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">CloneFileName</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29"></a><a href="#__codelineno-9-29"><span class="linenos" data-linenos="29 "></span></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">FileName</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;readme&quot;</span><span class="p">)))</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30"></a><a href="#__codelineno-9-30"><span class="linenos" data-linenos="30 "></span></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31"></a><a href="#__codelineno-9-31"><span class="linenos" data-linenos="31 "></span></a><span class="w">            </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Readme File found at: [%s]&quot;</span><span class="p">),</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32"></a><a href="#__codelineno-9-32"><span class="linenos" data-linenos="32 "></span></a><span class="w">                </span><span class="o">*</span><span class="n">NextFile</span><span class="p">.</span><span class="n">GetPathString</span><span class="p">());</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33"></a><a href="#__codelineno-9-33"><span class="linenos" data-linenos="33 "></span></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalSearch</span><span class="o">::</span><span class="n">Success</span><span class="p">;</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34"></a><a href="#__codelineno-9-34"><span class="linenos" data-linenos="34 "></span></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35"></a><a href="#__codelineno-9-35"><span class="linenos" data-linenos="35 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalSearch</span><span class="o">::</span><span class="n">Continue</span><span class="p">;</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36"></a><a href="#__codelineno-9-36"><span class="linenos" data-linenos="36 "></span></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37"></a><a href="#__codelineno-9-37"><span class="linenos" data-linenos="37 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneSearch</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnSearchComplete</span><span class="p">)</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38"></a><a href="#__codelineno-9-38"><span class="linenos" data-linenos="38 "></span></a><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>First we'll look at the guarded traversal. This is the callback we'll be using:</p>
+<p><img alt="Async Traversal Guarded Callback" src="../img/bp/async/async-traversal-guarded-callback.png" /></p>
+<p>And here is how we would execute this traversal:</p>
+<p><img alt="Async Traversal Guarded Launch" src="../img/bp/async/async-traversal-guarded-launch.png" /></p>
+<p>Now, let's look at our search traversal callback:</p>
+<p><img alt="Async Traversal Search Callback" src="../img/bp/async/async-traversal-search-callback.png" /></p>
+<p>And this is how we would launch the search:</p>
+<p><img alt="Async Traversal Search Launch" src="../img/bp/async/async-traversal-search-launch.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="cakemix">CakeMix</h3>
+<p>CakeFS Async provides asynchronous versions of all of the <a href="/core-api/cake-mix/">CakeMix</a> IO functions. For our example, we'll use the async version of <code>CountSubdirs</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">C++</label><label for="__tabbed_7_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Async versions of CakeMixLibrary functions are located under the namespace <code>CakeFS Async::CakeMix</code>. The CakeMixLibrary namespace is mirrored underneath, so if a function is located in <code>CakeMixLibrary::Dir</code>, then the async function is found in <code>CakeFS Async::CakeMix::Dir</code>.</p>
+<p>Since the <code>Count</code> interfaces return an <code>FCakeMixCount</code> our callback's parameter will need to be of the same type.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">DirCakeArena</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><a href="#__codelineno-10-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnCountSubdirsComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeMixCount</span><span class="w"> </span><span class="n">CountSubdirs</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><a href="#__codelineno-10-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><a href="#__codelineno-10-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CountSubdirs</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><a href="#__codelineno-10-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><a href="#__codelineno-10-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;We have [%d] subdirectories in our main directory!&quot;</span><span class="p">),</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><a href="#__codelineno-10-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">            </span><span class="n">CountSubdirs</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><a href="#__codelineno-10-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><a href="#__codelineno-10-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">};</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><a href="#__codelineno-10-11"><span class="linenos" data-linenos="11 "></span></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><a href="#__codelineno-10-12"><span class="linenos" data-linenos="12 "></span></a><span class="n">CakeFS</span><span class="w"> </span><span class="nf">Async::CakeMix::Dir::CountSubdirs</span><span class="p">(</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><a href="#__codelineno-10-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="n">DirCakeArena</span><span class="p">,</span><span class="w"> </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span><span class="p">,</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><a href="#__codelineno-10-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="n">FCakeAsyncDoneDirCount</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnCountSubdirsComplete</span><span class="p">)</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><a href="#__codelineno-10-15"><span class="linenos" data-linenos="15 "></span></a><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Async CakeMix CountSubdirs" src="../img/bp/async/async-cakemix-countsubdirs.png" /></p>
+</div>
+</div>
+</div>
+<h2 id="unique-interfaces">Unique Interfaces</h2>
+<h3 id="batch-operations">Batch Operations</h3>
+<p>A batch operation runs a user-supplied callback on an array of CakeFiles or CakeDirs in an asynchronous context. There are two styles of batch operations supported: one style that reports the overall progress of the operation at each step via an extra callback, and one that does not report any progress.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>By combining some form of Gather/GatherCustom operation with batch processing, one can achieve a wide variety of complex async IO operations in a simple and safe way.</p>
+</div>
+<p>The batch operation callback has the same signature as a traversal callback, except that it returns a <a href="../core-api/special-types/signals.md#ecakesignalbatchop">BatchOp</a> signal, which allows the caller to halt batch operations early if errors are encountered.</p>
+<p>If you want to get progress updates as the batch operation proceeds, use the WithProgress variants of the batch operations. These require the caller supply an extra callback which will receive the operation updates. This callback will receive the following information: an integer representing the number of items already processed, an integer representing the total number of items to process, and a float representing the percentage complete the operation is.</p>
+<p>Now let's take a look at a concrete example in order to strengthen our understanding.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">C++</label><label for="__tabbed_8_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The batch operation API is defined in the namespace <code>CakeAsyncFS::BatchOp</code>.</p>
+<p>We have four functions in this namespace: <code>RunBatchOpFile</code>, <code>RunBatchOpDir</code>, <code>RunBatchOpFileWithProgress</code>, and <code>RunBatchOpDirWithProgress</code>. </p>
+</div>
+<div class="tabbed-block">
+<p>There are four async nodes we can use to run a batch operation: <code>RunBatchOpFile</code>, <code>RunBatchOpDir</code>, <code>RunBatchOpFileWithProgress</code>, and <code>RunBatchOpDirWithProgress</code>.</p>
+<p><img alt="Async Batch Op Node Suite" src="../img/bp/async/async-batch-op-node-suite.png" /></p>
+</div>
+</div>
+</div>
+<h4 id="batch-operation-example">Batch Operation Example</h4>
+<p>For our example we'll make a simple action callback used on a batch of files. We'll keep things simple and just read the text data from each file, and we'll halt the batch early if any of the read operations fail.</p>
+<p>Let's first start by defining our callback:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">C++</label><label for="__tabbed_9_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">FileBatchAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><a href="#__codelineno-11-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><a href="#__codelineno-11-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">ReadTextFile</span><span class="p">())</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><a href="#__codelineno-11-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><a href="#__codelineno-11-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;[%s] data: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">NextFile</span><span class="p">.</span><span class="n">CloneFileName</span><span class="p">(),</span><span class="w"> </span><span class="o">*</span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span><span class="p">);</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><a href="#__codelineno-11-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span><span class="o">::</span><span class="n">Continue</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><a href="#__codelineno-11-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><a href="#__codelineno-11-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="k">else</span><span class="w"> </span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><a href="#__codelineno-11-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><a href="#__codelineno-11-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span><span class="o">::</span><span class="n">Abort</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><a href="#__codelineno-11-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a><a href="#__codelineno-11-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Async Batch Op Callback" src="../img/bp/async/async-batch-op-callback.png" /></p>
+</div>
+</div>
+</div>
+<p>With our callback ready, let's launch a batch operation. To start a batch operation, we need to have an array filled with the target CakeFS objects that we want to to be processed. In our case, we need an array of CakeFile objects. Let's pretend we've already gathered a selection of relevant files. Remember, CakeMix's Gather/GatherCustom functions pair exceptionally well with batch operations because they generate an array of CakeFiles or CakeDirs.</p>
+<p>When a batch operation completes, we will receive an <a href="../core-api/special-types/results.md#fcakeresultbatchop">FCakeResultBatchOp</a>. This is a simple result type that wraps an <a href="../core-api/special-types/outcomes.md#ecakeoutcomebatchop">ECakeOutcomeBatchOp</a> and also includes a field that indicates the total number of batch elements that were processed.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">C++</label><label for="__tabbed_10_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>First we need to make the done callback for this operation. As mentioned earlier, this needs to receive an FCakeResultBatchOp as a parameter. </p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnBatchOpComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">BatchOpResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><a href="#__codelineno-12-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><a href="#__codelineno-12-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">BatchOpResult</span><span class="p">)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><a href="#__codelineno-12-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><a href="#__codelineno-12-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><a href="#__codelineno-12-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">            </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Successfully processed [%d] file(s).&quot;</span><span class="p">),</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><a href="#__codelineno-12-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">            </span><span class="n">BatchOpResult</span><span class="p">.</span><span class="n">TotalProcessed</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><a href="#__codelineno-12-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><a href="#__codelineno-12-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><a href="#__codelineno-12-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">};</span>
+</code></pre></div>
+<p>All that's left is to get an array of CakeFile objects, and launch our operation:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeMixBatchFiles</span><span class="w"> </span><span class="n">Files</span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><a href="#__codelineno-13-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">GatherFiles</span><span class="p">(</span><span class="n">DirCakeArena</span><span class="p">,</span><span class="w"> </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span><span class="p">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><a href="#__codelineno-13-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><a href="#__codelineno-13-4"><span class="linenos" data-linenos=" 4 "></span></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><a href="#__codelineno-13-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Files</span><span class="p">)</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><a href="#__codelineno-13-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">{</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><a href="#__codelineno-13-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="n">CakeFS</span><span class="w"> </span><span class="nf">Async::BatchOp::RunBatchOpFile</span><span class="p">(</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><a href="#__codelineno-13-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">        </span><span class="n">Files</span><span class="p">.</span><span class="n">Batch</span><span class="p">,</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><a href="#__codelineno-13-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">        </span><span class="n">FCakeAsyncBatchActionFile</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">FileBatchAction</span><span class="p">),</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><a href="#__codelineno-13-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="n">FCakeAsyncDoneBatchOp</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnBatchOpComplete</span><span class="p">)</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><a href="#__codelineno-13-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><a href="#__codelineno-13-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">}</span>
+</code></pre></div>
+<p>Finally, here's all the required code in one block:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">DirCakeArena</span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><a href="#__codelineno-14-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">FCakePath</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><a href="#__codelineno-14-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><a href="#__codelineno-14-4"><span class="linenos" data-linenos=" 4 "></span></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><a href="#__codelineno-14-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnBatchOpComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">BatchOpResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><a href="#__codelineno-14-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">{</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><a href="#__codelineno-14-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">BatchOpResult</span><span class="p">)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><a href="#__codelineno-14-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><a href="#__codelineno-14-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><a href="#__codelineno-14-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">            </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Successfully processed [%d] file(s).&quot;</span><span class="p">),</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><a href="#__codelineno-14-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">            </span><span class="n">BatchOpResult</span><span class="p">.</span><span class="n">TotalProcessed</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a><a href="#__codelineno-14-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13"></a><a href="#__codelineno-14-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14"></a><a href="#__codelineno-14-14"><span class="linenos" data-linenos="14 "></span></a><span class="p">};</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15"></a><a href="#__codelineno-14-15"><span class="linenos" data-linenos="15 "></span></a>
+<a id="__codelineno-14-16" name="__codelineno-14-16"></a><a href="#__codelineno-14-16"><span class="linenos" data-linenos="16 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">FileBatchAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17"></a><a href="#__codelineno-14-17"><span class="linenos" data-linenos="17 "></span></a><span class="p">{</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18"></a><a href="#__codelineno-14-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">ReadTextFile</span><span class="p">())</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19"></a><a href="#__codelineno-14-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20"></a><a href="#__codelineno-14-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;[%s] data: [%s]&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">*</span><span class="n">NextFile</span><span class="p">.</span><span class="n">CloneFileName</span><span class="p">(),</span><span class="w"> </span><span class="o">*</span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span><span class="p">);</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21"></a><a href="#__codelineno-14-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span><span class="o">::</span><span class="n">Continue</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-14-22" name="__codelineno-14-22"></a><a href="#__codelineno-14-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23"></a><a href="#__codelineno-14-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">    </span><span class="k">else</span><span class="w"> </span>
+<a id="__codelineno-14-24" name="__codelineno-14-24"></a><a href="#__codelineno-14-24"><span class="linenos" data-linenos="24 "></span></a><span class="w">    </span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-14-25" name="__codelineno-14-25"></a><a href="#__codelineno-14-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span><span class="o">::</span><span class="n">Abort</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-14-26" name="__codelineno-14-26"></a><a href="#__codelineno-14-26"><span class="linenos" data-linenos="26 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27"></a><a href="#__codelineno-14-27"><span class="linenos" data-linenos="27 "></span></a><span class="p">};</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28"></a><a href="#__codelineno-14-28"><span class="linenos" data-linenos="28 "></span></a>
+<a id="__codelineno-14-29" name="__codelineno-14-29"></a><a href="#__codelineno-14-29"><span class="linenos" data-linenos="29 "></span></a><span class="n">FCakeMixBatchFiles</span><span class="w"> </span><span class="n">Files</span><span class="p">{</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30"></a><a href="#__codelineno-14-30"><span class="linenos" data-linenos="30 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">GatherFiles</span><span class="p">(</span><span class="n">DirCakeArena</span><span class="p">,</span><span class="w"> </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span><span class="p">)</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31"></a><a href="#__codelineno-14-31"><span class="linenos" data-linenos="31 "></span></a><span class="p">};</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32"></a><a href="#__codelineno-14-32"><span class="linenos" data-linenos="32 "></span></a>
+<a id="__codelineno-14-33" name="__codelineno-14-33"></a><a href="#__codelineno-14-33"><span class="linenos" data-linenos="33 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Files</span><span class="p">)</span>
+<a id="__codelineno-14-34" name="__codelineno-14-34"></a><a href="#__codelineno-14-34"><span class="linenos" data-linenos="34 "></span></a><span class="p">{</span>
+<a id="__codelineno-14-35" name="__codelineno-14-35"></a><a href="#__codelineno-14-35"><span class="linenos" data-linenos="35 "></span></a><span class="w">    </span><span class="n">CakeFS</span><span class="w"> </span><span class="nf">Async::BatchOp::RunBatchOpFile</span><span class="p">(</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36"></a><a href="#__codelineno-14-36"><span class="linenos" data-linenos="36 "></span></a><span class="w">        </span><span class="n">Files</span><span class="p">.</span><span class="n">Batch</span><span class="p">,</span>
+<a id="__codelineno-14-37" name="__codelineno-14-37"></a><a href="#__codelineno-14-37"><span class="linenos" data-linenos="37 "></span></a><span class="w">        </span><span class="n">FCakeAsyncBatchActionFile</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">FileBatchAction</span><span class="p">),</span>
+<a id="__codelineno-14-38" name="__codelineno-14-38"></a><a href="#__codelineno-14-38"><span class="linenos" data-linenos="38 "></span></a><span class="w">        </span><span class="n">FCakeAsyncDoneBatchOp</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnBatchOpComplete</span><span class="p">)</span>
+<a id="__codelineno-14-39" name="__codelineno-14-39"></a><a href="#__codelineno-14-39"><span class="linenos" data-linenos="39 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-14-40" name="__codelineno-14-40"></a><a href="#__codelineno-14-40"><span class="linenos" data-linenos="40 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Async Batch Op Launch" src="../img/bp/async/async-batch-op-launch.png" /></p>
+</div>
+</div>
+</div>
+<p>Great! We've successfully run our first batch operation! But what if we want updates that can be used to inform us and other users about the progress of these batch operations? The WithProgress versions of batch operations have us covered. Let's adjust our last example so that it can support progress updates. </p>
+<p>All we need to do is add another callback that takes the following signature: an integer representing the current step of the operation, an integer representing the total total steps, and finally a float that represents the overall progress of the batch operation.</p>
+<p>Let's make our progress update callback. For now, we'll just print the progress out to a log.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">C++</label><label for="__tabbed_11_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">BatchProgressHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><a href="#__codelineno-15-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">int32</span><span class="w"> </span><span class="n">CurrentStep</span><span class="p">,</span><span class="w"> </span><span class="n">int32</span><span class="w"> </span><span class="n">MaxStep</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">PercentComplete</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><a href="#__codelineno-15-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">{</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><a href="#__codelineno-15-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><a href="#__codelineno-15-5"><span class="linenos" data-linenos="5 "></span></a><span class="w">            </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;File Batch Progress: %d/%d (%2f)&quot;</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><a href="#__codelineno-15-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">            </span><span class="n">CurrentStep</span><span class="p">,</span><span class="w"> </span><span class="n">MaxStep</span><span class="p">,</span><span class="w"> </span><span class="n">PercentComplete</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><a href="#__codelineno-15-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><a href="#__codelineno-15-8"><span class="linenos" data-linenos="8 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Async Batch Op Progress Callback" src="../img/bp/async/async-batch-op-progress-callback.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The Blueprint progress callbacks are always called from the game thread. This means you can safely update any Slate / UserWidget directly from this callback.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Now, all we need to do is launch the WithProgress version of <code>RunBatchOpFile</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">C++</label><label for="__tabbed_12_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The C++ version has an extra parameter that allows the caller to choose whether the progress callback is invoked from the same thread as the batch operation or from the game thread. </p>
+<p>Using the game thread can dramatically simplify the receiving code, especially if you are using that information to inform GUI changes. However, sending progress reports via the game thread incurs extra overhead -- be sure to profile in any performance sensitive contexts.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><a href="#__codelineno-16-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">enum</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">EProgressCbThread</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">uint8</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><a href="#__codelineno-16-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><a href="#__codelineno-16-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="cm">/** Use the thread used by the current async process (NEVER guaranteed to be the game thread). */</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><a href="#__codelineno-16-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">AsyncThread</span><span class="p">,</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><a href="#__codelineno-16-5"><span class="linenos" data-linenos="5 "></span></a><span class="w">    </span><span class="cm">/** Use the game thread to report progress. */</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><a href="#__codelineno-16-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="n">GameThread</span><span class="p">,</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><a href="#__codelineno-16-7"><span class="linenos" data-linenos="7 "></span></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><a href="#__codelineno-16-8"><span class="linenos" data-linenos="8 "></span></a><span class="w">    </span><span class="n">MAX</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><a href="#__codelineno-16-9"><span class="linenos" data-linenos="9 "></span></a><span class="p">};</span>
+</code></pre></div>
+<p>Here's the code that would launch our progress version of the batch operation:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><a href="#__codelineno-17-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeMixBatchFiles</span><span class="w"> </span><span class="n">Files</span><span class="p">{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><a href="#__codelineno-17-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">GatherFiles</span><span class="p">(</span><span class="n">DirCakeArena</span><span class="p">,</span><span class="w"> </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><a href="#__codelineno-17-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">};</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><a href="#__codelineno-17-4"><span class="linenos" data-linenos=" 4 "></span></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a><a href="#__codelineno-17-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Files</span><span class="p">)</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a><a href="#__codelineno-17-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">{</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><a href="#__codelineno-17-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="n">CakeFS</span><span class="w"> </span><span class="nf">Async::BatchOp::RunBatchOpFileWithProgress</span><span class="p">(</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><a href="#__codelineno-17-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">        </span><span class="n">Files</span><span class="p">.</span><span class="n">Batch</span><span class="p">,</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a><a href="#__codelineno-17-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">        </span><span class="n">FCakeAsyncBatchActionFile</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">FileBatchAction</span><span class="p">),</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10"></a><a href="#__codelineno-17-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="n">FCakeAsyncOpProgress</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">BatchProgressHandler</span><span class="p">),</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a><a href="#__codelineno-17-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">        </span><span class="n">CakeFS</span><span class="w"> </span><span class="n">Async</span><span class="o">::</span><span class="n">EProgressCbThread</span><span class="o">::</span><span class="n">GameThread</span><span class="p">,</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a><a href="#__codelineno-17-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="n">FCakeAsyncDoneBatchOp</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnBatchOpComplete</span><span class="p">)</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><a href="#__codelineno-17-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14"></a><a href="#__codelineno-17-14"><span class="linenos" data-linenos="14 "></span></a><span class="p">}</span>
+</code></pre></div>
+<p>Finally, here's all the code required in a single block:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><a href="#__codelineno-18-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">DirCakeArena</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><a href="#__codelineno-18-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><a href="#__codelineno-18-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">OnBatchOpComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">BatchOpResult</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><a href="#__codelineno-18-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><a href="#__codelineno-18-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">BatchOpResult</span><span class="p">)</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><a href="#__codelineno-18-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a><a href="#__codelineno-18-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a><a href="#__codelineno-18-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">            </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Successfully processed [%d] file(s).&quot;</span><span class="p">),</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a><a href="#__codelineno-18-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">            </span><span class="n">BatchOpResult</span><span class="p">.</span><span class="n">TotalProcessed</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a><a href="#__codelineno-18-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a><a href="#__codelineno-18-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12"></a><a href="#__codelineno-18-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">};</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13"></a><a href="#__codelineno-18-13"><span class="linenos" data-linenos="13 "></span></a>
+<a id="__codelineno-18-14" name="__codelineno-18-14"></a><a href="#__codelineno-18-14"><span class="linenos" data-linenos="14 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">BatchProgressHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a><a href="#__codelineno-18-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="n">int32</span><span class="w"> </span><span class="n">CurrentStep</span><span class="p">,</span><span class="w"> </span><span class="n">int32</span><span class="w"> </span><span class="n">MaxStep</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">PercentComplete</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">void</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16"></a><a href="#__codelineno-18-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">{</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17"></a><a href="#__codelineno-18-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-18-18" name="__codelineno-18-18"></a><a href="#__codelineno-18-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">            </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;File Batch Progress: %d/%d (%2f)&quot;</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-18-19" name="__codelineno-18-19"></a><a href="#__codelineno-18-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">            </span><span class="n">CurrentStep</span><span class="p">,</span><span class="w"> </span><span class="n">MaxStep</span><span class="p">,</span><span class="w"> </span><span class="n">PercentComplete</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20"></a><a href="#__codelineno-18-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21"></a><a href="#__codelineno-18-21"><span class="linenos" data-linenos="21 "></span></a><span class="p">};</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22"></a><a href="#__codelineno-18-22"><span class="linenos" data-linenos="22 "></span></a>
+<a id="__codelineno-18-23" name="__codelineno-18-23"></a><a href="#__codelineno-18-23"><span class="linenos" data-linenos="23 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">FileBatchAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24"></a><a href="#__codelineno-18-24"><span class="linenos" data-linenos="24 "></span></a><span class="p">{</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25"></a><a href="#__codelineno-18-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">ReadTextFile</span><span class="p">())</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26"></a><a href="#__codelineno-18-26"><span class="linenos" data-linenos="26 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27"></a><a href="#__codelineno-18-27"><span class="linenos" data-linenos="27 "></span></a><span class="w">        </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;[%s] data: [%s]&quot;</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-18-28" name="__codelineno-18-28"></a><a href="#__codelineno-18-28"><span class="linenos" data-linenos="28 "></span></a><span class="w">            </span><span class="o">*</span><span class="n">NextFile</span><span class="p">.</span><span class="n">CloneFileName</span><span class="p">(),</span><span class="w"> </span>
+<a id="__codelineno-18-29" name="__codelineno-18-29"></a><a href="#__codelineno-18-29"><span class="linenos" data-linenos="29 "></span></a><span class="w">            </span><span class="o">*</span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30"></a><a href="#__codelineno-18-30"><span class="linenos" data-linenos="30 "></span></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31"></a><a href="#__codelineno-18-31"><span class="linenos" data-linenos="31 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span><span class="o">::</span><span class="n">Continue</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-18-32" name="__codelineno-18-32"></a><a href="#__codelineno-18-32"><span class="linenos" data-linenos="32 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33"></a><a href="#__codelineno-18-33"><span class="linenos" data-linenos="33 "></span></a><span class="w">    </span><span class="k">else</span><span class="w"> </span>
+<a id="__codelineno-18-34" name="__codelineno-18-34"></a><a href="#__codelineno-18-34"><span class="linenos" data-linenos="34 "></span></a><span class="w">    </span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-18-35" name="__codelineno-18-35"></a><a href="#__codelineno-18-35"><span class="linenos" data-linenos="35 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalBatchOp</span><span class="o">::</span><span class="n">Abort</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-18-36" name="__codelineno-18-36"></a><a href="#__codelineno-18-36"><span class="linenos" data-linenos="36 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-37" name="__codelineno-18-37"></a><a href="#__codelineno-18-37"><span class="linenos" data-linenos="37 "></span></a><span class="p">};</span>
+<a id="__codelineno-18-38" name="__codelineno-18-38"></a><a href="#__codelineno-18-38"><span class="linenos" data-linenos="38 "></span></a>
+<a id="__codelineno-18-39" name="__codelineno-18-39"></a><a href="#__codelineno-18-39"><span class="linenos" data-linenos="39 "></span></a><span class="n">FCakeMixBatchFiles</span><span class="w"> </span><span class="n">Files</span><span class="p">{</span>
+<a id="__codelineno-18-40" name="__codelineno-18-40"></a><a href="#__codelineno-18-40"><span class="linenos" data-linenos="40 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">GatherFiles</span><span class="p">(</span><span class="n">DirCakeArena</span><span class="p">,</span><span class="w"> </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span><span class="p">)</span>
+<a id="__codelineno-18-41" name="__codelineno-18-41"></a><a href="#__codelineno-18-41"><span class="linenos" data-linenos="41 "></span></a><span class="p">};</span>
+<a id="__codelineno-18-42" name="__codelineno-18-42"></a><a href="#__codelineno-18-42"><span class="linenos" data-linenos="42 "></span></a>
+<a id="__codelineno-18-43" name="__codelineno-18-43"></a><a href="#__codelineno-18-43"><span class="linenos" data-linenos="43 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Files</span><span class="p">)</span>
+<a id="__codelineno-18-44" name="__codelineno-18-44"></a><a href="#__codelineno-18-44"><span class="linenos" data-linenos="44 "></span></a><span class="p">{</span>
+<a id="__codelineno-18-45" name="__codelineno-18-45"></a><a href="#__codelineno-18-45"><span class="linenos" data-linenos="45 "></span></a><span class="w">    </span><span class="n">CakeFS</span><span class="w"> </span><span class="nf">Async::BatchOp::RunBatchOpFileWithProgress</span><span class="p">(</span>
+<a id="__codelineno-18-46" name="__codelineno-18-46"></a><a href="#__codelineno-18-46"><span class="linenos" data-linenos="46 "></span></a><span class="w">        </span><span class="n">Files</span><span class="p">.</span><span class="n">Batch</span><span class="p">,</span>
+<a id="__codelineno-18-47" name="__codelineno-18-47"></a><a href="#__codelineno-18-47"><span class="linenos" data-linenos="47 "></span></a><span class="w">        </span><span class="n">FCakeAsyncBatchActionFile</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">FileBatchAction</span><span class="p">),</span>
+<a id="__codelineno-18-48" name="__codelineno-18-48"></a><a href="#__codelineno-18-48"><span class="linenos" data-linenos="48 "></span></a><span class="w">        </span><span class="n">FCakeAsyncOpProgress</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">BatchProgressHandler</span><span class="p">),</span>
+<a id="__codelineno-18-49" name="__codelineno-18-49"></a><a href="#__codelineno-18-49"><span class="linenos" data-linenos="49 "></span></a><span class="w">        </span><span class="n">CakeFS</span><span class="w"> </span><span class="n">Async</span><span class="o">::</span><span class="n">EProgressCbThread</span><span class="o">::</span><span class="n">GameThread</span><span class="p">,</span>
+<a id="__codelineno-18-50" name="__codelineno-18-50"></a><a href="#__codelineno-18-50"><span class="linenos" data-linenos="50 "></span></a><span class="w">        </span><span class="n">FCakeAsyncDoneBatchOp</span><span class="o">::</span><span class="n">CreateLambda</span><span class="p">(</span><span class="n">OnBatchOpComplete</span><span class="p">)</span>
+<a id="__codelineno-18-51" name="__codelineno-18-51"></a><a href="#__codelineno-18-51"><span class="linenos" data-linenos="51 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-18-52" name="__codelineno-18-52"></a><a href="#__codelineno-18-52"><span class="linenos" data-linenos="52 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Async Batch Op Progress Launch" src="../img/bp/async/async-batch-op-progress-launch.png" /></p>
+</div>
+</div>
+</div>
+<p>And that's it! We now can run async processing of CakeFiles with progress! The process for running batch operations on CakeDirs is exactly the same, with the exception that we use CakeDirs instead of CakeFiles. Remember, Gather / GatherCustom + Batch Processing makes async operations easy and (relatively) painless! Good luck!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.sections", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
