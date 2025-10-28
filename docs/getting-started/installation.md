@@ -39,4 +39,6 @@ At this point, Blueprint users are good to go. If you are using the C++ API, you
     }
 ```
 
+After this, make sure to refresh your .uproject and regenerate the solution file. Then you should be ready to start using CakeFS with C++!
+
 
