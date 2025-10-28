@@ -1,6 +1,9 @@
 # API Overview
 Welcome to the API documentation for CakeFS! Here we will go over a brief summary of each of the sections provided here.
 
+## Platform Support
+Right now the only officially supported platform is Windows; however, the entire library is written against Unreal Engine's cross-platform IO / filesystem APIs. Technically CakeFS should work as is with any platform that Unreal's APIs support, but we do not have the resources to support these platforms officially. We will look to expand the number of officially supported platforms in the future.
+
 ## Core Objects
 This section of the API covers the most important CakeFS objects and their general usage. Users who are brand new to CakeFS should start here to gain familiarity with the main objects of CakeFS.
 

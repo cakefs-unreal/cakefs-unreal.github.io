@@ -1,7 +1,7 @@
 # Installation
 To use the CakeFS plugin, you first need to either add the plugin to your specific Unreal project or install it to a particular Unreal Engine version. If you are unfamiliar with plugins and how they integrate into the Unreal Engine, please refer to [Epic's official documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/working-with-plugins-in-unreal-engine).
 
-## Installing the CakeFS plugin from the Fab 
+## Installing the CakeFS plugin from Fab 
 First, you'll need to install the plugin to the version of the Unreal Engine you are using. For details on that process, please see [Epic's official documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/working-with-plugins-in-unreal-engine#installingpluginsfromfab).
 
 Once you have installed CakeFS from Fab to the correct Unreal Engine version, only a few steps are required to integrate it into your projects.
@@ -20,7 +20,7 @@ Click the checkbox next to the CakeFS icon to enable the plugin for this project
 
 Once enabled, you will need to restart the Unreal Editor. 
 
-At this point, Blueprint users are good to go. If you are using the C++ API, you will need to add the "CakeIO" module as a dependency to any module that wishes to use it. Just add "CakeIO" to either PublicDependencyModuleNames or PrivateDependencyModuleNames in the consuming module's Build.cs. For example:
+At this point, Blueprint users are good to go. If you are using the C++ API, you will need to add the "CakeFS" module as a dependency to any module that wishes to use it. Just add "CakeFS" to either PublicDependencyModuleNames or PrivateDependencyModuleNames in the consuming module's Build.cs. For example:
 
 ```c# hl_lines="11"
 	public MyModule(ReadOnlyTargetRules Target) : base(Target)
@@ -33,7 +33,7 @@ At this point, Blueprint users are good to go. If you are using the C++ API, you
 			"InputCore", 
 			"UMG", 
 			"SlateCore", 
-			"CakeIO" 
+			"CakeFS" 
 		});
         // ...
     }
