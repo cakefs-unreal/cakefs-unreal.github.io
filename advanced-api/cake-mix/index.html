@@ -1,0 +1,2141 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://cakeio-unreal.github.io/advanced-api/cake-mix/">
+      
+      
+        <link rel="prev" href="../advanced-usage/">
+      
+      
+        <link rel="next" href="../cake-async-fs/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>CakeMix - CakeFS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Onest:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Onest";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cake-mix-library" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CakeFS" class="md-header__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CakeFS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CakeMix
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tour/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tour
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../core-api/overview/" class="md-tabs__link">
+          
+  
+  
+  Core API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../advanced-usage/" class="md-tabs__link">
+          
+  
+  
+  Advanced API Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CakeFS" class="md-nav__button md-logo" aria-label="CakeFS" data-md-component="logo">
+      
+  <img src="../../assets/SiteIcon.png" alt="logo">
+
+    </a>
+    CakeFS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tour
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Core API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core Objects
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Core Objects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paths
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/file-extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Directories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Error Handling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Error Handling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling Patterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/error-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fundamental Types
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Fundamental Types
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/outcomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Outcomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Signals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Results
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/cake-orders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cake Orders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core-api/fundamental-types/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Utility Libraries
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Utility Libraries
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    CakeMix
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeMix
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cake-mix-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cake Mix Library
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-work-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Work Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Directory Work Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-work-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Work Error Handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gathering-elements-to-an-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gathering Elements to an Array
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gathering Elements to an Array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gather-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gather Error Handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gather-return-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gather Return Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gathering-elements-via-custom-predicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gathering Elements via Custom Predicate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gathering Elements via Custom Predicate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gathercustom-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      GatherCustom Error Handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gather-custom-callback-signature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gather Custom Callback Signature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gather-custom-callback-basic-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gather Custom Callback Basic Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gather-custom-callback-advanced-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gather Custom Callback Advanced Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-gathercustom-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching GatherCustom Operations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#counting-elements-in-a-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Counting Elements in a Directory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Counting Elements in a Directory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#count-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Count Error Handling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#buildfilename" class="md-nav__link">
+    <span class="md-ellipsis">
+      BuildFileName
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Path Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Path Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pathstringisvalid" class="md-nav__link">
+    <span class="md-ellipsis">
+      PathStringIsValid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pathisvalid" class="md-nav__link">
+    <span class="md-ellipsis">
+      PathIsValid
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tostring-utility-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      ToString Utility Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-exclusive-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blueprint Exclusive Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blueprint Exclusive Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sorting-arrays-of-paths-files-and-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sorting arrays of Paths, Files, and Directories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cakemix-exclusive-c-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      CakeMix Exclusive C++ Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CakeMix Exclusive C++ Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tcakemixbatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCakeMixBatch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fcakemixcount" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCakeMixCount
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cake-async-fs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeAsyncFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            CakeFS Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CakeFS Services Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>CakeMix</h1>
+
+<h2 id="cake-mix-library">Cake Mix Library</h2>
+<p>CakeMixLibrary provides a suite of advanced functionality built on top of the CakeFS's core APIs and objects. Its primary purpose is to provide an ergonomic interface for some common complex operations, such as collecting elements from a directory and storing them in a container. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This library and its documentation require a firm understanding of CakeFS fundamentals and its core objects.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>CakeMixLibrary is located in the following header:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CakeFS/CakeMixLibrary.h&quot;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>The Blueprint implementation of CakeMixLibrary is UCakeMixBlueprintStatics, located in the following header:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CakeFS/Blueprint/CakeMixBlueprintStatics.h&quot;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="directory-work-functions">Directory Work Functions</h2>
+<p>Directory Work is defined as any operation that involves traversing a target CakeDir object's elements in order to accomplish some kind of work. The kind of work can vary greatly, from counting elements at a specific depth to gathering elements into an array for future processing.</p>
+<h3 id="directory-work-error-handling">Directory Work Error Handling</h3>
+<p>Every function involving directory work will return an <a href="/core-api/special-types/results/#fcakeresultdirwork">FCakeResultDirWork</a> to indicate the outcome of the overall work process. There are only a few types of errors we can encounter in directory work operations:</p>
+<ol>
+<li>If the source directory does not exist, <code>SourceDirectoryDoesNotExist</code> will be assigned to the outcome.</li>
+<li>If the traversal operation associated with the work fails to launch, <code>TraversalDidNotLaunch</code> will be assigned to the outcome.</li>
+<li>If the directory work encounters an error that causes it to abort, <code>Aborted</code> will be assigned to the error.</li>
+<li>Otherwise, <code>WorkCompleted</code> will be assigned to the outcome.</li>
+</ol>
+<p><strong>Not all directory work functions will generate <code>Aborted</code> outcomes</strong>. Some directory work is free from critical errors assuming it can start. Each function group in this section will have a short error handling section to provide guidance regarding the <code>Aborted</code> outcome value. </p>
+<p>The remaining outcomes here involve helping the caller ensure the operation itself actually was able to successfully run. Remember that traversal can fail to launch in a <a href="/core-api/special-types/outcomes/#did-not-launch">variety of circumstances</a>. However, since the outcome has a specific value to inform you when the source directory doesn't exist, the only scenarios you need to worry about for traversals being launched are:</p>
+<ol>
+<li>Ensure valid traversal arguments are being sent. Unless you are casting numeric types to enums these should be very rare.</li>
+<li>Ensure the source directory has extensions in its extension filter when using a <code>WithFilter</code> variant of a particular directory work operation.</li>
+</ol>
+<h3 id="gathering-elements-to-an-array">Gathering Elements to an Array</h3>
+<p>Often we'll want to collect files or subdirectories from a source directory and place them into a container for future processing. The Gather family of functions can help us accomplish this quickly and succinctly. These functions will use directory traversal to gather all target elements at a specified depth into an array. For instance, if we use <code>GatherFiles</code> and specify an <a href="../core-api/special-types/policies.md#opdepth">OpDepth</a> of shallow, then the resulting array will contain all shallow files contained within the specified CakeDir object.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Since each Gather operation internally uses a directory traversal operation, all the standard parameters you can use to configure a traversal are available via the Gather function signature. We can adjust the extension filter settings when using a filtered GatherFiles operation, or determine if extension filters are cloned during a GatherSubdirs operation. </p>
+</div>
+<h4 id="gather-error-handling">Gather Error Handling</h4>
+<p>Gather error handling is very simple -- assuming the directory work operation successfully begins, it will complete its work. There is no <code>Aborted</code> path that must be handled.</p>
+<h4 id="gather-return-types">Gather Return Types</h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The <code>Gather</code> functions return the CakeMix exclusive order type <a href="#tcakemixbatch">TCakeMixBatch</a>. </p>
+</div>
+<div class="tabbed-block">
+<p>Regardless as to which Gather function we use, the return types will follow a similar form. We get an <a href="/core-api/special-types/results/#fcakeresultdirwork">FCakeResultDirWork</a> that indicates result of the gather operation and an array that contains all gathered elements.</p>
+<p><img alt="Gather Return Type Example" src="../img/bp/cake-mix-library/gather-return-type-example.png" /></p>
+<p>Since our example shows Gather Subdirs our returned array will be an array of CakeDir objects. If we were gathering files this would be an array of CakeFile objects.</p>
+</div>
+</div>
+</div>
+<p>To gather all files in a directory at a specific depth, we use <code>GatherFiles</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">ProjectDir</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">FCakeMixBatchFiles</span><span class="w"> </span><span class="n">ShallowFiles</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="hll"><a href="#__codelineno-2-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">GatherFiles</span><span class="p">(</span>
+</span><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="hll"><a href="#__codelineno-2-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="n">ProjectDir</span><span class="p">,</span>
+</span><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="hll"><a href="#__codelineno-2-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">        </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Shallow</span>
+</span><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="hll"><a href="#__codelineno-2-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="p">)</span>
+</span><a id="__codelineno-2-9" name="__codelineno-2-9"></a><a href="#__codelineno-2-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="p">};</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><a href="#__codelineno-2-10"><span class="linenos" data-linenos="10 "></span></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><a href="#__codelineno-2-11"><span class="linenos" data-linenos="11 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ShallowFiles</span><span class="p">)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><a href="#__codelineno-2-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">{</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><a href="#__codelineno-2-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><a href="#__codelineno-2-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Gathered [%d] files!&quot;</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><a href="#__codelineno-2-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">        </span><span class="n">ShallowFiles</span><span class="p">.</span><span class="n">Batch</span><span class="p">.</span><span class="n">Num</span><span class="p">()</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><a href="#__codelineno-2-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><a href="#__codelineno-2-17"><span class="linenos" data-linenos="17 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Gather Files" src="../img/bp/cake-mix-library/gather-files.png" /></p>
+</div>
+</div>
+</div>
+<p>We can use <code>GatherFilesWithFilter</code> to utilize our source directory's extension filter:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">ProjectDir</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena&quot;</span><span class="p">)},</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;wav|ogg&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><a href="#__codelineno-3-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">FCakeMixBatchFiles</span><span class="w"> </span><span class="n">SoundFiles</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><a href="#__codelineno-3-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="hll"><a href="#__codelineno-3-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">GatherFilesWithFilter</span><span class="p">(</span>
+</span><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="hll"><a href="#__codelineno-3-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="n">ProjectDir</span><span class="p">,</span>
+</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><a href="#__codelineno-3-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">        </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span>
+</span><a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="hll"><a href="#__codelineno-3-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="p">)</span>
+</span><a id="__codelineno-3-9" name="__codelineno-3-9"></a><a href="#__codelineno-3-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="p">};</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><a href="#__codelineno-3-10"><span class="linenos" data-linenos="10 "></span></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><a href="#__codelineno-3-11"><span class="linenos" data-linenos="11 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">SoundFiles</span><span class="p">)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><a href="#__codelineno-3-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">{</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><a href="#__codelineno-3-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><a href="#__codelineno-3-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Gathered [%d] sound effect files!&quot;</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><a href="#__codelineno-3-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">        </span><span class="n">SoundFiles</span><span class="p">.</span><span class="n">Batch</span><span class="p">.</span><span class="n">Num</span><span class="p">()</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><a href="#__codelineno-3-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><a href="#__codelineno-3-17"><span class="linenos" data-linenos="17 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Gather Files With Filter" src="../img/bp/cake-mix-library/gather-files-with-filter.png" /></p>
+</div>
+</div>
+</div>
+<p>To gather all subdirectories in a directory at a specified depth, we use <code>GatherSubdirs</code>: </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">ProjectDir</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">FCakeMixBatchSubdirs</span><span class="w"> </span><span class="n">ShallowSubdirs</span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="hll"><a href="#__codelineno-4-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">GatherSubdirs</span><span class="p">(</span>
+</span><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="hll"><a href="#__codelineno-4-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">        </span><span class="n">ProjectDir</span><span class="p">,</span>
+</span><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="hll"><a href="#__codelineno-4-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Shallow</span>
+</span><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="hll"><a href="#__codelineno-4-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="p">)</span>
+</span><a id="__codelineno-4-8" name="__codelineno-4-8"></a><a href="#__codelineno-4-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">};</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><a href="#__codelineno-4-9"><span class="linenos" data-linenos=" 9 "></span></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><a href="#__codelineno-4-10"><span class="linenos" data-linenos="10 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ShallowSubdirs</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><a href="#__codelineno-4-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">{</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><a href="#__codelineno-4-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><a href="#__codelineno-4-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Gathered [%d] subdirectories!&quot;</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><a href="#__codelineno-4-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="n">ShallowSubdirs</span><span class="p">.</span><span class="n">Batch</span><span class="p">.</span><span class="n">Num</span><span class="p">()</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a><a href="#__codelineno-4-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><a href="#__codelineno-4-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">}</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><a href="#__codelineno-4-17"><span class="linenos" data-linenos="17 "></span></a><span class="k">else</span><span class="w"> </span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><a href="#__codelineno-4-18"><span class="linenos" data-linenos="18 "></span></a><span class="p">{</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><a href="#__codelineno-4-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a><a href="#__codelineno-4-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;Failed gathering subdirectories: [%s]&quot;</span><span class="p">),</span><span class="w"> </span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a><a href="#__codelineno-4-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">        </span><span class="o">*</span><span class="n">ShallowSubdirs</span><span class="p">.</span><span class="n">Result</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a><a href="#__codelineno-4-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a><a href="#__codelineno-4-23"><span class="linenos" data-linenos="23 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Gather Subdirs" src="../img/bp/cake-mix-library/gather-subdirs.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="gathering-elements-via-custom-predicate">Gathering Elements via Custom Predicate</h3>
+<p>Sometimes we might want to gather files or subdirectories based upon some custom requirements, and for that we can use the GatherCustom family of functions. The interface is similar to the non-custom Gather functions, but this time we need to supply a callback that will control whether a particular element is gathered.</p>
+<p>The callback will be invoked for every directory element that is visited during the gather traversal.</p>
+<h4 id="gathercustom-error-handling">GatherCustom Error Handling</h4>
+<p>GatherCustom function outcomes can generate an <code>Aborted</code> value, and this occurs whenever the user-supplied callback returns an <code>Abort</code> signal. </p>
+<h4 id="gather-custom-callback-signature">Gather Custom Callback Signature</h4>
+<p>A GatherCustom's callback signature is nearly identical to an advanced directory traversal style. It will receive a single argument, either a CakeFile or a CakeDir object depending on what element the gather operation is targeting, and it will need to return a signal back that will help control the gather operation's behavior.
+The signal that is returned is of type <a href="../core-api/special-types/signals.md#ecakesignalgather">ECakeSignalGather</a>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">C++</label><label for="__tabbed_6_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="cm">/** An enum used to send handle control flow / item selection in filter-like functions. */</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="k">enum</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ECakeSignalGather</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">uint8</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="cm">/** Add the element to the gather container and continue the traversal. */</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">Select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">    </span><span class="n">UMETA</span><span class="p">(</span><span class="n">DisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Select&quot;</span><span class="p">),</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><a href="#__codelineno-5-6"><span class="linenos" data-linenos=" 6 "></span></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><a href="#__codelineno-5-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="cm">/** Do not add the element to the gather container and continue the traversal. */</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><a href="#__codelineno-5-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="n">Reject</span><span class="w">        </span><span class="n">UMETA</span><span class="p">(</span><span class="n">DisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Reject&quot;</span><span class="p">),</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><a href="#__codelineno-5-9"><span class="linenos" data-linenos=" 9 "></span></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><a href="#__codelineno-5-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="cm">/** Add the element to the gather container and then stop the traversal. */</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><a href="#__codelineno-5-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">SelectThenStop</span><span class="w"> </span><span class="n">UMETA</span><span class="p">(</span><span class="n">DisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Select Then Stop&quot;</span><span class="p">),</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><a href="#__codelineno-5-12"><span class="linenos" data-linenos="12 "></span></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><a href="#__codelineno-5-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="cm">/** Do not add the element to the gather container and then stop the traversal. */</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><a href="#__codelineno-5-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="n">RejectThenStop</span><span class="w"> </span><span class="n">UMETA</span><span class="p">(</span><span class="n">DisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Reject Then Stop&quot;</span><span class="p">),</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><a href="#__codelineno-5-15"><span class="linenos" data-linenos="15 "></span></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><a href="#__codelineno-5-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="cm">/** A critical error was encountered and the gather operation should immediately abort. */</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><a href="#__codelineno-5-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="n">Abort</span><span class="w">         </span><span class="n">UMETA</span><span class="p">(</span><span class="n">DisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Abort&quot;</span><span class="p">),</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><a href="#__codelineno-5-18"><span class="linenos" data-linenos="18 "></span></a>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a><a href="#__codelineno-5-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="n">MAX</span><span class="w">           </span><span class="n">UMETA</span><span class="p">(</span><span class="n">Hidden</span><span class="p">)</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><a href="#__codelineno-5-20"><span class="linenos" data-linenos="20 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Signal Gather Example" src="../img/bp/cake-mix-library/signal-gather-example.png" /></p>
+</div>
+</div>
+</div>
+<p>The most basic signal commands are <code>Select</code> / <code>Reject</code>. <code>Select</code> is used when we want to add the current element to the gathered batch and then continue the gather operation. <code>Reject</code> is used when we want to skip the current element and continue the gather operation.</p>
+<p><code>SelectThenStop</code> and <code>RejectThenStop</code> function just like their more basic forms <code>Select</code> and <code>Reject</code>, except the gather operation will not visit any more elements and will immediately stop, returning whatever has been gathered up to that point.</p>
+<p>Finally, <code>Abort</code> is a special value used to indicate that a critical error has occurred. The gather operation will <strong>not</strong> add the currently visited element and it will immediately abort the gather operation, assigning the operation's outcome to an <code>Aborted</code> value. Remember, this value is meant for critical errors. If you encounter a recoverable error where you might want to stop the current gather operation but still use the gathered batch of files or subdirectories, using one of the <code>ThenStop</code> signal values is more appropriate.</p>
+<h4 id="gather-custom-callback-basic-example">Gather Custom Callback Basic Example</h4>
+<p>Let's begin with a simple callback example. We're going to gather any text files that contain a specific phrase. To do this, we'll read every file we get sent as a text file, check to see if the text contains the specific phrase, and gather any that do contain the phrase.</p>
+<p>The structure will be simple: Assuming the File IO Read operation succeeds, we use FString's <code>Contains</code> function on the file's text data. If it contains our magic phrase, we return <code>Select</code>, which will add the current file to the gather batch. If it does not, we return <code>Reject</code>. </p>
+<p>If the File IO Read operation fails, we return <code>Abort</code>, which signifies a critical error that we don't want to recover from. This would be the branch to handle any necessary error reporting. In our case, we'll simply abort, but we have enough context to do proper error reporting if we needed to. Finally, keep in mind that we are in complete control over determining what constitutes a critical error. In some scenarios, it might be fine to just skip that file and continue -- you remain in total control over how the gather operation should proceed. Use whatever works best for your current context.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">C++</label><label for="__tabbed_7_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">ContainsMagicText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalGather</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><a href="#__codelineno-6-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">ReadTextFile</span><span class="p">())</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><a href="#__codelineno-6-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><a href="#__codelineno-6-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;MagicData&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><a href="#__codelineno-6-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><a href="#__codelineno-6-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Select</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><a href="#__codelineno-6-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><a href="#__codelineno-6-9"><span class="linenos" data-linenos=" 9 "></span></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><a href="#__codelineno-6-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Reject</span><span class="p">;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a><a href="#__codelineno-6-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><a href="#__codelineno-6-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Abort</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><a href="#__codelineno-6-13"><span class="linenos" data-linenos="13 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Gather Custom Callback Example Simple" src="../img/bp/cake-mix-library/gather-custom-callback-example-simple.png" /></p>
+</div>
+</div>
+</div>
+<p>The form <code>if (cond) { Select } else { Reject }</code> is quite common when writing GatherCustom predicates, and so CakeFS offers some convenience utilities to make writing that a bit more concise:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">C++</label><label for="__tabbed_8_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The CakeSignalGather namespace has utility functions to help spare us the boilerplate. We can use <code>SelectIf</code> as the equivalent for <code>if (cond) { Select }  else { Reject }</code>:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">ContainsMagicText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalGather</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">ReadTextFile</span><span class="p">())</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><a href="#__codelineno-7-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="hll"><a href="#__codelineno-7-5"><span class="linenos" data-linenos="5 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">CakeSignalGather</span><span class="o">::</span><span class="n">SelectIf</span><span class="p">(</span><span class="w"> </span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;MagicData&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">);</span>
+</span><a id="__codelineno-7-6" name="__codelineno-7-6"></a><a href="#__codelineno-7-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><a href="#__codelineno-7-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Abort</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><a href="#__codelineno-7-8"><span class="linenos" data-linenos="8 "></span></a><span class="p">};</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The CakeSignalGather namespace also contains the complement to <code>SelectIf</code>, which is the utility function <code>RejectIf</code>. This function is equivalent to the form <code>if (cond) { Reject } else { Select }</code>.</p>
+</div>
+</div>
+<div class="tabbed-block">
+<p>CakeMix provides a conversion utility from a <code>bool</code> to an <code>ECakeSignalGather</code>. The signal will be <code>Select</code> when the <code>bool</code> is true, otherwise the signal will be <code>Reject</code>. We can drag the return node from Contains to our Gather Signal return output node and then type "Select If" to bring up the conversion utility. This can help simplify and compact our callback's code.</p>
+<p><img alt="Gather Custom Callback Example Simple Select If" src="../img/bp/cake-mix-library/gather-custom-callback-example-simple-select-if.png" /></p>
+</div>
+</div>
+</div>
+<p>This new callback is logically equivalent to the previous one. Use whichever style you prefer. </p>
+<h4 id="gather-custom-callback-advanced-example">Gather Custom Callback Advanced Example</h4>
+<p>The Gather signal also allows us to stop the gather process at any step. We can use either <code>SelectThenStop</code> or <code>RejectThenStop</code>, which will take action on the current item and then stop the traversal immediately.</p>
+<p>Let's upgrade the predicate we made in the previous example. This time we'll make it so the predicate gathers two files and then stops. This is an ideal scenario to use the <code>ThenStop</code> signal value.</p>
+<p>We'll keep track of how many files we've gathered via an integer, and then we'll increment that integer whenever we find a text file that contains our magic phrase. When the number of gathered files reaches two, we submit the <code>SelectThenStop</code> signal, which will gather the current item and then immediately stop the gather operation. Again, in the event that we encounter an IO operation error, we'll simply abort the gather operation.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">C++</label><label for="__tabbed_9_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">ContainsMagicTextFirstTwo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">NumCollected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">int32</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}]</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><a href="#__codelineno-8-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">(</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalGather</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><a href="#__codelineno-8-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="p">{</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">ReadTextFile</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><a href="#__codelineno-8-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ReadText</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Abort</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><a href="#__codelineno-8-6"><span class="linenos" data-linenos=" 6 "></span></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><a href="#__codelineno-8-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;MagicData&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><a href="#__codelineno-8-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="hll"><a href="#__codelineno-8-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">        </span><span class="o">++</span><span class="n">NumCollected</span><span class="p">;</span>
+</span><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="hll"><a href="#__codelineno-8-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NumCollected</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</span><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="hll"><a href="#__codelineno-8-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">        </span><span class="p">{</span>
+</span><a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="hll"><a href="#__codelineno-8-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">SelectThenStop</span><span class="p">;</span>
+</span><a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="hll"><a href="#__codelineno-8-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="p">}</span>
+</span><a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="hll"><a href="#__codelineno-8-14"><span class="linenos" data-linenos="14 "></span></a>
+</span><a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="hll"><a href="#__codelineno-8-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Select</span><span class="p">;</span>
+</span><a id="__codelineno-8-16" name="__codelineno-8-16"></a><a href="#__codelineno-8-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><a href="#__codelineno-8-17"><span class="linenos" data-linenos="17 "></span></a>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><a href="#__codelineno-8-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Reject</span><span class="p">;</span><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><a href="#__codelineno-8-19"><span class="linenos" data-linenos="19 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Gather Custom Callback Advanced Select" src="../img/bp/cake-mix-library/gather-custom-callback-advanced-select.png" /></p>
+<p>This callback is getting a little large for screenshots. Here is the portion of the callback with the new logic zoomed:</p>
+<p><img alt="Gather Custom Callback Advanced Select Zoom" src="../img/bp/cake-mix-library/gather-custom-callback-advanced-select-zoom.png" /></p>
+</div>
+</div>
+</div>
+<p>We used the <code>SelectThenStop</code> signal because of how we setup our number termination logic. We could also change the logic so that once the number is greater than two we want to stop, but this time we wouldn't want to gather the current file because we already have gathered enough files. <code>RejectThenStop</code> will cause our gather operation to immediately stop, and the current file we have been passed will not be added to the gather batch.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">C++</label><label for="__tabbed_10_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">ContainsMagicTextFirstTwo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">NumCollected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">int32</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}]</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><a href="#__codelineno-9-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="p">(</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">,</span><span class="w"> </span><span class="n">FCakeResultFileIO</span><span class="o">&amp;</span><span class="w"> </span><span class="n">OutResultFile</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalGather</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><a href="#__codelineno-9-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="hll"><a href="#__codelineno-9-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NumCollected</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</span><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="hll"><a href="#__codelineno-9-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="p">{</span>
+</span><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="hll"><a href="#__codelineno-9-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">RejectThenStop</span><span class="p">;</span>
+</span><a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="hll"><a href="#__codelineno-9-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><a id="__codelineno-9-8" name="__codelineno-9-8"></a><a href="#__codelineno-9-8"><span class="linenos" data-linenos=" 8 "></span></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><a href="#__codelineno-9-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="p">{</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">ReadTextFile</span><span class="p">()</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><a href="#__codelineno-9-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ReadText</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Abort</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><a href="#__codelineno-9-11"><span class="linenos" data-linenos="11 "></span></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><a href="#__codelineno-9-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;MagicData&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">)</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a><a href="#__codelineno-9-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="hll"><a href="#__codelineno-9-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="o">++</span><span class="n">NumCollected</span><span class="p">;</span>
+</span><a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="hll"><a href="#__codelineno-9-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Select</span><span class="p">;</span>
+</span><a id="__codelineno-9-16" name="__codelineno-9-16"></a><a href="#__codelineno-9-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a><a href="#__codelineno-9-17"><span class="linenos" data-linenos="17 "></span></a>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a><a href="#__codelineno-9-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Reject</span><span class="p">;</span><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a><a href="#__codelineno-9-19"><span class="linenos" data-linenos="19 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Gather Custom Callback Example Advanced Reject" src="../img/bp/cake-mix-library/gather-custom-callback-example-advanced-reject.png" /></p>
+<p>Let's zoom in to focus on the two major changes. First, at the beginning of each step we are checking to see if we have already gathered two files. If so, we return <code>RejectThenStop</code>:</p>
+<p><img alt="Gather Custom Callback Example Advanced Reject Zoom 1" src="../img/bp/cake-mix-library/gather-custom-callback-example-advanced-reject-zoom-1.png" /></p>
+<p>Second, when we find a magic file, we just increment the counter and return <code>Select</code>:</p>
+<p><img alt="Gather Custom Callback Example Advanced Reject Zoom 2" src="../img/bp/cake-mix-library/gather-custom-callback-example-advanced-reject-zoom-2.png" /></p>
+</div>
+</div>
+</div>
+<p>Technically this approach is inferior, since it requires an unnecessary visit to an extra file, but it serves as a simple example as to how the <code>RejectThenStop</code> signal value works.</p>
+<h4 id="launching-gathercustom-operations">Launching GatherCustom Operations</h4>
+<p>Once we have crafted our custom predicate callback, using the GatherCustom functions is extremely similar to using the Gather functions. We only need to add our predicate callback to the list of arguments we submit to the GatherCustom function:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">C++</label><label for="__tabbed_11_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">ProjectDir</span><span class="p">{</span><span class="w"> </span><span class="n">FCakePath</span><span class="p">{</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena&quot;</span><span class="p">)},</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;txt|md&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><a href="#__codelineno-10-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">ContainsMagicText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">FCakeFile</span><span class="w"> </span><span class="n">NextFile</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ECakeSignalGather</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><a href="#__codelineno-10-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><a href="#__codelineno-10-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TCakeOrderFile</span><span class="o">&lt;</span><span class="n">FString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReadText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NextFile</span><span class="p">.</span><span class="n">ReadTextFile</span><span class="p">())</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><a href="#__codelineno-10-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><a href="#__codelineno-10-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">CakeSignalGather</span><span class="o">::</span><span class="n">SelectIf</span><span class="p">(</span><span class="w"> </span><span class="n">ReadText</span><span class="p">.</span><span class="n">Order</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;MagicData&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">);</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><a href="#__codelineno-10-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><a href="#__codelineno-10-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ECakeSignalGather</span><span class="o">::</span><span class="n">Abort</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><a href="#__codelineno-10-10"><span class="linenos" data-linenos="10 "></span></a><span class="p">};</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><a href="#__codelineno-10-11"><span class="linenos" data-linenos="11 "></span></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><a href="#__codelineno-10-12"><span class="linenos" data-linenos="12 "></span></a><span class="n">FCakeMixBatchFiles</span><span class="w"> </span><span class="n">MagicTextFiles</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><a href="#__codelineno-10-13"><span class="linenos" data-linenos="13 "></span></a><span class="p">{</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><a href="#__codelineno-10-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">GatherCustomFilesWithFilter</span><span class="p">(</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><a href="#__codelineno-10-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">        </span><span class="n">ProjectDir</span><span class="p">,</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a><a href="#__codelineno-10-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">        </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Shallow</span><span class="p">,</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a><a href="#__codelineno-10-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">        </span><span class="n">ContainsMagicText</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a><a href="#__codelineno-10-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a><a href="#__codelineno-10-19"><span class="linenos" data-linenos="19 "></span></a><span class="p">};</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20"></a><a href="#__codelineno-10-20"><span class="linenos" data-linenos="20 "></span></a>
+<a id="__codelineno-10-21" name="__codelineno-10-21"></a><a href="#__codelineno-10-21"><span class="linenos" data-linenos="21 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">MagicTextFiles</span><span class="p">)</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22"></a><a href="#__codelineno-10-22"><span class="linenos" data-linenos="22 "></span></a><span class="p">{</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23"></a><a href="#__codelineno-10-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;We gathered [%d] magic files!&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">MagicTextFiles</span><span class="p">.</span><span class="n">Batch</span><span class="p">.</span><span class="n">Num</span><span class="p">());</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24"></a><a href="#__codelineno-10-24"><span class="linenos" data-linenos="24 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Gather Custom Launch" src="../img/bp/cake-mix-library/gather-custom-launch.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="counting-elements-in-a-directory">Counting Elements in a Directory</h3>
+<p>Sometimes we just want to know the count of a target element within a directory, and the Count functions can help us quickly achieve this. We can count all items, just files, or just subdirectories at a specified depth.</p>
+<h4 id="count-error-handling">Count Error Handling</h4>
+<p>The Count functions do not return an <code>Aborted</code> directory work outcome. Assuming the operation can launch, it will succeed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The value returned a Count function is only valid if the count operation succeeds.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">C++</label><label for="__tabbed_12_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>All the count functions return an <a href="#fcakemixcount">FCakeMixCount</a> object which just wraps an <a href="../core-api/special-types/results.md#fcakeresultdirwork">FCakeResultDirWork</a> result and an <code>int32</code> representing the number of elements counted. That's all there is to this function, nothing more, nothing less.</p>
+<p>In this example we'll use Count Files, but the basic usage is the same for all variants.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakeDir</span><span class="w"> </span><span class="n">ProjectDir</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><a href="#__codelineno-11-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><a href="#__codelineno-11-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">FCakeMixCount</span><span class="w"> </span><span class="n">Files</span><span class="p">{</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><a href="#__codelineno-11-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Dir</span><span class="o">::</span><span class="n">CountFiles</span><span class="p">(</span><span class="n">ProjectDir</span><span class="p">,</span><span class="w"> </span><span class="n">ECakePolicyOpDepth</span><span class="o">::</span><span class="n">Deep</span><span class="p">)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><a href="#__codelineno-11-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="p">};</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><a href="#__codelineno-11-6"><span class="linenos" data-linenos=" 6 "></span></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><a href="#__codelineno-11-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Files</span><span class="p">)</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><a href="#__codelineno-11-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">{</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><a href="#__codelineno-11-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><a href="#__codelineno-11-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;There are [%d] total file(s) in [%s].&quot;</span><span class="p">),</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><a href="#__codelineno-11-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">        </span><span class="n">Files</span><span class="p">.</span><span class="n">Count</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a><a href="#__codelineno-11-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="o">*</span><span class="n">ProjectDir</span><span class="p">.</span><span class="n">CloneDirName</span><span class="p">()</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a><a href="#__codelineno-11-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a><a href="#__codelineno-11-14"><span class="linenos" data-linenos="14 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>The Count functions give us back a <a href="/core-api/special-types/results/#fcakeresultdirwork">FCakeResultDirWork</a> result type and an integer that represents the number of target elements found in the source directory at the specified depth.</p>
+<p>In this example we'll use Count Files, but the basic usage pattern is the same for all variants.</p>
+<p><img alt="Count Files" src="../img/bp/cake-mix-library/count-files.png" /></p>
+</div>
+</div>
+</div>
+<h2 id="file-functions">File Functions</h2>
+<h3 id="buildfilename">BuildFileName</h3>
+<p>BuildFileName is a convenience function that allows us to quickly concatenate a file extension to a bare file name. In the following example, we use BuildFileName to generate the file name <code>my-file.bin.dat</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">C++</label><label for="__tabbed_13_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">FCakeFileExt</span><span class="w"> </span><span class="n">FileExt</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;bin.dat&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><a href="#__codelineno-12-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><a href="#__codelineno-12-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">FString</span><span class="w"> </span><span class="n">NewFileName</span><span class="p">{</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><a href="#__codelineno-12-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">File</span><span class="o">::</span><span class="n">BuildFileName</span><span class="p">(</span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;my-file&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">FileExt</span><span class="p">)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><a href="#__codelineno-12-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Build File Name" src="../img/bp/cake-mix-library/build-file-name.png" /></p>
+</div>
+</div>
+</div>
+<h2 id="path-functions">Path Functions</h2>
+<h3 id="pathstringisvalid">PathStringIsValid</h3>
+<p>The <code>PathStringIsValid</code> family of functions indicate if a given string represents a file or directory that currently exists on the filesystem. These functions are intended to be used in contexts where a path string needs to be frequently evaulated and the caller would like to avoid the cost of CakePath normalization. A classic example is an input field where a user is submitting a path -- we can check the string that the text field is holding via <code>PathStringIsValid</code> before we need to convert it into any other object form. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">C++</label><label for="__tabbed_14_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FString</span><span class="w"> </span><span class="n">PathString</span><span class="p">{</span><span class="w"> </span><span class="s">&quot;X:/cake-arena/enemy-data.db&quot;</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><a href="#__codelineno-13-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><a href="#__codelineno-13-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Path</span><span class="o">::</span><span class="n">PathStringIsValidFile</span><span class="p">(</span><span class="n">PathString</span><span class="p">))</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><a href="#__codelineno-13-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><a href="#__codelineno-13-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;It&#39;s a file!&quot;</span><span class="p">));</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><a href="#__codelineno-13-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">}</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><a href="#__codelineno-13-7"><span class="linenos" data-linenos=" 7 "></span></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><a href="#__codelineno-13-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Path</span><span class="o">::</span><span class="n">PathStringIsValidDir</span><span class="p">(</span><span class="n">PathString</span><span class="p">))</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><a href="#__codelineno-13-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="p">{</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><a href="#__codelineno-13-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;It&#39;s a directory!&quot;</span><span class="p">));</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><a href="#__codelineno-13-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Path String Is Valid" src="../img/bp/cake-mix-library/path-string-is-valid.png" /></p>
+</div>
+</div>
+</div>
+<h3 id="pathisvalid">PathIsValid</h3>
+<p>The <code>PathIsValid</code> family of functions indicate if a given CakePath object holds a path that represents a file or directory that currently exists on the filesystem. These functions can be used to cheaply identify whether a path points to a file or directory without having to convert the CakePath into a CakeFile or CakeDir.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">C++</label><label for="__tabbed_15_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">FCakePath</span><span class="w"> </span><span class="n">Path</span><span class="p">{</span><span class="w"> </span><span class="n">TEXTVIEW</span><span class="p">(</span><span class="s">&quot;X:/cake-arena/enemy-data.db&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><a href="#__codelineno-14-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><a href="#__codelineno-14-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Path</span><span class="o">::</span><span class="n">PathIsValidFile</span><span class="p">(</span><span class="n">Path</span><span class="p">))</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><a href="#__codelineno-14-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="p">{</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><a href="#__codelineno-14-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;It&#39;s a file!&quot;</span><span class="p">));</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><a href="#__codelineno-14-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="p">}</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><a href="#__codelineno-14-7"><span class="linenos" data-linenos=" 7 "></span></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><a href="#__codelineno-14-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CakeMixLibrary</span><span class="o">::</span><span class="n">Path</span><span class="o">::</span><span class="n">PathIsValidDir</span><span class="p">(</span><span class="n">Path</span><span class="p">))</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><a href="#__codelineno-14-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="p">{</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><a href="#__codelineno-14-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">UE_LOG</span><span class="p">(</span><span class="n">LogTemp</span><span class="p">,</span><span class="w"> </span><span class="n">Warning</span><span class="p">,</span><span class="w"> </span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;It&#39;s a directory!&quot;</span><span class="p">));</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><a href="#__codelineno-14-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Path Is Valid" src="../img/bp/cake-mix-library/path-is-valid.png" /></p>
+</div>
+</div>
+</div>
+<h2 id="error-handling">Error Handling</h2>
+<h3 id="tostring-utility-functions">ToString Utility Functions</h3>
+<p>CakeMixLibrary offers various <code>ToString</code> functions which generate human-readable strings describing various error related types. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">C++</label><label for="__tabbed_16_2">Blueprint</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The <code>ErrorHandling</code> namespace contains <code>ToString</code> functions for various <a href="../core-api/special-types/outcomes.md">outcome</a> and <a href="../core-api/special-types/results.md">result</a> types:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the file IO outcome value. */</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><a href="#__codelineno-15-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringOutcomeFileIO</span><span class="p">(</span><span class="n">ECakeOutcomeFileIO</span><span class="w"> </span><span class="n">Outcome</span><span class="p">);</span><span class="w"> </span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><a href="#__codelineno-15-3"><span class="linenos" data-linenos=" 3 "></span></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><a href="#__codelineno-15-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the directory IO outcome value. */</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><a href="#__codelineno-15-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringOutcomeDirIO</span><span class="p">(</span><span class="n">ECakeOutcomeDirIO</span><span class="w"> </span><span class="n">Outcome</span><span class="p">);</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><a href="#__codelineno-15-6"><span class="linenos" data-linenos=" 6 "></span></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><a href="#__codelineno-15-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the directory traversal outcome value. */</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><a href="#__codelineno-15-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringOutcomeTraversal</span><span class="p">(</span><span class="n">ECakeOutcomeTraversal</span><span class="w"> </span><span class="n">Outcome</span><span class="p">);</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a><a href="#__codelineno-15-9"><span class="linenos" data-linenos=" 9 "></span></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><a href="#__codelineno-15-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the directory search outcome value. */</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><a href="#__codelineno-15-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringOutcomeSearch</span><span class="p">(</span><span class="n">ECakeOutcomeSearch</span><span class="w"> </span><span class="n">Outcome</span><span class="p">);</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a><a href="#__codelineno-15-12"><span class="linenos" data-linenos="12 "></span></a>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a><a href="#__codelineno-15-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the directory work outcome value. */</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><a href="#__codelineno-15-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringOutcomeDirWork</span><span class="p">(</span><span class="n">ECakeOutcomeDirWork</span><span class="w"> </span><span class="n">Outcome</span><span class="p">);</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a><a href="#__codelineno-15-15"><span class="linenos" data-linenos="15 "></span></a>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a><a href="#__codelineno-15-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the batch operation outcome value. */</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17"></a><a href="#__codelineno-15-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringOutcomeBatchOp</span><span class="p">(</span><span class="n">ECakeOutcomeBatchOp</span><span class="w"> </span><span class="n">Outcome</span><span class="p">);</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><a href="#__codelineno-15-18"><span class="linenos" data-linenos="18 "></span></a>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><a href="#__codelineno-15-19"><span class="linenos" data-linenos="19 "></span></a>
+<a id="__codelineno-15-20" name="__codelineno-15-20"></a><a href="#__codelineno-15-20"><span class="linenos" data-linenos="20 "></span></a>
+<a id="__codelineno-15-21" name="__codelineno-15-21"></a><a href="#__codelineno-15-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the file IO result value. */</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22"></a><a href="#__codelineno-15-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringResultFileIO</span><span class="p">(</span><span class="n">FCakeResultFileIO</span><span class="w"> </span><span class="n">Result</span><span class="p">);</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23"></a><a href="#__codelineno-15-23"><span class="linenos" data-linenos="23 "></span></a>
+<a id="__codelineno-15-24" name="__codelineno-15-24"></a><a href="#__codelineno-15-24"><span class="linenos" data-linenos="24 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the directory IO result value. */</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25"></a><a href="#__codelineno-15-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringResultDirIO</span><span class="p">(</span><span class="n">FCakeResultDirIO</span><span class="w"> </span><span class="n">Result</span><span class="p">);</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26"></a><a href="#__codelineno-15-26"><span class="linenos" data-linenos="26 "></span></a>
+<a id="__codelineno-15-27" name="__codelineno-15-27"></a><a href="#__codelineno-15-27"><span class="linenos" data-linenos="27 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the directory traversal result value. */</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28"></a><a href="#__codelineno-15-28"><span class="linenos" data-linenos="28 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringResultTraversal</span><span class="p">(</span><span class="n">FCakeResultTraversal</span><span class="w"> </span><span class="n">Result</span><span class="p">);</span>
+<a id="__codelineno-15-29" name="__codelineno-15-29"></a><a href="#__codelineno-15-29"><span class="linenos" data-linenos="29 "></span></a>
+<a id="__codelineno-15-30" name="__codelineno-15-30"></a><a href="#__codelineno-15-30"><span class="linenos" data-linenos="30 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the directory search result value. */</span>
+<a id="__codelineno-15-31" name="__codelineno-15-31"></a><a href="#__codelineno-15-31"><span class="linenos" data-linenos="31 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringResultSearch</span><span class="p">(</span><span class="n">FCakeResultSearch</span><span class="w"> </span><span class="n">Result</span><span class="p">);</span>
+<a id="__codelineno-15-32" name="__codelineno-15-32"></a><a href="#__codelineno-15-32"><span class="linenos" data-linenos="32 "></span></a>
+<a id="__codelineno-15-33" name="__codelineno-15-33"></a><a href="#__codelineno-15-33"><span class="linenos" data-linenos="33 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the directory work result value. */</span>
+<a id="__codelineno-15-34" name="__codelineno-15-34"></a><a href="#__codelineno-15-34"><span class="linenos" data-linenos="34 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringResultDirWork</span><span class="p">(</span><span class="n">FCakeResultDirWork</span><span class="w"> </span><span class="n">Result</span><span class="p">);</span>
+<a id="__codelineno-15-35" name="__codelineno-15-35"></a><a href="#__codelineno-15-35"><span class="linenos" data-linenos="35 "></span></a>
+<a id="__codelineno-15-36" name="__codelineno-15-36"></a><a href="#__codelineno-15-36"><span class="linenos" data-linenos="36 "></span></a><span class="w">    </span><span class="cm">/** @return A human-readable string that describes the batch operation result value. */</span>
+<a id="__codelineno-15-37" name="__codelineno-15-37"></a><a href="#__codelineno-15-37"><span class="linenos" data-linenos="37 "></span></a><span class="w">    </span><span class="n">CakeFS_API</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">FString</span><span class="w"> </span><span class="n">ToStringResultBatchOp</span><span class="p">(</span><span class="n">FCakeResultBatchOp</span><span class="w"> </span><span class="n">Result</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>CakeMix ensures that we can always easily turn an outcome value into a human readable string. Finding the appropriate ToString function is simple, just drag off the outcome value, ensure Context Sensitive is checked, type in 'ToString', and you should easily find the function you need.</p>
+<p><img alt="To String Outcome" src="../img/bp/cake-mix-library/to-string-outcome.png" /></p>
+</div>
+</div>
+</div>
+<h2 id="blueprint-exclusive-functions">Blueprint Exclusive Functions</h2>
+<h3 id="sorting-arrays-of-paths-files-and-directories">Sorting arrays of Paths, Files, and Directories</h3>
+<p>Unreal Engine doesn't expose the sort operations for arrays in Blueprint; in light of this, CakeMix provides the functions SortPaths, SortFiles, and SortDirs to enable callers to sort their collections by basic string ordering logic to ensure some kind of ordering consistency.</p>
+<p><img alt="Sort Arrays" src="../img/bp/cake-mix-library/sort-arrays.png" /></p>
+<h2 id="cakemix-exclusive-c-types">CakeMix Exclusive C++ Types</h2>
+<p>CakeMix introduces a few types exclusive to the C++ API. They are defined in <code>CakeFS/CakeMixTypes.h</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following section only applies to native C++ CakeFS code.</p>
+</div>
+<h3 id="tcakemixbatch">TCakeMixBatch</h3>
+<p>This type is used by CakeMix to return a collection of files or subdirectories from some directory work operation. This simple type merely combines a <a href="/core-api/special-types/results/#fcakeresultdirwork">FCakeResultDirWork</a> result type with a <code>TArray&lt;T&gt;</code>, where <code>T</code> is the element type:</p>
+<p><div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><a href="#__codelineno-16-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">ElementType</span><span class="o">&gt;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><a href="#__codelineno-16-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">TCakeMixBatch</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><a href="#__codelineno-16-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">{</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><a href="#__codelineno-16-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">FCakeResultDirWork</span><span class="w"> </span><span class="n">Result</span><span class="p">{};</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><a href="#__codelineno-16-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><a href="#__codelineno-16-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="n">TArray</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Batch</span><span class="p">{};</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><a href="#__codelineno-16-7"><span class="linenos" data-linenos="7 "></span></a><span class="p">};</span>
+</code></pre></div>
+CakeMixLibrary does not use the TCakeMixBatch type directly, but uses the template aliases FCakeMixBatchFiles and FCakeMixBatchSubdirs instead:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><a href="#__codelineno-17-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">using</span><span class="w"> </span><span class="n">FCakeMixBatchFiles</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">TCakeMixBatch</span><span class="o">&lt;</span><span class="n">FCakeFile</span><span class="o">&gt;</span><span class="p">;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><a href="#__codelineno-17-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">using</span><span class="w"> </span><span class="n">FCakeMixBatchSubdirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TCakeMixBatch</span><span class="o">&lt;</span><span class="n">FCakeDir</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre></div></p>
+<p>There are a variety of convenience functions provided:</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><a href="#__codelineno-18-1"><span class="linenos" data-linenos="1 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">TArray</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">*</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Batch</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><a href="#__codelineno-18-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><a href="#__codelineno-18-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">WorkWasCompleted</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="n">WorkWasCompleted</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><a href="#__codelineno-18-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="kt">bool</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">WorkWasCompleted</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><a href="#__codelineno-18-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><a href="#__codelineno-18-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">GatheredAny</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Batch</span><span class="p">.</span><span class="n">Num</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a><a href="#__codelineno-18-7"><span class="linenos" data-linenos="7 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">WorkWasCompletedAndGatheredAny</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a><a href="#__codelineno-18-8"><span class="linenos" data-linenos="8 "></span></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="n">WorkWasCompleted</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">GatheredAny</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="fcakemixcount">FCakeMixCount</h3>
+<p>This is a simple type that bundles an <a href="/core-api/special-types/results/#fcakeresultdirwork">FCakeResultDirWork</a> with an integer that represents the number of elements counted.</p>
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><a href="#__codelineno-19-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">FCakeMixCount</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><a href="#__codelineno-19-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><a href="#__codelineno-19-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">FCakeResultDirWork</span><span class="w"> </span><span class="n">Result</span><span class="p">{};</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><a href="#__codelineno-19-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">int32</span><span class="w"> </span><span class="n">Count</span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><a href="#__codelineno-19-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">}</span>
+</code></pre></div>
+<p>There are a variety of utility functions provided:
+<div class="language-c++ highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><a href="#__codelineno-20-1"><span class="linenos" data-linenos="1 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">int32</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">*</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">NumElements</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><a href="#__codelineno-20-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><a href="#__codelineno-20-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">WorkWasCompleted</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">WorkResult</span><span class="p">.</span><span class="n">WorkWasCompleted</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a><a href="#__codelineno-20-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="kt">bool</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">WorkWasCompleted</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5"></a><a href="#__codelineno-20-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a><a href="#__codelineno-20-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">CountedAny</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7"></a><a href="#__codelineno-20-7"><span class="linenos" data-linenos="7 "></span></a>
+<a id="__codelineno-20-8" name="__codelineno-20-8"></a><a href="#__codelineno-20-8"><span class="linenos" data-linenos="8 "></span></a><span class="w">    </span><span class="n">FORCEINLINE</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">WorkCompletedAndCountedAny</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span>
+<a id="__codelineno-20-9" name="__codelineno-20-9"></a><a href="#__codelineno-20-9"><span class="linenos" data-linenos="9 "></span></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">WorkResult</span><span class="p">.</span><span class="n">WorkWasCompleted</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">  </span><span class="n">CountedAny</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.sections", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
